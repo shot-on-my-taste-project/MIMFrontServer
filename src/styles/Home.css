@@ -1,0 +1,257 @@
+/* 전체 서식(검은 배경에 흰 글씨)*/
+/* mobile-first */
+body {
+  background-color: black;
+}
+
+div {
+  color: white;
+}
+
+.Home {
+  text-align: center;
+}
+
+/* 상단바(사이드바 & 회원정보) */
+.TopBar { 
+  display: flex;
+  justify-content: space-between;
+  margin-top: 0.5rem;
+  /* background-color: red; */
+}
+
+.TopBar #member { 
+  margin-top: 0.25rem;
+  margin-right: 0.25rem;
+}
+
+/* 메인 로고 */
+.Logo {
+  display: flex;
+  justify-content: center;
+  /* background-color: orange; */
+  padding-top: 15em;
+}
+
+.Logo h3 {
+  display: flex;
+  padding-top: 1rem;
+  margin-left: 0.5rem;
+}
+
+.Logo h3 span {
+  color: red;
+  margin-left: 0.5rem;
+}
+
+.SearchArea {
+  display: flex;
+  flex-direction: column;
+  justify-content: center;
+  align-items: center;
+  /* background-color: yellow; */
+}
+
+#main-search {
+  position: relative;
+}
+
+.SearchArea #input-text {
+  background-color: black;
+  border: solid 1px white;
+  color: white;
+  font-size: large;
+  width: 25rem;
+  height: 2.5rem;
+}
+
+.SearchArea img {
+  position: absolute;
+  top: 0.125rem;
+  right: 0.25rem;
+}
+
+.SelectSearchOption {
+  background-color: red;
+  display: flex;
+  flex-direction: column;
+}
+
+.SearchOption {
+  background-color: orange;
+  display: flex;
+  flex-direction: row;
+}
+
+input[type="checkbox"] {
+  background-color: green;
+  padding: 5rem;
+}
+
+#slate-close {
+  display: none;
+}
+
+#slate:hover #slate-close {
+  display: block;
+  top: 0.35rem;
+}
+
+#slate:hover #slate-open {
+  display: none;
+}
+
+
+.SideBar span {
+  font-size: 2rem;
+  justify-content: left;
+  margin-left: 0.5rem;
+}
+
+.SideBar #semi-logo {
+  color: red;
+}
+
+.SideBar #sidenav {
+  height: 100%;
+  width: 0;
+  position: fixed;
+  z-index: 1;
+  top: 0;
+  left: 0;
+  background-color: #111;
+  overflow-x: hidden;
+  transition: 0.5s;
+  padding-top: 60px;
+}
+
+.SideBar #sidenav #closebtn {
+  position: absolute;
+  top: 0;
+  right: 25px;
+  font-size: 36px;
+  margin-left: 50px;
+}
+
+.SideBar #sidenav a {
+  padding: 8px 8px 8px 32px;
+  text-decoration: none;
+  font-size: 20px;
+  color: #818181;
+  display: block;
+  transition: 0.3s;
+}
+
+.SideBar #sidenav a:hover {
+  color: #f1f1f1;
+}
+
+#image-search-ex {
+  position:relative;
+}
+
+.SearchImgExample {
+  display: flex;
+  justify-items: center;
+  padding: 1rem 3rem;
+  background-color: blue;
+}
+
+.SearchScriptExample {
+  display: none;
+  justify-items: center;
+  background-color: blue;
+}
+
+.SearchImgExample span{
+  background-color: violet;
+}
+
+.SearchScriptExample span{
+  background-color: violet;
+  margin: 0 2rem;
+}
+
+/* 태블릿 */
+@media screen and (min-width: 768px) and (max-width: 1023px){
+  .Logo h1 {
+    font-size: 2.5rem;
+  }
+
+  .Logo h3 {
+    display: flex;
+    padding-top: 2rem;
+    margin-left: 0.5rem;
+  }
+
+  .SearchArea #input-text {
+    width: 30rem;
+  }
+
+  .SearchOption {
+    margin-left: 12rem;
+    margin-right: 19rem;
+    /* background-color: green; */
+  }
+}
+
+/* PC */
+@media screen and (min-width: 1024px){
+  .Logo {
+    padding-top: 10rem;
+  }
+
+  .Logo h1 {
+    font-size: 3.5rem;
+  }
+
+  .Logo h3 {
+    display: flex;
+    font-size: 2rem;
+    padding-top: 1.75rem;
+    margin-left: 0.5rem;
+  }
+
+  .SideBar span {
+    font-size: 2.5rem;
+  }
+
+  .TopBar #member { 
+    margin-top: 0.25rem;
+    margin-right: 0.25rem;
+    width: 50px;
+    height: 50px;
+  }
+
+  .SearchArea {
+    margin-top: -1rem;
+  }
+
+  .SearchArea #input-text {
+    width: 50rem;
+    height: 3rem;
+    font-size: 1.25rem;
+  }
+
+  .SearchArea img {
+    top: 0.3rem;
+    right: 0.4rem;
+  }
+
+  #slate:hover #slate-close {
+    display: block;
+    top: 0.5rem;
+  }
+  
+  .SearchOption {
+    margin-left: 10rem;
+    margin-right: 36rem;
+    /* background-color: green; */
+    font-size: 1.25rem;
+  }
+
+  .SearchOption #text {
+    margin-left: 1.5rem;
+  }  
+}
+
