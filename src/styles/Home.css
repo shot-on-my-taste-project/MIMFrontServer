@@ -47,7 +47,7 @@ div {
 .SearchArea {
   display: flex;
   flex-direction: column;
-  justify-content: center;
+  /* justify-content: center; */
   align-items: center;
   /* background-color: yellow; */
 }
@@ -71,23 +71,6 @@ div {
   right: 0.25rem;
 }
 
-.SelectSearchOption {
-  background-color: red;
-  display: flex;
-  flex-direction: column;
-}
-
-.SearchOption {
-  background-color: orange;
-  display: flex;
-  flex-direction: row;
-}
-
-input[type="checkbox"] {
-  background-color: green;
-  padding: 5rem;
-}
-
 #slate-close {
   display: none;
 }
@@ -101,7 +84,39 @@ input[type="checkbox"] {
   display: none;
 }
 
+input[type=checkbox] {
+  transform: scale(0.5);
+}
 
+.SearchOption {
+  display: flex;
+  flex-direction: column;
+  /* background-color: red; */
+}
+
+.SelectOption {
+  display: flex;
+  flex-direction: row;
+  /* background-color: orange; */
+  margin-right: 3rem;
+}
+
+.SelectOption .option {
+  /* background-color: magenta; */
+  display: flex;
+  flex-direction: row;
+  align-items: center;
+  justify-content: left;
+  margin-left: -7rem;
+}
+
+.SelectOption .option label {
+  width: 5rem;
+  /* background-color: mediumaquamarine; */
+  word-break : nowrap; 
+  margin-left: -8rem;
+
+}
 .SideBar span {
   font-size: 2rem;
   justify-content: left;
@@ -152,24 +167,31 @@ input[type="checkbox"] {
 
 .SearchImgExample {
   display: flex;
-  justify-items: center;
+  margin: 1rem;
   padding: 1rem 3rem;
-  background-color: blue;
+  /* background-color: yellow; */
+  width: 22rem;
 }
 
 .SearchScriptExample {
   display: none;
   justify-items: center;
-  background-color: blue;
+  /* background-color: yellow; */
+  margin: 1rem;
+  /* width: 23rem; */
+}
+
+.SearchImgExample img{
+  margin-left: -2rem;
 }
 
 .SearchImgExample span{
-  background-color: violet;
+  /* background-color: green; */
+  width: 20rem;
 }
 
 .SearchScriptExample span{
-  background-color: violet;
-  margin: 0 2rem;
+  /* background-color: green; */
 }
 
 /* 태블릿 */
@@ -253,5 +275,52 @@ input[type="checkbox"] {
   .SearchOption #text {
     margin-left: 1.5rem;
   }  
+
+  .SearchOption {
+    display: flex;
+    flex-direction: column;
+    /* background-color: yellow; */
+    width: 30rem;
+  }
+  
+  .SelectOption {
+    display: flex;
+    flex-direction: row;
+    /* background-color: green; */
+    margin-right: 3rem;
+  }
+
+  
+  .SearchImgExample {
+    display: flex;
+    margin: 1rem;
+    padding: 1rem 3rem;
+    /* background-color: blue; */
+    width: 35rem;
+  }
+  
+  .SearchScriptExample {
+    display: none;
+    justify-items: center;
+    /* background-color: blue; */
+    margin: 1rem;
+    /* width: 23rem; */
+    width: 35rem;
+  }
+  
+  .SearchImgExample img{
+    margin-left: -2rem;
+    width: 18rem;
+    height: 12rem;
+  }
+  
+  .SearchImgExample span{
+    /* background-color: purple; */
+    width: 20rem;
+  }
+  
+  .SearchScriptExample span{
+    /* background-color: purple; */
+  }
 }
 
