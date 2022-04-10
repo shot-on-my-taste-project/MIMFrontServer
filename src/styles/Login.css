@@ -29,10 +29,30 @@ input {
     flex-direction: column;
 }
 
-.OptionArea {
-    background-color: green;
-    flex-direction: row;
+ul {
+    list-style: none;
+    display: flex;
     justify-content: center;
-    margin-left: 3rem;
-    margin-top: 1rem;
+    margin-right: 5rem;
+    /* background-color: aqua; */
+}
+
+ul li {
+    text-align: center;
+    padding: 1rem;
+    /* background-color: red; */
+}
+
+/* 태블릿 */
+@media screen and (min-width: 768px) and (max-width: 1023px){
+    /* ul {
+        margin-left: 10rem;
+    } */
+}
+
+/* PC */
+@media screen and (min-width: 1024px){
+    /* ul {
+        margin-left: 40rem;
+    } */
 }
