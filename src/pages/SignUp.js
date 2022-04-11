@@ -1,4 +1,5 @@
 import React, { Component } from 'react'
+import {Button, Table} from "react-bootstrap";
 import '../styles/Home.css'
 import '../styles/SignUp.css'
 import Header from '../component/Header';
@@ -13,38 +14,38 @@ const SignUp = () => {
                     <tr>
                         <th colspan="1">아이디</th>
                         <td colspan="1">
-                            <input type="text" placeholder="아이디"/>
-                            <button>중복확인</button>
+                            <input class="userInfo" type="text" placeholder="아이디"/>
+                            <Button variant="secondary" size="sm" className="subBtn">중복<br/>확인</Button>
                         </td>
                     </tr>
                     <tr>
                         <th colspan="1">비밀번호</th>
                         <td colspan="1">
-                            <input type="password" placeholder="비밀번호"/>
+                            <input class="userInfo" type="password" placeholder="비밀번호"/>
                         </td>
                     </tr>
                     <tr>
                         <th colspan="1"></th>
                         <td colspan="1">
-                            <input type="password" placeholder="비밀번호 재입력"/>
-                            <button>일치확인</button>
+                            <input class="userInfo" type="password" placeholder="비밀번호 재입력"/>
+                            <Button variant="secondary" size="sm" className="subBtn">일치<br/>확인</Button>
                         </td>
                     </tr>
                     <tr>
                         <th colspan="1">닉네임</th>
                         <td colspan="1">
-                            <input type="text" placeholder="닉네임"/>
-                            <button>중복확인</button>
+                            <input class="userInfo" type="text" placeholder="닉네임"/>
+                            <Button variant="secondary" size="sm" className="subBtn">중복<br/>확인</Button>
                         </td>
                     </tr>
                     <tr>
                         <th colspan="1">프로필 사진</th>
                         <td colspan="1">
-                            <input type="file" placeholder=""/>
+                            <input class="userInfo" type="file" placeholder=""/>
                         </td>
                     </tr>
                 </table>
-                <button id="signup-btn">SIGN UP</button>
+                <Button variant="danger" id="signup-btn">SIGN UP</Button>
             </div>
             
         </div>

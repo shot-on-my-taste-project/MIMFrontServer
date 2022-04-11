@@ -1,5 +1,6 @@
 import React, { Component, useState } from 'react'
 import { Route, Link } from 'react-router-dom'
+import {Button} from "react-bootstrap";
 import { SignUp } from '.';
 import Header from '../component/Header';
 import Logo from '../component/Logo';
@@ -16,7 +17,7 @@ const Login = () => {
                         <input type="text" placeholder=" ID"></input>
                         <input type="password" placeholder=" PW"></input>
                     </div>
-                    <button id="login-btn">로그인</button>
+                    <Button variant="danger" id="login-btn">로그인</Button>
                 </div>
                 <ul className="OptionArea">
                     <li><Link style={{textDecoration: 'none', color: 'white'}} id="signup-btn" to="/signup">회원가입</Link></li>

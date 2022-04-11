@@ -1,16 +1,35 @@
+.SignUpArea .Logo {
+    margin-bottom: 1rem;
+    padding-top: 20rem;
+  }
+
 .UserInfoArea {
     display: flex;
     flex-direction: column;
     align-items: center;
 }
 
-.Logo {
-    margin-top: -10rem;
+.UserInfoArea #signup-btn {
+    padding: 0.5rem 0;
+    width: 20rem;
+    margin-top: 1rem;
 }
 
-#signup-btn {
-    background-color: red;
-    color: white;
-    padding: 1rem 0;
-    width: 20rem;
+.SignUpArea .Logo {
+    margin-top: -5rem;
+}
+
+.UserInfoArea .userInfo {
+    width: 15rem;
+    margin-left: 1rem;
+}
+
+.UserInfoArea .subBtn {
+    margin-left: 0.5rem;
+    height: 3rem;
+}
+
+/* PC */
+@media screen and (min-width: 1024px){
+
 }
