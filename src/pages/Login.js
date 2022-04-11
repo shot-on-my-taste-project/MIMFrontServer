@@ -8,7 +8,7 @@ import '../styles/Home.css'
 import '../styles/Login.css'
 const Login = () => {
     return (
-        <div>
+        <div className="LoginTotalArea">
             <Header></Header>
             <Logo></Logo>
             <div className="LoginWrapper">

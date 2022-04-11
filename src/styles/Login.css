@@ -1,3 +1,8 @@
+.LoginTotalArea .Logo {
+    margin-bottom: 1rem;
+    padding-top: 15rem;
+  }
+
 .LoginWrapper {
     /* background-color: red; */
     display: flex;
