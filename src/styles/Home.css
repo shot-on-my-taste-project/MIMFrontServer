@@ -16,7 +16,7 @@
   color: white;
   font-size: large;
   width: 25rem;
-  height: 2.5rem;
+  height: 2.7rem;
 }
 
 .SearchArea img {
@@ -121,18 +121,16 @@ input[type=checkbox] {
 
 .SearchImgExample {
   display: flex;
-  margin: 1rem;
   padding: 1rem 3rem;
   /* background-color: yellow; */
-  width: 22rem;
+  width: 28rem;
 }
 
 .SearchScriptExample {
   display: none;
   justify-items: center;
   /* background-color: yellow; */
-  margin: 1rem;
-  /* width: 23rem; */
+  width: 28rem;
 }
 
 .SearchImgExample img{
@@ -141,11 +139,17 @@ input[type=checkbox] {
 
 .SearchImgExample span{
   /* background-color: green; */
-  width: 20rem;
+  width: 25rem;
+  margin-top: -1.5rem;
+  margin-left: 0.5rem;
+  color: gray
 }
 
 .SearchScriptExample span{
   /* background-color: green; */
+  margin-top: -0.5rem;
+  margin-left: 1rem;
+  color: gray;
 }
 
 /* 태블릿 */
@@ -169,12 +173,57 @@ input[type=checkbox] {
     margin-right: 19rem;
     /* background-color: green; */
   }
+
+  .SearchOption .SelectOption {
+    /* background-color: greenyellow; */
+    margin-left: 10rem;
+  }
+
+  .SearchImgExample {
+    display: flex;
+    /* margin: 1rem; */
+    padding: 1rem 3rem;
+    /* background-color: blue; */
+    margin-left: 10rem;
+    width: 35rem;
+  }
+  
+  .SearchScriptExample {
+    display: none;
+    justify-items: center;
+    /* background-color: blue; */
+    margin-left: 10rem;
+    /* margin: 1rem; */
+    /* width: 23rem; */
+    width: 35rem;
+  }
+  
+  .SearchImgExample img{
+    margin-left: -2rem;
+    width: 18rem;
+    height: 12rem;
+  }
+  
+  .SearchImgExample span{
+    /* background-color: purple; */
+    width: 20rem;
+  }
+  
+  .SearchScriptExample span{
+    /* background-color: purple; */
+  }
 }
 
 /* PC */
 @media screen and (min-width: 1024px){
   .Logo {
-    padding-top: 10rem;
+    padding-top: 15rem;
+    /* background-color: aqua; */
+  }
+
+  .SearchArea {
+    padding-top: 7rem;
+    /* background-color: aquamarine; */
   }
 
   .Logo h1 {
@@ -241,25 +290,28 @@ input[type=checkbox] {
     display: flex;
     flex-direction: row;
     /* background-color: green; */
+    margin: 1rem;
     margin-right: 3rem;
   }
 
   
   .SearchImgExample {
     display: flex;
-    margin: 1rem;
     padding: 1rem 3rem;
     /* background-color: blue; */
-    width: 35rem;
+    width: 40rem;
+    margin-left: 3rem;
+    margin-top: -2rem;
   }
   
   .SearchScriptExample {
     display: none;
     justify-items: center;
     /* background-color: blue; */
-    margin: 1rem;
     /* width: 23rem; */
-    width: 35rem;
+    width: 40rem;
+    margin-left: 3rem;
+    margin-top: -2rem;
   }
   
   .SearchImgExample img{
@@ -270,7 +322,9 @@ input[type=checkbox] {
   
   .SearchImgExample span{
     /* background-color: purple; */
-    width: 20rem;
+    width: 30rem;
+    margin-top: 0.1rem;
+    margin-left: 1rem;
   }
   
   .SearchScriptExample span{

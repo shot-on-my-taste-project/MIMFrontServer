@@ -35,6 +35,7 @@ body {
   
   .Logo h3 {
     display: flex;
+    font-size: 1rem;
     padding-top: 1rem;
     margin-left: 0.5rem;
   }
@@ -43,3 +44,45 @@ body {
     color: red;
     margin-left: 0.5rem;
   }
+
+  /* 태블릿 */
+@media screen and (min-width: 768px) and (max-width: 1023px){
+  .Logo h1 {
+    font-size: 2.5rem;
+  }
+
+  .Logo h3 {
+    display: flex;
+    padding-top: 1.5rem;
+    margin-left: 0.5rem;
+  }
+}
+
+/* PC */
+@media screen and (min-width: 1024px){
+  .Logo {
+    padding-top: 10rem;
+  }
+
+  .Logo h1 {
+    font-size: 3.5rem;
+  }
+
+  .Logo h3 {
+    display: flex;
+    font-size: 1.5rem;
+    padding-top: 2rem;
+    margin-left: 0.5rem;
+  }
+
+  .SideBar span {
+    font-size: 2.5rem;
+  }
+
+  .TopBar #member { 
+    margin-top: 0.25rem;
+    margin-right: 0.25rem;
+    width: 50px;
+    height: 50px;
+  }
+}

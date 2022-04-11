@@ -68,8 +68,8 @@ class SearchOption extends Component {
       return (
         <div className="SearchScriptExample" id="search-script-ex">
             <span>
-                <br/>'손모가지 날아가붕게'는 영화 '타짜'에 등장하는 명대사입니다.<br/>
-                다음 예시와 같이 여러분들의 기억 속에 있는 영화 대사를 <br/>검색해 보세요!
+                <br/>'손모가지 날아가붕게'는<br/>영화 '타짜'에 등장하는 명대사입니다.<br/>
+                다음 예시와 같이 여러분들의 기억 속에 있는 <br/>영화 대사를 검색해 보세요!
             </span>
         </div>
       );
