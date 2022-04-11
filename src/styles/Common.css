@@ -1,0 +1,45 @@
+/* 전체 서식(검은 배경에 흰 글씨)*/
+/* mobile-first */
+body {
+    background-color: black;
+  }
+  
+  div {
+    color: white;
+  }
+  
+  .Home {
+    text-align: center;
+  }
+  
+  /* 상단바(사이드바 & 회원정보) */
+  .TopBar { 
+    display: flex;
+    justify-content: space-between;
+    margin-top: 0.5rem;
+    /* background-color: red; */
+  }
+  
+  .TopBar #member { 
+    margin-top: 0.25rem;
+    margin-right: 0.25rem;
+  }
+  
+  /* 메인 로고 */
+  .Logo {
+    display: flex;
+    justify-content: center;
+    /* background-color: orange; */
+    padding-top: 15em;
+  }
+  
+  .Logo h3 {
+    display: flex;
+    padding-top: 1rem;
+    margin-left: 0.5rem;
+  }
+  
+  .Logo h3 span {
+    color: red;
+    margin-left: 0.5rem;
+  }
