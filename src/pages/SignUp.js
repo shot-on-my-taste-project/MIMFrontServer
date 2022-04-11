@@ -1,6 +1,5 @@
 import React, { Component } from 'react'
 import {Button, Table} from "react-bootstrap";
-import '../styles/Home.css'
 import '../styles/SignUp.css'
 import Header from '../component/Header';
 import Logo from '../component/Logo';

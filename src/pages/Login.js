@@ -4,7 +4,6 @@ import {Button} from "react-bootstrap";
 import { SignUp } from '.';
 import Header from '../component/Header';
 import Logo from '../component/Logo';
-import '../styles/Home.css'
 import '../styles/Login.css'
 const Login = () => {
     return (
