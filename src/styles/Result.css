@@ -1,0 +1,72 @@
+.SearchArea {
+    /* background-color: aliceblue; */
+    margin-top: -5rem;
+}
+
+.ResultsWrapper {
+    display: flex;
+    justify-content: center;
+    margin-top: 1rem;
+}
+
+.Result {
+    display: flex;
+    flex-direction: column;
+    margin: 0 1rem;
+}
+
+.Result h3 {
+    /* background-color: aqua; */
+    text-align: center;
+    margin-top: 1rem;
+}
+
+.ContentWrapper {
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+}
+
+.MovieInfo {
+    display: flex;
+    /* margin-left: 10rem; */
+    margin-top: 10rem;
+}
+
+.MovieInfo .TextInfo {
+    margin-left: 5rem;
+    margin-top: 5rem;;
+}
+
+.ShortCutCommunity {
+    display: flex;
+    margin: 5rem;
+    /* margin-left: 10rem; */
+}
+
+.ShortCutCommunity #slate {
+    margin-left: 1rem;
+    margin-top: -1rem;
+}
+
+.ShortCutCommunity #slate-close {
+    display: none;
+  }
+  
+.ShortCutCommunity #slate:hover #slate-close {
+    display: block;
+    top: 0.35rem;
+}
+  
+.ShortCutCommunity #slate:hover #slate-open {
+    display: none;
+}
+
+/* PC */
+@media screen and (min-width: 1024px){
+    .SearchArea {
+        /* background-color: aliceblue; */
+        margin-top: -10rem;
+    }
+}
+
