@@ -27,20 +27,27 @@
     align-items: center;
 }
 
+.MovieInfo img {
+    margin-top: 5rem;
+    margin-left: 5rem;
+}
+
 .MovieInfo {
     display: flex;
-    /* margin-left: 10rem; */
-    margin-top: 10rem;
+    flex-direction: column;
 }
 
 .MovieInfo .TextInfo {
-    margin-left: 5rem;
-    margin-top: 5rem;;
+    margin: 1rem;
+}
+
+.MovieInfo .TextInfo {
+    margin: 1rem;
 }
 
 .ShortCutCommunity {
     display: flex;
-    margin: 5rem;
+    margin: 1rem;
     /* margin-left: 10rem; */
 }
 
@@ -67,6 +74,30 @@
     .SearchArea {
         /* background-color: aliceblue; */
         margin-top: -10rem;
+    }
+
+    .ContentWrapper {
+        display: flex;
+        flex-direction: column;
+        align-items: center;
+    }
+    
+    .MovieInfo {
+        display: flex;
+        flex-direction: row;
+        /* margin-left: 10rem; */
+        margin-top: 5rem;
+    }
+    
+    .MovieInfo .TextInfo {
+        margin-left: 5rem;
+        margin-top: 10rem;
+    }
+    
+    .ShortCutCommunity {
+        display: flex;
+        margin: 5rem;
+        /* margin-left: 10rem; */
     }
 }
 
