@@ -24,10 +24,12 @@ const ResultDetail = () => {
                 
                 <div className="ShortCutCommunity">
                     <h2>이 영화를 더 즐기고 싶다면?</h2>
+                    <Link to="/community/movie">
                     <div id="slate">
                     <img id="slate-open" src={ SlateImg1 } width={"80px"} height={"80px"}/>
                     <img id="slate-close" src={ SlateImg2 } width={"80px"} height={"70px"}/>
                     </div>
+                    </Link>
                 </div>
             </div>
         </div>
