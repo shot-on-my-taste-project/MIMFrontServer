@@ -30,15 +30,49 @@
 
 .BoardInfo {
     display: flex;
-    margin-top: 22rem;
+    margin-top: 21rem;
+    justify-content: space-between;
 }
 
-.SearchArea {
+.Text {
+    display: flex;
+    margin-left: 1rem;
+}
+
+.BoardInfo .Text h1 {
+    font-size: 2.5rem;
+    color: white;
+    margin-top: 0.5rem;
+}
+
+.BoardInfo .Text h4{
+    font-size: 1.25rem;
+    color: white;
+    margin-top: 2rem;
+    margin-left: 0.5rem;
+}
+
+.Btn {
+    margin-right: 1rem;
+    margin-top: 1.5rem;
+}
+
+
+.SubSearchArea {
     display: flex;
     flex-direction: row;
     margin-top: 2rem;
+    justify-content: right;
+    margin-right: 1rem;
 }
 
+.SubSearchArea input{
+    width: 15rem;
+}
+
+table {
+    width: 80%;
+}
 
 th, td {
     color: white;
@@ -46,8 +80,31 @@ th, td {
 
 .ThumbImg {
     position: absolute;
-    margin-top: -3.5rem;
+    margin-top: -4rem;
     z-index: -1;
+    object-fit: cover;
+}
+
+.TableWrapper {
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+}
+
+.TableContainer {
+    /* background-color: darkblue; */
+    margin: 1rem;
+    padding: 1rem;
+    width: 80%;
+}
+
+.pagination {
+    width: 100%;
+    margin-top: -2.5rem;
+}
+
+li a {
+
 }
 
 @media screen and (min-width: 768px) and (max-width: 1023px) {
