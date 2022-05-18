@@ -105,8 +105,10 @@ th, td {
 
 .FreeBoardThumb {
     display: flex;
-    justify-content: space-around;
-    padding-top: 3rem;
+    flex-direction: column;
+    align-items: center;
+    padding-top: 5rem;
+    padding-bottom: 2rem;
 }
 
 .FreeBoardThumb h1 {
@@ -117,12 +119,38 @@ th, td {
     .SearchArea {
         margin-top: 2rem;
     }
+
+    .FreeBoardThumb {
+        display: flex;
+        flex-direction: row;
+        justify-content: space-around;
+        padding-top: 5rem;
+        padding-bottom: 2rem;
+    }
+    
+    .FreeBoardThumb h1 {
+        font-size: 3rem;
+        margin-bottom: -1rem;
+    }
 }
     
 
 @media screen and (min-width: 1024px) {
     .SearchArea {
         margin-top: -5rem;
+    }
+
+    .FreeBoardThumb {
+        display: flex;
+        flex-direction: row;
+        justify-content: space-around;
+        padding-top: 5rem;
+        padding-bottom: 2rem;
+    }
+    
+    .FreeBoardThumb h1 {
+        font-size: 3rem;
+        margin-bottom: -1rem;
     }
 }
     
