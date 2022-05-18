@@ -1,0 +1,65 @@
+.Title {
+    display: flex;
+    justify-content: space-between;
+    padding: 3rem 7rem;
+
+}
+
+.CommunitiesWrapper {
+    display: flex;
+    justify-content: center;
+    margin-top: 1rem;
+}
+
+.Community {
+    display: flex;
+    flex-direction: column;
+    margin: 0 1rem;
+}
+
+.Community h3 {
+    /* background-color: aqua; */
+    text-align: center;
+    margin-top: 1rem;
+}
+
+.Community h6 {
+    /* background-color: aqua; */
+    text-align: center;
+}
+
+.BoardInfo {
+    display: flex;
+    margin-top: 22rem;
+}
+
+.SearchArea {
+    display: flex;
+    flex-direction: row;
+    margin-top: 2rem;
+}
+
+
+th, td {
+    color: white;
+}
+
+.ThumbImg {
+    position: absolute;
+    margin-top: -3.5rem;
+    z-index: -1;
+}
+
+@media screen and (min-width: 768px) and (max-width: 1023px) {
+    .SearchArea {
+        margin-top: 2rem;
+    }
+}
+    
+
+@media screen and (min-width: 1024px) {
+    .SearchArea {
+        margin-top: -5rem;
+    }
+}
+    

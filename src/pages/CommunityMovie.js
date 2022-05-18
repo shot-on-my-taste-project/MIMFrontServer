@@ -1,12 +1,87 @@
-import React, { Component } from 'react'
+import React, { Component, useState } from 'react'
+import { Button } from 'react-bootstrap'
 import Header from '../component/Header';
+import Pagenation from '../component/Pagenation';
+import Thumb from "../assets/tazza-thumb.jpg"
 import '../styles/Community.css'
+import { pagenate } from '../services/pagenate'
+
+
 const CommunityMovie = () => {
+    const getBoards = () => { // 영화 정보를 반환하는 함수
+        const boards = [
+          { id: 1678, title: "동작 그만 밑장빼기냐?", time: "13:33" },
+          { id: 1677, title: "묻고 트리플로 가", time: "13:32" },
+          { id: 1676, title: "2시부터 단관할 사람", time: "13:32" },
+          { id: 1675, title: "곧 사쿠라의 계절이네요", time: "13:30" },
+          { id: 1674, title: "싸늘하다 가슴에 비수가 날아와 꽂힌다", time: "13:29" },
+          { id: 1673, title: "집에 가고 싶다", time: "13:28" },
+          { id: 1672, title: "침대가 보고 싶다", time: "13:28" },
+          { id: 1671, title: "학교 온 지 1시간도 안됐는데", time: "13:27" },
+          { id: 1670, title: "개발이 끝이 없네", time: "13:26" },
+          { id: 1669, title: "ㅁㄴㅇㄻㄴㅇㄹ", time: "13:25" },
+        ]
+        return boards;
+      }
+
+      const [boards, setBoards] = useState({ // 영화 정보를 담는 state
+        data: getBoards(), // 영화 정보
+        pageSize: 5, // 한 페이지에 보여줄 아이템(영화목록) 개수
+        currentPage: 1 // 현재 활성화된 페이지 위치
+      });
+    
+      const handlePageChange = (page) => {
+        setBoards({ ...boards, currentPage: page });
+      };
+    
+      const { data, pageSize, currentPage } = boards;
+      const pagedBoards = pagenate(data, currentPage, pageSize); // 페이지 별로 아이템이 속한 배열을 얻어옴
+
+      const { length: count } = boards.data;
+      if (count === 0) 
+        return <p>글 정보가 없습니다.</p>;
     return (
         <div>
             <Header></Header>
-            작품별 게시판
-        </div>
+            <img className="ThumbImg" src={ Thumb } width={"100%"} height={"50%"}/>
+           
+            <div className="BoardInfo">
+                <h1>타짜</h1><h4>789명과 함께 이야기 중</h4>
+                <Button>신고</Button><Button>즐겨찾기</Button>
+            </div>
+            
+            <div className="SearchArea">
+                <input type="text"/><Button>검색</Button><Button>글쓰기</Button>
+            </div>
+            
+
+            <table className="tablecss table">
+            <thead>
+                <tr>
+                <th colSpan={1}>번호</th>
+                <th colSpan={3}>제목</th>
+                <th colSpan={1}>작성시간</th>
+                </tr>
+            </thead>
+            <tbody>
+                {pagedBoards.map((board) => (
+            <tr key={board.id}>
+              <td colSpan={1}>{board.id}</td>
+              <td colSpan={3}>{board.title}</td>
+              <td colSpan={1}>{board.time}</td>
+            </tr>
+          ))}
+            </tbody>
+            </table>
+  
+            <Pagenation
+        pageSize={pageSize}
+        itemsCount={count}
+        currentPage={currentPage}
+        onPageChange={handlePageChange}
+      />
+            </div>
+        
     );
 };
 
