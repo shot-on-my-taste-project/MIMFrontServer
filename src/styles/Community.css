@@ -103,8 +103,14 @@ th, td {
     margin-top: -2.5rem;
 }
 
-li a {
+.FreeBoardThumb {
+    display: flex;
+    justify-content: space-around;
+    padding-top: 3rem;
+}
 
+.FreeBoardThumb h1 {
+    font-size: 3rem;
 }
 
 @media screen and (min-width: 768px) and (max-width: 1023px) {
