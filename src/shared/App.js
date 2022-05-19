@@ -1,7 +1,8 @@
 import React, { Component } from 'react'
 import { Route, Switch } from 'react-router-dom'
 import Menu from '../component/Menu';
-import { Home, About, Login, SignUp, Result, ResultDetail, MyPage, MyPageUpdate, CommunityMain, CommunityMovie, CommunityFree } from '../pages'
+import { Home, About, Login, SignUp, Result, ResultDetail, MyPage, MyPageUpdate, 
+    CommunityMain, CommunityMovie, CommunityFree, AdminBoardManage, AdminMovieManage, AdminReportManage } from '../pages'
 import 'bootstrap/dist/css/bootstrap.min.css';
 import {Button} from "react-bootstrap";
 import '../styles/Common.css'
@@ -25,6 +26,11 @@ class App extends Component {
                     <Route path="/community/movie" component={ CommunityMovie }/>
                     <Route path="/community/free" component={ CommunityFree }/>
                     <Route path="/community" component={ CommunityMain }/>
+                </Switch>
+                <Switch>
+                    <Route path="/admin/board" component={ AdminBoardManage }/>
+                    <Route path="/admin/report" component={ AdminReportManage }/>
+                    <Route path="/admin/movie" component={ AdminMovieManage }/>
                 </Switch>
             </div>
         );
