@@ -6,6 +6,9 @@ const FreeBoardWrite = () => {
     return (
         <div>
             <Header></Header>
+            <div className="FreeBoardThumb">
+                <h1>자유 게시판</h1>
+            </div>
             <WriteBoard></WriteBoard>
         </div>
     );

@@ -115,6 +115,47 @@ th, td {
     font-size: 3rem;
 }
 
+.WriteArea {
+    /* background-color: red; */
+    padding: 2rem;
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+}
+
+.WriteWrapper table {
+    width: 30rem;
+    margin: auto;
+}
+
+.WriteWrapper table, td, th {
+    border-collapse : collapse;
+}
+
+.WriteWrapper {
+    /* background-color: orange; */
+    padding: 1rem;
+}
+
+.WriteWrapper #board-title {
+    width: 25rem;
+}
+
+.WriteWrapper #board-content {
+    height: 10rem;
+    width: 25rem;
+    margin-top: 1rem;
+}
+
+.ButtonWrapper {
+    /* background-color: yellow; */
+    justify-content: center;
+}
+
+.ButtonWrapper Button {
+    margin: 1rem;
+}
+
 @media screen and (min-width: 768px) and (max-width: 1023px) {
     .SearchArea {
         margin-top: 2rem;
@@ -131,6 +172,50 @@ th, td {
     .FreeBoardThumb h1 {
         font-size: 3rem;
         margin-bottom: -1rem;
+    }
+
+    .WriteArea {
+        /* background-color: red; */
+        padding: 2rem;
+        display: flex;
+        flex-direction: column;
+        align-items: center;
+    }
+
+    .WriteWrapper table {
+        width: 50rem;
+        margin: auto;
+        margin-left: 10rem;
+    }
+    
+    .WriteWrapper table, td, th {
+        border-collapse : collapse;
+    }
+    
+    .WriteWrapper {
+        /* background-color: orange; */
+        padding: 1rem;
+    }
+    
+    .WriteWrapper #board-title {
+        width: 40rem;
+    }
+    
+    .WriteWrapper #board-content {
+        height: 15rem;
+        width: 40rem;
+        margin-top: 1rem;
+    }
+    
+    .ButtonWrapper {
+        /* background-color: yellow; */
+        justify-content: center;
+    }
+    
+    .ButtonWrapper Button {
+        margin: 1rem;
+        width: 10rem;
+        height: 3rem;
     }
 }
     
@@ -152,5 +237,50 @@ th, td {
         font-size: 3rem;
         margin-bottom: -1rem;
     }
+
+    .WriteArea {
+        /* background-color: red; */
+        padding: 2rem;
+        display: flex;
+        flex-direction: column;
+        align-items: center;
+    }
+
+    .WriteWrapper table {
+        width: 90rem;
+        margin: auto;
+        margin-left: 10rem;
+    }
+    
+    .WriteWrapper table, td, th {
+        border-collapse : collapse;
+    }
+    
+    .WriteWrapper {
+        /* background-color: orange; */
+        padding: 1rem;
+    }
+    
+    .WriteWrapper #board-title {
+        width: 80rem;
+    }
+    
+    .WriteWrapper #board-content {
+        height: 15rem;
+        width: 80rem;
+        margin-top: 1rem;
+    }
+    
+    .ButtonWrapper {
+        /* background-color: yellow; */
+        justify-content: center;
+    }
+    
+    .ButtonWrapper Button {
+        margin: 1rem;
+        width: 10rem;
+        height: 3rem;
+    }
+    
 }
     
