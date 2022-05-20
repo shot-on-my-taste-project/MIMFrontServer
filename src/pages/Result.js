@@ -29,7 +29,6 @@ const Result = () => {
                     <img src={ ImgEx3 } width={"300rem"} height={"400rem"}/>
                     <h3>부산행</h3>
                 </div>
-    
             </div>
         </div>
     );

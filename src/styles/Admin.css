@@ -15,6 +15,28 @@
     height: 100%;
 }
 
+.BoardRequestWrapper {
+    display: flex;
+    justify-content: center;
+    margin-top: 1rem;
+}
+
+.Request {
+    display: flex;
+    flex-direction: column;
+    margin: 0 1rem;
+}
+
+.Request h3 {
+    /* background-color: aqua; */
+    text-align: center;
+    margin-top: 1rem;
+}
+
+.ButtonWrapper Button{
+    width: 5rem;
+}
+
 .ReportSearch {
     display: flex;
     flex-direction: column;
