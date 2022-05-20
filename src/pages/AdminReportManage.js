@@ -1,5 +1,8 @@
 import React, { useState } from 'react'
 import Header from '../component/AdminHeader';
+import AdminReportBoard from '../component/AdminReportBoard';
+import AdminReportReply from '../component/AdminReportReply';
+import AdminReportPost from '../component/AdminReportPost';
 import { Button } from 'react-bootstrap'
 const AdminReportManage = () => {
     const [activeIndex, setActiveIndex] = useState(0);
@@ -10,7 +13,7 @@ const AdminReportManage = () => {
                 <li className={activeIndex===0 ? "is-active" : ""} onClick={()=>tabClickHandler(0)}>게시글 신고</li>
             ),
             tabCont: (
-                <div>탭1 내용</div>
+                <div><AdminReportBoard/></div>
             )
         },
         {
@@ -18,15 +21,15 @@ const AdminReportManage = () => {
                 <li className={activeIndex===1 ? "is-active" : ""} onClick={()=>tabClickHandler(1)}>댓글 신고</li>
             ),
             tabCont: (
-                <div>탭2 내용</div>
+                <div><AdminReportReply/></div>
             )
         },
         {
             tabTitle: (
-                <li className={activeIndex===1 ? "is-active" : ""} onClick={()=>tabClickHandler(2)}>게시판 신고</li>
+                <li className={activeIndex===2 ? "is-active" : ""} onClick={()=>tabClickHandler(2)}>게시판 신고</li>
             ),
             tabCont: (
-                <div>탭3 내용</div>
+                <div><AdminReportPost/></div>
             )
         }
     ];
@@ -40,9 +43,6 @@ const AdminReportManage = () => {
             <Header></Header>
             <div className="BoardManageThumb">
                 <h1>신고 관리</h1>
-                <div className="SubSearchArea">
-                    <input type="text"/><Button>검색</Button>
-                </div>
             </div>
             <ul className="tabs is-boxed">
                 {tabContArr.map((section, index)=>{

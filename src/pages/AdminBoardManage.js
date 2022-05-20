@@ -1,5 +1,7 @@
 import React, { Component, useState } from 'react'
 import Header from '../component/AdminHeader';
+import AdminBoardOpen from '../component/AdminBoardOpen';
+import AdminBoardClose from '../component/AdminBoardClose';
 import { Button } from 'react-bootstrap'
 import '../styles/Admin.css'
 
@@ -13,7 +15,7 @@ const AdminBoardManage = () => {
                 <li className={activeIndex===0 ? "is-active" : ""} onClick={()=>tabClickHandler(0)}>개설 요청</li>
             ),
             tabCont: (
-                <div>탭1 내용</div>
+                <div><AdminBoardOpen/></div>
             )
         },
         {
@@ -21,7 +23,7 @@ const AdminBoardManage = () => {
                 <li className={activeIndex===1 ? "is-active" : ""} onClick={()=>tabClickHandler(1)}>폐쇄 요청</li>
             ),
             tabCont: (
-                <div>탭2 내용</div>
+                <div><AdminBoardClose/></div>
             )
         }
     ];
