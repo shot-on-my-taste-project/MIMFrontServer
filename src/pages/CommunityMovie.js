@@ -1,5 +1,6 @@
 import React, { Component, useState } from 'react'
 import { Button } from 'react-bootstrap'
+import { Link } from 'react-router-dom'
 import Header from '../component/Header';
 import Pagenation from '../component/Pagenation';
 import Thumb from "../assets/tazza-thumb.jpg"
@@ -78,7 +79,8 @@ const CommunityMovie = () => {
             </div>
             
             <div className="SubSearchArea">
-                <input type="text"/><Button>검색</Button><Button>글쓰기</Button>
+                <input type="text"/><Button>검색</Button>
+                <Link to="/community/movie/write"><Button>글쓰기</Button></Link>
             </div>
             
             <div className="TableWrapper">

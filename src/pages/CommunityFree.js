@@ -1,4 +1,5 @@
 import React, { Component, useState } from 'react'
+import { Link } from 'react-router-dom'
 import { Button } from 'react-bootstrap'
 import Header from '../component/Header';
 import Pagenation from '../component/Pagenation';
@@ -67,7 +68,8 @@ const CommunityMovie = () => {
             <div className="FreeBoardThumb">
                 <h1>자유 게시판</h1>
                 <div className="SubSearchArea">
-                    <input type="text"/><Button>검색</Button><Button>글쓰기</Button>
+                    <input type="text"/><Button>검색</Button>
+                    <Link to="/community/free/write"><Button>글쓰기</Button></Link>
                 </div>
             </div>
         
