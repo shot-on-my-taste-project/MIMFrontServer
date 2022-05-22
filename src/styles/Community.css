@@ -156,6 +156,26 @@ th, td {
     margin: 1rem;
 }
 
+.WriteReply {
+    display: flex;
+    flex-direction: row;
+}
+
+.WriteReply img {
+    margin-right: 1rem;
+}
+
+.WriteReply textarea {
+    width: 25rem;
+    height: 5rem;
+}
+
+.WriteReply Button {
+    height: 5rem;
+    width: 4rem;
+    margin-top: 1.7rem;
+}
+
 @media screen and (min-width: 768px) and (max-width: 1023px) {
     .SearchArea {
         margin-top: 2rem;

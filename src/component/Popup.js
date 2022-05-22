@@ -10,7 +10,7 @@ class Popup extends Component {
   
       return (
           
-        <div className={open ? 'openPopup Popup' : ''}>
+        <div className={open ? 'openPopup Popup' : 'Popup'}>
           {open ? (
             <section>
               <header>
@@ -21,9 +21,9 @@ class Popup extends Component {
               </header>
               <main>{this.props.children}</main>
               <footer>
-                <Button className="close" variant="secondary" onClick={close}>
+                {/* <Button className="close" variant="secondary" onClick={close}>
                   닫기
-                </Button>
+                </Button> */}
               </footer>
             </section>
           ) : null}

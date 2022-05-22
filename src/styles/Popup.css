@@ -5,6 +5,7 @@
   }
 
 .Popup {
+    display: none;
     border: 1px solid white;
     position: absolute;
     background-color: black;
@@ -18,14 +19,41 @@
 .Popup header .close {
     display: flex;
     justify-content: right;
-    padding: 1rem;
 }
 
 .Popup main {
-    padding: 2rem;
+    padding: 2.5rem;
 }
 
 .Popup footer {
     display: flex;
     justify-content: right;
 }
+
+.Popup.openPopup {
+    display: flex;
+    align-items: center;
+    /* 팝업이 열릴때 스르륵 열리는 효과 */
+    animation: modal-bg-show 0.3s;
+    background-color: black;
+  }
+
+@keyframes Popup-show {
+    from {
+      opacity: 0;
+      margin-top: -50px;
+    }
+    to {
+      opacity: 1;
+      margin-top: 0;
+    }
+  }
+
+  @keyframes modal-bg-show {
+    from {
+      opacity: 0;
+    }
+    to {
+      opacity: 1;
+    }
+  } 

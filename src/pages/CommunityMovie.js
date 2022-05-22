@@ -6,6 +6,8 @@ import Pagenation from '../component/Pagenation';
 import Thumb from "../assets/tazza-thumb.jpg"
 import '../styles/Community.css'
 import { pagenate } from '../services/pagenate'
+import Popup from '../component/Popup'
+import PostDetail from '../component/PostDetail';
 
 
 const CommunityMovie = () => {
@@ -53,6 +55,8 @@ const CommunityMovie = () => {
         currentPage: 1 // 현재 활성화된 페이지 위치
       });
     
+      const [popupOpen, setPopupOpen] = useState(false);
+
       const handlePageChange = (page) => {
         setBoards({ ...boards, currentPage: page });
       };
@@ -63,6 +67,15 @@ const CommunityMovie = () => {
       const { length: count } = boards.data;
       if (count === 0) 
         return <p>글 정보가 없습니다.</p>;
+
+        
+    
+        const openPopup = () => {
+          setPopupOpen(true);
+        }
+        const closePopup = () => {
+          setPopupOpen(false);
+        }
     return (
         <div className="CommunityMovieContainer">
             <Header></Header>
@@ -102,7 +115,7 @@ const CommunityMovie = () => {
                     {pagedBoards.map((board) => (
                 <tr key={board.id}>
                   <td>{board.id}</td>
-                  <td>{board.title}</td>
+                  <td onClick={openPopup}>{board.title}</td>
                   <td>{board.time}</td>
                 </tr>
               ))}
@@ -110,7 +123,12 @@ const CommunityMovie = () => {
                 </table>
               </div>
               
-    
+              <Popup open={popupOpen} close={closePopup}>
+                            <PostDetail title="2시부터 단관할 사람"
+                            writtenTime="2022-05-22 11:30:52"
+                            writer="소공이" content="ㅈㄱㄴ"/>
+                        </Popup>
+
               <Pagenation
                 pageSize={pageSize}
                 itemsCount={count}
