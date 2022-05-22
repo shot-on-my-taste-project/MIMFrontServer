@@ -5,6 +5,8 @@ import Header from '../component/Header';
 import Pagenation from '../component/Pagenation';
 import '../styles/Community.css'
 import { pagenate } from '../services/pagenate'
+import CustomSearchArea from '../component/CustomSearchArea';
+import WriteButton from '../component/WriteButton';
 
 
 const CommunityMovie = () => {
@@ -68,8 +70,8 @@ const CommunityMovie = () => {
             <div className="FreeBoardThumb">
                 <h1>자유 게시판</h1>
                 <div className="SubSearchArea">
-                    <input type="text"/><Button>검색</Button>
-                    <Link to="/community/free/write"><Button>글쓰기</Button></Link>
+                    <CustomSearchArea />
+                    <WriteButton moveTo="/community/free/write" />
                 </div>
             </div>
         

@@ -1,9 +1,5 @@
 /* 전체 서식(검은 배경에 흰 글씨)*/
 /* mobile-first */
-body {
-    background-color: black;
-  }
-  
   div {
     color: white;
   }

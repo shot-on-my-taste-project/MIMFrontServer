@@ -6,6 +6,7 @@ import '../styles/Community.css'
 import ImgEx1 from "../assets/tazza.jpg"
 import ImgEx2 from "../assets/seungriho.jpg"
 import ImgEx3 from "../assets/busanhang.jpg"
+import CustomSearchArea from '../component/CustomSearchArea'
 const CommunityMain = () => {
     return (
         <div>
@@ -14,8 +15,7 @@ const CommunityMain = () => {
             <div className="Title">
                 <h1>인기 게시판 TOP 3</h1>
                 <div>
-                    <input type="text"></input>
-                    <Button>검색</Button>
+                    <CustomSearchArea />
                 </div>
                 
             </div>

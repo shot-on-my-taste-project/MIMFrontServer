@@ -8,6 +8,10 @@ import '../styles/Community.css'
 import { pagenate } from '../services/pagenate'
 import Popup from '../component/Popup'
 import PostDetail from '../component/PostDetail';
+import CustomSearchArea from '../component/CustomSearchArea';
+import WriteButton from '../component/WriteButton';
+import ReportButton from '../component/ReportButton';
+import FavoriteButton from '../component/FavoriteButton';
 
 
 const CommunityMovie = () => {
@@ -86,14 +90,15 @@ const CommunityMovie = () => {
                   <h1>타짜</h1><h4>789명과 함께 이야기 중</h4>
                 </div>
                 <div className="Btn">
-                  <Button>신고</Button><Button>즐겨찾기</Button>
+                  <ReportButton />
+                  <FavoriteButton />
                 </div>
                 
             </div>
             
             <div className="SubSearchArea">
-                <input type="text"/><Button>검색</Button>
-                <Link to="/community/movie/write"><Button>글쓰기</Button></Link>
+                <CustomSearchArea />
+                <WriteButton moveTo="/community/movie/write"/>
             </div>
             
             <div className="TableWrapper">

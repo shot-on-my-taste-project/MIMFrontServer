@@ -1,0 +1,18 @@
+  .CustomSearchArea {
+    display: flex;
+  }
+
+  .CustomSearchArea input{
+    background-color: black;
+    border: solid 1px white;
+    color: white;
+  }
+
+  .CustomSearchArea img {
+    margin-left: -2rem;
+    margin-top: 0.3rem;
+  }
+
+  .WriteButton img {
+    border: solid 1px white;
+  }
