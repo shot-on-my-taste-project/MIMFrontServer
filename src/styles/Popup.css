@@ -14,3 +14,18 @@
     height: 30rem;
     margin: -15rem 0 0 -20rem;
 }
+
+.Popup header .close {
+    display: flex;
+    justify-content: right;
+    padding: 1rem;
+}
+
+.Popup main {
+    padding: 2rem;
+}
+
+.Popup footer {
+    display: flex;
+    justify-content: right;
+}
