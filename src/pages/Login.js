@@ -1,8 +1,7 @@
 import React, { Component, useState, useEffect } from 'react'
 import axios from 'axios';
-import { Route, Link } from 'react-router-dom'
+import { Link } from 'react-router-dom'
 import {Button} from "react-bootstrap";
-import { SignUp } from '.';
 import Header from '../component/Header';
 import Logo from '../component/Logo';
 import '../styles/Login.css'
@@ -11,7 +10,6 @@ import CryptoJS from 'crypto-js';
 const Login = () => {
     const [inputId, setInputId] = useState('')
     let [inputPw, setInputPw] = useState('')
-    const saltRounds = 10;
 
     const handleInputId = (e) => {
         setInputId(e.target.value)
@@ -27,9 +25,16 @@ const Login = () => {
                     "pw": CryptoJS.SHA256(inputPw).toString()
                   })
                   .then(res => {
-                    console.log(res)
-                })
-                  .catch();
+                      if(res.data === "success") {
+                        document.location.href="/";
+                      }
+                  })
+                  .catch(err => {
+                    alert("아이디 혹은 비밀번호가 다릅니다.")
+                    var pwInput = document.getElementById("pw")
+                    pwInput.value = null
+                    pwInput.focus();
+                  });
                   console.log("click login")
     }
 
@@ -40,8 +45,8 @@ const Login = () => {
             <div className="LoginWrapper">
                 <div className="LoginArea">
                     <div className="InputArea">
-                        <input type="text" placeholder=" ID" name="id" value={inputId} onChange={handleInputId}></input>
-                        <input type="password" placeholder=" PW" name="pw" value={inputPw} onChange={handleInputPw}></input>
+                        <input type="text" placeholder=" ID" id="id" name="id" value={inputId} onChange={handleInputId}></input>
+                        <input type="password" placeholder=" PW" id="pw" name="pw" value={inputPw} onChange={handleInputPw}></input>
                     </div>
                     <Button variant="danger" id="login-btn" onClick={onClickLogin}>로그인</Button>
                 </div>
