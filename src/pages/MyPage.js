@@ -1,4 +1,4 @@
-import React from 'react'
+import React, { useState } from 'react'
 import { Button } from 'react-bootstrap';
 import { Route, Link } from 'react-router-dom'
 import profileImg from "../assets/profile.jpg"
@@ -7,16 +7,34 @@ import ImgEx2 from "../assets/seungriho.jpg"
 import ImgEx3 from "../assets/busanhang.jpg"
 import Header from '../component/Header';
 import '../styles/MyPage.css'
+import { getCookie } from '../utils/Cookie';
+import axios from 'axios';
 
 const MyPage = () => {
+    const [user, setUser] = useState([]);
+    axios({
+        url: '/users/' + `${getCookie('user-id')}`,
+        method: 'get',
+        headers: {
+            "X-ACCESS-TOKEN": `${getCookie('user-id')}`,
+            "X-REFRESH-TOKEN": localStorage.getItem("refresh-token")
+        }
+    })
+    .then(res => {
+        setUser(res.data);
+    })
+    .catch(err => {
+        console.log(err)
+    });
+
     return ( 
         <div className="MyPageArea">
             <Header></Header>
             <div className="UserInfoWrapper">
                 <div className="MainInfo">
-                    <img src={ profileImg } width={ "150rem" }/>
+                    <img src={ user.profileImg } width={ "150rem" }/>
                     <div className="TextInfo">
-                        <h1>소공이</h1>
+                        <h1>{ user.nickName }</h1>
                         <Link to="/mypage/update">
                             <Button variant="danger">정보 수정</Button>
                         </Link>

@@ -31,7 +31,7 @@ const SignUp = () => {
         axios.post('/sign-up', {
                     "id": inputId,
                     "pw": CryptoJS.SHA256(inputPw).toString(),
-                    "nickname": inputNickName,
+                    "nickName": inputNickName,
                   })
                   .then(res => {
                       if(res.data === "success") {
