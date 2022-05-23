@@ -6,6 +6,7 @@ import Header from '../component/Header';
 import Logo from '../component/Logo';
 import '../styles/Login.css'
 import CryptoJS from 'crypto-js';
+import { setCookie } from '../utils/Cookie';
 
 const Login = () => {
     const [inputId, setInputId] = useState('')
@@ -26,6 +27,10 @@ const Login = () => {
                   })
                   .then(res => {
                       if(res.data === "success") {
+                        localStorage.setItem("refresh-token", res.headers['x-refresh-token']);
+                        console.log(localStorage.getItem("refresh-token"));
+                        setCookie("access-token", res.headers['x-access-token']);
+                        setCookie("user-id", inputId);
                         document.location.href="/";
                       }
                   })
@@ -35,7 +40,6 @@ const Login = () => {
                     pwInput.value = null
                     pwInput.focus();
                   });
-                  console.log("click login")
     }
 
     return (
