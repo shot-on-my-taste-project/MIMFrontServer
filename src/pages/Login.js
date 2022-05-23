@@ -6,9 +6,12 @@ import { SignUp } from '.';
 import Header from '../component/Header';
 import Logo from '../component/Logo';
 import '../styles/Login.css'
+import CryptoJS from 'crypto-js';
+
 const Login = () => {
     const [inputId, setInputId] = useState('')
-    const [inputPw, setInputPw] = useState('')
+    let [inputPw, setInputPw] = useState('')
+    const saltRounds = 10;
 
     const handleInputId = (e) => {
         setInputId(e.target.value)
@@ -20,18 +23,16 @@ const Login = () => {
 
     const onClickLogin = () => {
         axios.post('/login', {
-            "id": inputId,
-            "pw": inputPw,
-            "isRemoved": false,
-            "nickname": "",
-            "profilePath": "",
-            "role": "USER"
-          })
-          .then(res => console.log(res))
-          .catch();
-          console.log("click login")
+                    "id": inputId,
+                    "pw": CryptoJS.SHA256(inputPw).toString()
+                  })
+                  .then(res => {
+                    console.log(res)
+                })
+                  .catch();
+                  console.log("click login")
     }
-    
+
     return (
         <div className="LoginTotalArea">
             <Header></Header>

@@ -1,13 +1,19 @@
-import React, { Component, useState, useEffect } from 'react'
+import React, { Component, useState, useEffect } from 'react';
 import axios from 'axios';
+import CryptoJS from 'crypto-js';
 import {Button, Table} from "react-bootstrap";
 import '../styles/SignUp.css'
 import Header from '../component/Header';
 import Logo from '../component/Logo';
+import Popup from '../component/Popup';
+
+
 const SignUp = () => {
     const [inputId, setInputId] = useState('')
-    const [inputPw, setInputPw] = useState('')
+    let [inputPw, setInputPw] = useState('')
     const [inputNickName, setInputNickName] = useState('')
+    const [popup, setPopup] = useState({open: false, title: "", message: "", callback: false});
+    const saltRounds = 10;
 
     const handleInputId = (e) => {
         setInputId(e.target.value)
@@ -19,24 +25,24 @@ const SignUp = () => {
 
     const handleInputNickName = (e) => {
         setInputNickName(e.target.value)
-    }
+    } 
 
     const onClickSignUp = () => {
         axios.post('/sign-up', {
-            "id": inputId,
-            "pw": inputPw,
-            "isRemoved": false,
-            "nickname": inputNickName,
-            "profilePath": "",
-            "role": "USER"
-          })
-          .then(res => console.log(res))
-          .catch();
-          console.log("click signup")
+                        "id": inputId,
+                        "pw": CryptoJS.SHA256(inputPw).toString(),
+                        "nickname": inputNickName,
+                      })
+                      .then(res => {
+                        console.log(res)
+                    })
+                      .catch();
+                      console.log("click signup")
     }
 
     return (
         <div className="SignUpArea">
+            <Popup open = {popup.open} setPopup = {setPopup} message = {popup.message} title = {popup.title} callback = {popup.callback}/>
             <Header></Header>
             <Logo></Logo>
             <div className="UserInfoArea">
