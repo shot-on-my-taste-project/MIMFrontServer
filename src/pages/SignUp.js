@@ -1,19 +1,15 @@
-import React, { Component, useState, useEffect } from 'react';
+import React, { useState } from 'react';
 import axios from 'axios';
 import CryptoJS from 'crypto-js';
-import {Button, Table} from "react-bootstrap";
+import { Button } from "react-bootstrap";
 import '../styles/SignUp.css'
 import Header from '../component/Header';
 import Logo from '../component/Logo';
-import Popup from '../component/Popup';
-
 
 const SignUp = () => {
     const [inputId, setInputId] = useState('')
     let [inputPw, setInputPw] = useState('')
     const [inputNickName, setInputNickName] = useState('')
-    const [popup, setPopup] = useState({open: false, title: "", message: "", callback: false});
-    const saltRounds = 10;
 
     const handleInputId = (e) => {
         setInputId(e.target.value)
@@ -44,11 +40,39 @@ const SignUp = () => {
     }
 
     const duplicateId = () => {
+        var idInput = document.getElementById("id");
 
+        axios.get('/users/id/' + inputId)
+          .then(res => {
+              if(res.data){
+                alert("중복된 아이디입니다.")
+                idInput.value = null;
+                idInput.focus();
+              } else {
+                alert("사용 가능한 아이디입니다.")
+              }
+                
+          })
+          .catch(err => {
+
+          })
     }
 
     const duplicateNickname = () => {
-        
+        var nickNameInput = document.getElementById("nickName");
+        axios.get('/users/nick-name/' + inputNickName)
+          .then(res => {
+            if(res.data){
+                alert("중복된 닉네임입니다.")
+                nickNameInput.value = null;
+                nickNameInput.focus();
+              } else {
+                alert("사용 가능한 닉네임입니다.")
+              }
+          })
+          .catch(err => {
+
+          })
     }
 
     const samePassword = () => {
@@ -66,7 +90,6 @@ const SignUp = () => {
 
     return (
         <div className="SignUpArea">
-            <Popup open = {popup.open} setPopup = {setPopup} message = {popup.message} title = {popup.title} callback = {popup.callback}/>
             <Header></Header>
             <Logo></Logo>
             <div className="UserInfoArea">
@@ -74,7 +97,7 @@ const SignUp = () => {
                     <tr>
                         <th colspan="1">아이디</th>
                         <td colspan="1">
-                            <input class="userInfo" type="text" placeholder="아이디" name="id" value={inputId} onChange={handleInputId}/>
+                            <input class="userInfo" type="text" placeholder="아이디" id="id" name="id" value={inputId} onChange={handleInputId}/>
                             <Button variant="secondary" size="sm" className="subBtn" onClick={duplicateId}>중복<br/>확인</Button>
                         </td>
                     </tr>
@@ -94,7 +117,7 @@ const SignUp = () => {
                     <tr>
                         <th colspan="1">닉네임</th>
                         <td colspan="1">
-                            <input class="userInfo" type="text" placeholder="닉네임" name="nickName" value={inputNickName} onChange={handleInputNickName}/>
+                            <input class="userInfo" type="text" placeholder="닉네임" id="nickName" name="nickName" value={inputNickName} onChange={handleInputNickName}/>
                             <Button variant="secondary" size="sm" className="subBtn" onClick={duplicateNickname}>중복<br/>확인</Button>
                         </td>
                     </tr>
