@@ -29,15 +29,39 @@ const SignUp = () => {
 
     const onClickSignUp = () => {
         axios.post('/sign-up', {
-                        "id": inputId,
-                        "pw": CryptoJS.SHA256(inputPw).toString(),
-                        "nickname": inputNickName,
-                      })
-                      .then(res => {
-                        console.log(res)
-                    })
-                      .catch();
-                      console.log("click signup")
+                    "id": inputId,
+                    "pw": CryptoJS.SHA256(inputPw).toString(),
+                    "nickname": inputNickName,
+                  })
+                  .then(res => {
+                      if(res.data === "success") {
+                          document.location.href="/login";
+                      }
+                  })
+                  .catch(err => {
+
+                  })
+    }
+
+    const duplicateId = () => {
+
+    }
+
+    const duplicateNickname = () => {
+        
+    }
+
+    const samePassword = () => {
+        var firstInput = document.getElementById("first-pw");
+        var secondInput = document.getElementById("second-pw");
+        
+        if(firstInput.value === secondInput.value) {
+            alert("비밀번호가 일치합니다.")
+        } else {
+            alert("비밀번호가 일치하지 않습니다.")
+            secondInput.value = null
+            secondInput.focus();
+        }
     }
 
     return (
@@ -51,27 +75,27 @@ const SignUp = () => {
                         <th colspan="1">아이디</th>
                         <td colspan="1">
                             <input class="userInfo" type="text" placeholder="아이디" name="id" value={inputId} onChange={handleInputId}/>
-                            <Button variant="secondary" size="sm" className="subBtn">중복<br/>확인</Button>
+                            <Button variant="secondary" size="sm" className="subBtn" onClick={duplicateId}>중복<br/>확인</Button>
                         </td>
                     </tr>
                     <tr>
                         <th colspan="1">비밀번호</th>
                         <td colspan="1">
-                            <input class="userInfo" type="password" placeholder="비밀번호" name="pw" value={inputPw} onChange={handleInputPw}/>
+                            <input class="userInfo" type="password" placeholder="비밀번호" id="first-pw" name="pw" value={inputPw} onChange={handleInputPw}/>
                         </td>
                     </tr>
                     <tr>
                         <th colspan="1"></th>
                         <td colspan="1">
-                            <input class="userInfo" type="password" placeholder="비밀번호 재입력"/>
-                            <Button variant="secondary" size="sm" className="subBtn">일치<br/>확인</Button>
+                            <input class="userInfo" type="password" id="second-pw" placeholder="비밀번호 재입력"/>
+                            <Button variant="secondary" size="sm" className="subBtn" onClick={samePassword}>일치<br/>확인</Button>
                         </td>
                     </tr>
                     <tr>
                         <th colspan="1">닉네임</th>
                         <td colspan="1">
                             <input class="userInfo" type="text" placeholder="닉네임" name="nickName" value={inputNickName} onChange={handleInputNickName}/>
-                            <Button variant="secondary" size="sm" className="subBtn">중복<br/>확인</Button>
+                            <Button variant="secondary" size="sm" className="subBtn" onClick={duplicateNickname}>중복<br/>확인</Button>
                         </td>
                     </tr>
                     <tr>
