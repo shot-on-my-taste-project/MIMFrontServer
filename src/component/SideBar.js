@@ -9,6 +9,8 @@ class SideBar extends Component {
     render() {
         const logout = () => {
             removeCookie("access-token")
+            removeCookie("user-id")
+            localStorage.removeItem("refresh-token")
             window.location.href="/"
         }
 
