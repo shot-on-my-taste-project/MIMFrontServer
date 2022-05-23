@@ -1,7 +1,6 @@
 import React, { useState } from 'react'
 import { Button } from 'react-bootstrap';
-import { Route, Link } from 'react-router-dom'
-import profileImg from "../assets/profile.jpg"
+import { Link } from 'react-router-dom'
 import ImgEx1 from "../assets/tazza.jpg"
 import ImgEx2 from "../assets/seungriho.jpg"
 import ImgEx3 from "../assets/busanhang.jpg"
@@ -16,7 +15,7 @@ const MyPage = () => {
         url: '/users/' + `${getCookie('user-id')}`,
         method: 'get',
         headers: {
-            "X-ACCESS-TOKEN": `${getCookie('user-id')}`,
+            "X-ACCESS-TOKEN": `${getCookie('access-token')}`,
             "X-REFRESH-TOKEN": localStorage.getItem("refresh-token")
         }
     })

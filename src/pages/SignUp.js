@@ -124,7 +124,10 @@ const SignUp = () => {
                     <tr>
                         <th colspan="1">프로필 사진</th>
                         <td colspan="1">
-                            <input class="userInfo" type="file" placeholder=""/>
+                            <div className="Filebox">
+                                <label for="ex_file">업로드</label>
+                                <input class="userInfo" type="file" id="ex_file" placeholder=""/>
+                            </div>
                         </td>
                     </tr>
                 </table>

@@ -65,7 +65,7 @@
 .ButtonWrapper {
     width: 100%;
     display: flex;
-    justify-content: right;
+    justify-content: center;
 }
 
 .ButtonWrapper Button {
@@ -95,7 +95,52 @@
     margin-top: 3rem;
     margin-left: 1rem;
     margin-bottom: 3rem;
+    width: auto;
 }
 .InputWrapper Button {
     margin-left: 0.5rem;
+}
+
+.MyPageArea {
+    /* background-color: red; */
+    flex-direction: column;
+}
+
+.MainInfoUpdate {
+    /* background-color: orange; */
+    display: flex;
+    justify-content: center;
+    padding-top: 5rem;
+}
+
+.InputWrapper {
+    /* background-color: yellow; */
+    display: flex;
+    justify-content: center;
+}
+
+.InputWrapper input{
+    width: 15rem;
+}
+
+th {
+    padding-right: 1rem;
+}
+
+/* 태블릿 */
+@media screen and (min-width: 768px) and (max-width: 1023px){
+    .InputWrapper {
+        margin-left: 7rem;
+    }
+}
+
+/* PC */
+@media screen and (min-width: 1024px){
+    .profileArea {
+        margin-left: -5rem;
+    }
+
+    .InputWrapper input{
+        width: 20rem;
+    }
 }
