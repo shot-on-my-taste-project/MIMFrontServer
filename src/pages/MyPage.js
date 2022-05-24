@@ -16,7 +16,7 @@ const MyPage = () => {
         method: 'get',
         headers: {
             "X-ACCESS-TOKEN": `${getCookie('access-token')}`,
-            "X-REFRESH-TOKEN": localStorage.getItem("refresh-token")
+            "X-REFRESH-TOKEN": localStorage.getItem('refresh-token')
         }
     })
     .then(res => {
@@ -25,6 +25,22 @@ const MyPage = () => {
     .catch(err => {
         console.log(err)
     });
+
+    const [ postings, setPostings ] = useState([]);
+    axios({
+        url: 'postings/user/' + `${getCookie('user-id')}` + '?page=0',
+        method: 'get',
+        headers: {
+            "X-ACCESS-TOKEN": `${getCookie('access-token')}`,
+            "X-REFRESH-TOKEN": localStorage.getItem('refresh-token')
+        }
+    })
+    .then(res => {
+        setPostings(res.data['content']);
+    })
+    .catch(err => {
+        console.log(err);
+    })
 
     return ( 
         <div className="MyPageArea">
@@ -41,13 +57,9 @@ const MyPage = () => {
                 </div>
 
                 <div className="ActivityHistory">
-                    <h2>작성한 글/댓글</h2>
+                    <h2>작성한 글</h2>
                     <div className="HistoryWrapper">
-                        <div>asdfasdf</div>
-                        <div>asdfasdf</div>
-                        <div>asdfasdf</div>
-                        <div>asdfasdf</div>
-                        <div>asdfasdf</div>
+                        {postings.map((posting)=><div>{posting.title}</div>)}
                     </div>
                 </div>
 
