@@ -1,11 +1,24 @@
-import React, { Component } from 'react'
+import React, { Component, useState } from 'react'
 import { Route, Link } from 'react-router-dom'
 import Header from '../component/Header';
 import ImgEx1 from "../assets/tazza.jpg"
 import SlateImg1 from "../assets/slate-open.png"
 import SlateImg2 from "../assets/slate-close.png"
 import '../styles/Result.css'
-const ResultDetail = () => {
+import axios from 'axios';
+import { render } from 'react-dom';
+const ResultDetail = ({ match }) => {
+    const [ movieInfo, setMovieInfo ] = useState([]);
+    axios.get('/movies/' + match.params.movieId)
+    .then(res => {
+        setMovieInfo(res.data);
+    })
+    .catch(err => {
+        console.log(err)
+    })
+
+    console.log(movieInfo)
+
     return ( 
         <div className="ResultArea">
             <Header></Header>
@@ -13,12 +26,11 @@ const ResultDetail = () => {
                 <div className="MovieInfo">
                     <img src={ ImgEx1 } width={"300rem"} height={"400rem"}/>
                     <div className="TextInfo">
-                        <h1>타짜</h1>
-                        <span>2006</span> | <span>청불</span> | <span>2시간 20분</span> | <span>스릴러</span>
-                        <p>이토록 화려하고, 이토록 슬픈 꽃놀이를 보았는가. <br/>
-                        속절없이 당한 도박 사기에 칼을 갈고 타짜로 거듭난 청년 고니. <br/>
-                        전국의 화투판을 돌면서 목숨 건 승부를 시작한다.</p>
-                        <p>주연: 조승우, 김혜수, 백윤식</p>
+                        <h1>{movieInfo.movieDto.title}</h1>
+                        <span>{movieInfo.movieDto.year}</span> | <span>{movieInfo.rating}</span> | <span>{movieInfo.movieDto.runningTime}분</span> | <span>{movieInfo.genres}</span>
+                        <p>{movieInfo.movieDto.synopsis}</p>
+                        <p>감독: {movieInfo.directors}</p>
+                        <p>주연: {movieInfo.actors}</p>
                     </div>
                 </div>
                 

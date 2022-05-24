@@ -20,7 +20,7 @@ class App extends Component {
                     <Route path="/mypage" component={ MyPage }/>                
                 </Switch>
                 <Switch>
-                    <Route path="/result/detail" component={ ResultDetail }/>
+                    <Route path="/result/detail/:movieId" component={ ResultDetail }/>
                     <Route path="/result" component={ Result }/>
                 </Switch>
                 <Switch>
