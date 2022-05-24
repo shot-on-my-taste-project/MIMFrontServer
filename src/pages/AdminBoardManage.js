@@ -2,9 +2,11 @@ import React, { Component, useState } from 'react'
 import Header from '../component/AdminHeader';
 import AdminBoardOpen from '../component/AdminBoardOpen';
 import AdminBoardClose from '../component/AdminBoardClose';
+import CustomSearchArea from '../component/CustomSearchArea';
+import Popup from '../component/Popup';
 import { Button } from 'react-bootstrap'
 import '../styles/Admin.css'
-
+import AdminBoardSearch from '../component/AdminBoardSearch';
 
 const AdminBoardManage = () => {
     const [activeIndex, setActiveIndex] = useState(0);
@@ -31,6 +33,15 @@ const AdminBoardManage = () => {
     const tabClickHandler=(index)=>{
         setActiveIndex(index);
     }
+
+    const [ popupOpen, setPopupOpen ] = useState(false);
+    const openPopup = () => {
+        setPopupOpen(true);
+    }
+    
+    const closePopup = () => {
+        setPopupOpen(false);
+    }
     
     return (
         <div>
@@ -38,7 +49,10 @@ const AdminBoardManage = () => {
             <div className="BoardManageThumb">
                 <h1>게시판 관리</h1>
                 <div className="SubSearchArea">
-                    <input type="text"/><Button>검색</Button>
+                <CustomSearchArea event={openPopup}/>
+                    <Popup open={popupOpen} close={closePopup}>
+                        <AdminBoardSearch />
+                    </Popup>
                 </div>
             </div>
             <ul className="tabs is-boxed">

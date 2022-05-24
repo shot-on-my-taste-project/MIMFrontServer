@@ -1,4 +1,4 @@
-import React, { Component } from 'react'
+import React, { Component, useState } from 'react'
 import { Route, Link } from 'react-router-dom'
 import { Button } from 'react-bootstrap'
 import Header from '../component/Header'
@@ -7,7 +7,19 @@ import ImgEx1 from "../assets/tazza.jpg"
 import ImgEx2 from "../assets/seungriho.jpg"
 import ImgEx3 from "../assets/busanhang.jpg"
 import CustomSearchArea from '../component/CustomSearchArea'
+import UserBoardSearch from '../component/UserBoardSearch'
+import Popup from '../component/Popup'
 const CommunityMain = () => {
+   
+    const [ popupOpen, setPopupOpen ] = useState(false);
+    const openPopup = () => {
+        setPopupOpen(true);
+    }
+    
+    const closePopup = () => {
+        setPopupOpen(false);
+    }
+
     return (
         <div>
             <Header></Header>
@@ -15,7 +27,11 @@ const CommunityMain = () => {
             <div className="Title">
                 <h1>인기 게시판 TOP 3</h1>
                 <div>
-                    <CustomSearchArea />
+                    <CustomSearchArea event={openPopup}/>
+                    <Popup open={popupOpen} close={closePopup}>
+                        <UserBoardSearch />
+                        
+                    </Popup>
                 </div>
                 
             </div>

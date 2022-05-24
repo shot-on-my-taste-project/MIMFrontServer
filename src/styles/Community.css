@@ -67,11 +67,15 @@
     flex-direction: row;
     margin-top: 2rem;
     justify-content: right;
-    margin-right: 1rem;
+    margin-right: 3rem;
 }
 
 .SubSearchArea input{
     width: 15rem;
+}
+
+.SubSearchArea .WriteButton{
+    margin-left: 0.5rem;
 }
 
 table {
@@ -178,6 +182,39 @@ th, td {
     height: 5rem;
     width: 4rem;
     margin-top: 1.7rem;
+}
+
+.UserBoardSearch .CustomSearchArea {
+    width: 100%;
+    display: flex;
+    justify-content: center;
+    padding-bottom: 2rem;
+    padding-left: 1rem;
+}
+
+.SearchResultsWrapper {
+    display: flex;
+    justify-content: center;
+    margin-top: 1rem;
+    padding: 1.5rem;
+    padding-left: 2rem;
+}
+
+.SearchResult {
+    display: flex;
+    flex-direction: column;
+    margin: 0 1rem;
+}
+
+.SearchResult h3 {
+    /* background-color: aqua; */
+    text-align: center;
+    margin-top: 1rem;
+}
+
+.SearchResult h6 {
+    /* background-color: aqua; */
+    text-align: center;
 }
 
 @media screen and (min-width: 768px) and (max-width: 1023px) {

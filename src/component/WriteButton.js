@@ -8,7 +8,7 @@ class WriteButton extends Component {
         const { moveTo } = this.props;
         return (
         <div className="WriteButton">
-            <Link to={ moveTo }><img src={ WriteBtn } width="40rem" height="40rem"/></Link>
+            <Link to={ moveTo }><img src={ WriteBtn } width="45rem" height="45rem"/></Link>
         </div>
       );
     }

@@ -60,6 +60,51 @@
     width: 15rem;
 }
 
+.AdminBoardSearch .CustomSearchArea {
+    width: 100%;
+    display: flex;
+    justify-content: center;
+    padding-bottom: 1rem;
+}
+
+.AdminBoardSearch .AdminSearchResultsWrapper {
+    display: flex;
+    justify-content: center;
+    margin-top: -1rem;
+    padding: 1.5rem;
+    padding-left: 2rem;
+}
+
+.AdminBoardSearch .AdminSearchResult {
+    display: flex;
+    flex-direction: column;
+    margin: 0 1rem;
+}
+
+.AdminBoardSearch .AdminSearchResult h3 {
+    text-align: center;
+    margin-top: 1rem;
+}
+
+.AdminBoardSearch .AdminSearchResult h6 {
+    text-align: center;
+}
+
+.TimeSearch img {
+    border: solid 1px white;
+}
+
+input[type='datetime-local'] {
+    background-color: black;
+    color: white;
+    border: solid 1px white;
+    width: 3rem;
+}
+
+.BoardReportReason {
+    display: flex;
+}
+
 @media screen and (min-width: 768px) and (max-width: 1023px) {
     .SearchArea {
         margin-top: 2rem;
