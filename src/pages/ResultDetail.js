@@ -1,4 +1,4 @@
-import React, { Component, useState } from 'react'
+import React, { Component, useState, useEffect } from 'react'
 import { Route, Link } from 'react-router-dom'
 import Header from '../component/Header';
 import ImgEx1 from "../assets/tazza.jpg"
@@ -6,18 +6,21 @@ import SlateImg1 from "../assets/slate-open.png"
 import SlateImg2 from "../assets/slate-close.png"
 import '../styles/Result.css'
 import axios from 'axios';
-import { render } from 'react-dom';
+
 const ResultDetail = ({ match }) => {
     const [ movieInfo, setMovieInfo ] = useState([]);
-    axios.get('/movies/' + match.params.movieId)
-    .then(res => {
-        setMovieInfo(res.data);
-    })
-    .catch(err => {
-        console.log(err)
-    })
+    
+    useEffect(() => {
+        axios.get('/movies/' + match.params.movieId)
+        .then(res => {
+            setMovieInfo(res.data);
+        })
+        .catch(err => {
+            console.log(err)
+        })
+    }, [])
 
-    console.log(movieInfo)
+    console.log('무비데이터', movieInfo);
 
     return ( 
         <div className="ResultArea">
@@ -27,10 +30,12 @@ const ResultDetail = ({ match }) => {
                     <img src={ ImgEx1 } width={"300rem"} height={"400rem"}/>
                     <div className="TextInfo">
                         <h1>{movieInfo.movieDto.title}</h1>
-                        <span>{movieInfo.movieDto.year}</span> | <span>{movieInfo.rating}</span> | <span>{movieInfo.movieDto.runningTime}분</span> | <span>{movieInfo.genres}</span>
+                        <span>{movieInfo.movieDto.year}</span> | <span>{movieInfo.rating}</span> | <span>{movieInfo.movieDto.runningTime}분</span> |
+                        {movieInfo.genres.map((genre) => <span> {genre} </span>)}
+
                         <p>{movieInfo.movieDto.synopsis}</p>
-                        <p>감독: {movieInfo.directors}</p>
-                        <p>주연: {movieInfo.actors}</p>
+                        <p>감독: {movieInfo.directors.map((director) => <span>{director} </span>)}</p>
+                        <p>주연: {movieInfo.actors.map((actor) => <span>{actor} </span>)}</p>
                     </div>
                 </div>
                 
