@@ -1,4 +1,4 @@
-import React, { useState } from 'react'
+import React, { useState, useEffect } from 'react'
 import { Button } from 'react-bootstrap';
 import { Link } from 'react-router-dom'
 import ImgEx1 from "../assets/tazza.jpg"
@@ -11,36 +11,38 @@ import axios from 'axios';
 
 const MyPage = () => {
     const [user, setUser] = useState([]);
-    axios({
-        url: '/users/' + `${getCookie('user-id')}`,
-        method: 'get',
-        headers: {
-            "X-ACCESS-TOKEN": `${getCookie('access-token')}`,
-            "X-REFRESH-TOKEN": localStorage.getItem('refresh-token')
-        }
-    })
-    .then(res => {
-        setUser(res.data);
-    })
-    .catch(err => {
-        console.log(err)
-    });
-
     const [ postings, setPostings ] = useState([]);
-    axios({
-        url: 'postings/user/' + `${getCookie('user-id')}` + '?page=0',
-        method: 'get',
-        headers: {
-            "X-ACCESS-TOKEN": `${getCookie('access-token')}`,
-            "X-REFRESH-TOKEN": localStorage.getItem('refresh-token')
-        }
-    })
-    .then(res => {
-        setPostings(res.data['content']);
-    })
-    .catch(err => {
-        console.log(err);
-    })
+    useEffect(() => {
+        axios({
+            url: '/users/' + `${getCookie('user-id')}`,
+            method: 'get',
+            headers: {
+                "X-ACCESS-TOKEN": `${getCookie('access-token')}`,
+                "X-REFRESH-TOKEN": localStorage.getItem('refresh-token')
+            }
+        })
+        .then(res => {
+            setUser(res.data);
+        })
+        .catch(err => {
+            console.log(err)
+        });
+
+        axios({
+            url: '/postings/user/' + `${getCookie('user-id')}` + '?page=0',
+            method: 'get',
+            headers: {
+                "X-ACCESS-TOKEN": `${getCookie('access-token')}`,
+                "X-REFRESH-TOKEN": localStorage.getItem('refresh-token')
+            }
+        })
+            .then(res => {
+                setPostings(res.data['content']);
+            })
+            .catch(err => {
+                console.log(err);
+            })
+    }, [])
 
     return ( 
         <div className="MyPageArea">
