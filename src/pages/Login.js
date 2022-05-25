@@ -30,8 +30,6 @@ const Login = () => {
                         localStorage.setItem("refresh-token", res.headers['x-refresh-token']);
                         setCookie("access-token", res.headers['x-access-token']);
                         setCookie("user-id", inputId);
-                        console.log(res.headers['x-refresh-token']);
-                        console.log(res.headers['x-access-token']);
                         document.location.href="/";
                       }
                   })

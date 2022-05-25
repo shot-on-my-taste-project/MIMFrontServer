@@ -4,7 +4,7 @@ import { Route, Link } from 'react-router-dom'
 import Header from '../component/Header';
 import profileImg from "../assets/profile.jpg"
 import '../styles/MyPage.css'
-import { getCookie } from '../utils/Cookie';
+import { getCookie, removeCookie } from '../utils/Cookie';
 import CryptoJS from 'crypto-js';
 import axios from 'axios';
 
@@ -63,43 +63,25 @@ const MyPageUpdate = () => {
 
     const updateMember = () => {
         axios({
-            url: '/login',
-            method: 'post',
+            url: '/users/' + `${getCookie('user-id')}`,
+            method: 'put',
+            headers: {
+                "X-ACCESS-TOKEN": `${getCookie('access-token')}`,
+                "X-REFRESH-TOKEN": localStorage.getItem("refresh-token")
+            },
             data: {
-                id: getCookie('user-id'),
-                pw: CryptoJS.SHA256(inputOriginPw).toString()
+                "id": getCookie('user-id'),
+                "nickName": inputNickName, 
+                "profilePath": inputProfilePath,
+                "pw": CryptoJS.SHA256(inputNewPw).toString()
             }
         })
         .then(res => {
-            console.log("기존로그인:" + res.data)
-            console.log(getCookie('user-id') + ', ' + inputNickName + ', ' + inputProfilePath, ', ' + inputNewPw)
-            if(res.data === "success") {
-                axios({
-                    url: '/users/' + `${getCookie('user-id')}`,
-                    method: 'put',
-                    headers: {
-                        "X-ACCESS-TOKEN": `${getCookie('access-token')}`,
-                        "X-REFRESH-TOKEN": localStorage.getItem("refresh-token")
-                    },
-                    data: {
-                        "id": getCookie('user-id'),
-                        "nickName": inputNickName, 
-                        "profilePath": inputProfilePath,
-                        "pw": CryptoJS.SHA256(inputNewPw).toString()
-                    }
-                })
-                .then(res => {
-                    console.log(res);
-                })
-            }
+            document.location.href="/mypage"
         })
         .catch(err => {
-            var originPw = document.getElementById('origin-pw');
-            alert("기존 비밀번호가 일치하지 않습니다.")
-            originPw.value = null;
-            originPw.focus();
+            console.log(err);
         })
-        
     }
 
     const leaveMember = () => {
@@ -114,7 +96,12 @@ const MyPageUpdate = () => {
                     "X-REFRESH-TOKEN": localStorage.getItem("refresh-token")
                 }
             })
+            removeCookie('access-token')
+            removeCookie('user-id')
+            localStorage.removeItem('refresh-token')
             alert("탈퇴되었습니다.")
+            document.location.href="/";
+            
         }
     }
 
