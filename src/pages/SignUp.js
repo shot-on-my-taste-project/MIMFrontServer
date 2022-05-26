@@ -1,10 +1,11 @@
 import React, { useState } from 'react';
-import axios from 'axios';
 import CryptoJS from 'crypto-js';
 import { Button } from "react-bootstrap";
 import '../styles/SignUp.css'
 import Header from '../component/Header';
 import Logo from '../component/Logo';
+// import { duplicateId, duplicateNickname, onClickSignUp } from '../utils/api/userAPI';
+import Api from "../utils/api/userAPI";
 
 const SignUp = () => {
     const [inputId, setInputId] = useState('')
@@ -23,56 +24,10 @@ const SignUp = () => {
         setInputNickName(e.target.value)
     } 
 
-    const onClickSignUp = () => {
-        axios.post('/sign-up', {
-                    "id": inputId,
-                    "pw": CryptoJS.SHA256(inputPw).toString(),
-                    "nickName": inputNickName,
-                  })
-                  .then(res => {
-                      if(res.data === "success") {
-                          document.location.href="/login";
-                      }
-                  })
-                  .catch(err => {
-
-                  })
-    }
-
-    const duplicateId = () => {
-        var idInput = document.getElementById("id");
-
-        axios.get('/users/id/' + inputId)
-          .then(res => {
-              if(res.data){
-                alert("중복된 아이디입니다.")
-                idInput.value = null;
-                idInput.focus();
-              } else {
-                alert("사용 가능한 아이디입니다.")
-              }
-                
-          })
-          .catch(err => {
-
-          })
-    }
-
-    const duplicateNickname = () => {
-        var nickNameInput = document.getElementById("nickName");
-        axios.get('/users/nick-name/' + inputNickName)
-          .then(res => {
-            if(res.data){
-                alert("중복된 닉네임입니다.")
-                nickNameInput.value = null;
-                nickNameInput.focus();
-              } else {
-                alert("사용 가능한 닉네임입니다.")
-              }
-          })
-          .catch(err => {
-
-          })
+    const userSignUpData = {
+        "id": inputId,
+        "pw": CryptoJS.SHA256(inputPw).toString(),
+        "nickName": inputNickName,
     }
 
     const samePassword = () => {
@@ -98,7 +53,7 @@ const SignUp = () => {
                         <th colspan="1">아이디</th>
                         <td colspan="1">
                             <input class="userInfo" type="text" placeholder="아이디" id="id" name="id" value={inputId} onChange={handleInputId}/>
-                            <Button variant="secondary" size="sm" className="subBtn" onClick={duplicateId}>중복<br/>확인</Button>
+                            <Button variant="secondary" size="sm" className="subBtn" onClick={Api.duplicateId.bind(this, inputId)}>중복<br/>확인</Button>
                         </td>
                     </tr>
                     <tr>
@@ -118,7 +73,7 @@ const SignUp = () => {
                         <th colspan="1">닉네임</th>
                         <td colspan="1">
                             <input class="userInfo" type="text" placeholder="닉네임" id="nickName" name="nickName" value={inputNickName} onChange={handleInputNickName}/>
-                            <Button variant="secondary" size="sm" className="subBtn" onClick={duplicateNickname}>중복<br/>확인</Button>
+                            <Button variant="secondary" size="sm" className="subBtn" onClick={ Api.duplicateNickname.bind(this, inputNickName) }>중복<br/>확인</Button>
                         </td>
                     </tr>
                     <tr>
@@ -126,12 +81,14 @@ const SignUp = () => {
                         <td colspan="1">
                             <div className="Filebox">
                                 <label for="ex_file">업로드</label>
-                                <input class="userInfo" type="file" id="ex_file" placeholder=""/>
+                                {/* <form action='/users//profile' method='post' encType='multipart/form-data'> */}
+                                    <input class="userInfo" type="file" id="ex_file" placeholder=""/>
+                                {/* </form> */}
                             </div>
                         </td>
                     </tr>
                 </table>
-                <Button variant="danger" id="signup-btn" onClick={onClickSignUp}>SIGN UP</Button>
+                <Button variant="danger" id="signup-btn" onClick={Api.onClickSignUp.bind(this, userSignUpData)}>SIGN UP</Button>
             </div>
             
         </div>

@@ -1,12 +1,11 @@
 import React, { useState } from 'react'
 import { Button } from 'react-bootstrap';
-import { Route, Link } from 'react-router-dom'
 import Header from '../component/Header';
 import profileImg from "../assets/profile.jpg"
-import '../styles/MyPage.css'
-import { getCookie, removeCookie } from '../utils/Cookie';
 import CryptoJS from 'crypto-js';
-import axios from 'axios';
+// import { duplicateNickname, updateMember, leaveMember } from '../utils/api/userAPI';
+import Api from "../utils/api/userAPI"
+import '../styles/MyPage.css'
 
 const MyPageUpdate = () => {
     const [inputNickName, setInputNickName] = useState('')
@@ -30,23 +29,11 @@ const MyPageUpdate = () => {
         setProfilePath(e.target.value)
     }
 
-    const duplicateNickname = () => {
-        var nickNameInput = document.getElementById("nickName");
-        axios.get('/users/nick-name/' + inputNickName)
-          .then(res => {
-            if(res.data){
-                alert("중복된 닉네임입니다.")
-                nickNameInput.value = null;
-                nickNameInput.focus();
-              } else {
-                alert("사용 가능한 닉네임입니다.")
-              }
-          })
-          .catch(err => {
-
-          })
+    const userMypageData = {
+        "nickName": inputNickName, 
+        "profilePath": inputProfilePath,
+        "pw": CryptoJS.SHA256(inputNewPw).toString()
     }
-
 
     const samePassword = () => {
         var firstInput = document.getElementById("first-pw");
@@ -58,50 +45,6 @@ const MyPageUpdate = () => {
             alert("비밀번호가 일치하지 않습니다.")
             secondInput.value = null
             secondInput.focus();
-        }
-    }
-
-    const updateMember = () => {
-        axios({
-            url: '/users/' + `${getCookie('user-id')}`,
-            method: 'put',
-            headers: {
-                "X-ACCESS-TOKEN": `${getCookie('access-token')}`,
-                "X-REFRESH-TOKEN": localStorage.getItem("refresh-token")
-            },
-            data: {
-                "id": getCookie('user-id'),
-                "nickName": inputNickName, 
-                "profilePath": inputProfilePath,
-                "pw": CryptoJS.SHA256(inputNewPw).toString()
-            }
-        })
-        .then(res => {
-            document.location.href="/mypage"
-        })
-        .catch(err => {
-            console.log(err);
-        })
-    }
-
-    const leaveMember = () => {
-        if(!window.confirm("탈퇴하시겠습니까?")) {
-            alert("탈퇴를 취소하였습니다.")
-        } else {
-            axios({
-                url: '/users/' + `${getCookie('user-id')}`,
-                method: 'delete',
-                headers: {
-                    "X-ACCESS-TOKEN": `${getCookie('access-token')}`,
-                    "X-REFRESH-TOKEN": localStorage.getItem("refresh-token")
-                }
-            })
-            removeCookie('access-token')
-            removeCookie('user-id')
-            localStorage.removeItem('refresh-token')
-            alert("탈퇴되었습니다.")
-            document.location.href="/";
-            
         }
     }
 
@@ -122,7 +65,7 @@ const MyPageUpdate = () => {
                 </div>
 
                 <input type="text" placeholder="닉네임" onChange={handleInputNickName}/>
-                <Button id="duplicate-check" variant="secondary" onClick={ duplicateNickname }>중복확인</Button>
+                <Button id="duplicate-check" variant="secondary" onClick={ Api.duplicateNickname.bind(this, inputNickName) }>중복확인</Button>
             </div>
 
             <div className="InputWrapper">
@@ -149,8 +92,8 @@ const MyPageUpdate = () => {
                 </table>
             </div>
             <div className="ButtonWrapper">
-                <Button variant="danger" onClick={ updateMember }>수정</Button>
-                <Button variant="secondary" onClick={ leaveMember }>탈퇴</Button>
+                <Button variant="danger" onClick={ Api.updateMember.bind(this, userMypageData) }>수정</Button>
+                <Button variant="secondary" onClick={ Api.leaveMember }>탈퇴</Button>
                 <Button variant="secondary" onClick={ goBack }>취소</Button>
             </div>
         </div>

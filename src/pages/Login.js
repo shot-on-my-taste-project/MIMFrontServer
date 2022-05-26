@@ -1,12 +1,11 @@
 import React, { Component, useState, useEffect } from 'react'
-import axios from 'axios';
 import { Link } from 'react-router-dom'
 import {Button} from "react-bootstrap";
 import Header from '../component/Header';
 import Logo from '../component/Logo';
 import '../styles/Login.css'
 import CryptoJS from 'crypto-js';
-import { setCookie } from '../utils/Cookie';
+import Api from "../utils/api/userAPI"
 
 const Login = () => {
     const [inputId, setInputId] = useState('')
@@ -20,25 +19,9 @@ const Login = () => {
         setInputPw(e.target.value)
     }
 
-    const onClickLogin = () => {
-        axios.post('/login', {
-                    "id": inputId,
-                    "pw": CryptoJS.SHA256(inputPw).toString()
-                  })
-                  .then(res => {
-                      if(res.data === "success") {
-                        localStorage.setItem("refresh-token", res.headers['x-refresh-token']);
-                        setCookie("access-token", res.headers['x-access-token']);
-                        setCookie("user-id", inputId);
-                        document.location.href="/";
-                      }
-                  })
-                  .catch(err => {
-                    alert("아이디 혹은 비밀번호가 다릅니다.")
-                    var pwInput = document.getElementById("pw")
-                    pwInput.value = null
-                    pwInput.focus();
-                  });
+    const loginData = {
+        "id": inputId,
+        "pw": CryptoJS.SHA256(inputPw).toString()
     }
 
     return (
@@ -51,7 +34,7 @@ const Login = () => {
                         <input type="text" placeholder=" ID" id="id" name="id" value={inputId} onChange={handleInputId}></input>
                         <input type="password" placeholder=" PW" id="pw" name="pw" value={inputPw} onChange={handleInputPw}></input>
                     </div>
-                    <Button variant="danger" id="login-btn" onClick={onClickLogin}>로그인</Button>
+                    <Button variant="danger" id="login-btn" onClick={Api.onClickLogin.bind(this, loginData)}>로그인</Button>
                 </div>
                 <ul className="OptionArea">
                     <li><Link style={{textDecoration: 'none', color: 'white'}} id="signup-btn" to="/signup">회원가입</Link></li>

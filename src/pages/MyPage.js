@@ -8,40 +8,61 @@ import Header from '../component/Header';
 import '../styles/MyPage.css'
 import { getCookie } from '../utils/Cookie';
 import axios from 'axios';
+import Api from "../utils/api/userAPI"
 
 const MyPage = () => {
-    const [user, setUser] = useState([]);
+    // const [ user, setUser ] = useState([]);
+    const [ profile, setProfile ] = useState([]);
     const [ postings, setPostings ] = useState([]);
-    useEffect(() => {
-        axios({
-            url: '/users/' + `${getCookie('user-id')}`,
-            method: 'get',
-            headers: {
-                "X-ACCESS-TOKEN": `${getCookie('access-token')}`,
-                "X-REFRESH-TOKEN": localStorage.getItem('refresh-token')
-            }
-        })
-        .then(res => {
-            setUser(res.data);
-        })
-        .catch(err => {
-            console.log(err)
-        });
 
-        axios({
-            url: '/postings/user/' + `${getCookie('user-id')}` + '?page=0',
-            method: 'get',
-            headers: {
-                "X-ACCESS-TOKEN": `${getCookie('access-token')}`,
-                "X-REFRESH-TOKEN": localStorage.getItem('refresh-token')
-            }
-        })
-            .then(res => {
-                setPostings(res.data['content']);
-            })
-            .catch(err => {
-                console.log(err);
-            })
+    const userfun = async () => await Api.getUserInfo();
+    useEffect(() => {
+        const user = userfun();
+        console.log(user);
+        // axios({
+        //     url: '/users/' + `${getCookie('user-id')}`,
+        //     method: 'get',
+        //     headers: {
+        //         "X-ACCESS-TOKEN": `${getCookie('access-token')}`,
+        //         "X-REFRESH-TOKEN": localStorage.getItem('refresh-token')
+        //     }
+        // })
+        // .then(res => {
+        //     setUser(res.data);
+        // })
+        // .catch(err => {
+        //     console.log(err)
+        // });
+
+        // axios({
+        //     url: '/users/' + `${getCookie('user-id')}` + '/profile',
+        //     method: 'get',
+        //     headers: {
+        //         "X-ACCESS-TOKEN": `${getCookie('access-token')}`,
+        //         "X-REFRESH-TOKEN": localStorage.getItem('refresh-token')
+        //     }
+        // })
+        // .then(res => {
+        //     setProfile(res.data);
+        // })
+        // .catch(err => {
+        //     console.log(err)
+        // });
+
+        // axios({
+        //     url: '/postings/user/' + `${getCookie('user-id')}` + '?page=0',
+        //     method: 'get',
+        //     headers: {
+        //         "X-ACCESS-TOKEN": `${getCookie('access-token')}`,
+        //         "X-REFRESH-TOKEN": localStorage.getItem('refresh-token')
+        //     }
+        // })
+        //     .then(res => {
+        //         setPostings(res.data['content']);
+        //     })
+        //     .catch(err => {
+        //         console.log(err);
+        //     })
     }, [])
 
     return ( 
@@ -49,9 +70,9 @@ const MyPage = () => {
             <Header></Header>
             <div className="UserInfoWrapper">
                 <div className="MainInfo">
-                    <img src={ user.profileImg } width={ "150rem" }/>
+                    <img src={ profile } width={ "150rem" }/>
                     <div className="TextInfo">
-                        <h1>{ user.nickName }</h1>
+                        {/* <h1>{ user.nickName }</h1> */}
                         <Link to="/mypage/update">
                             <Button variant="danger">정보 수정</Button>
                         </Link>
