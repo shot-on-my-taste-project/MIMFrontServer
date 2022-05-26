@@ -1,4 +1,4 @@
-import React, { useState, useEffect } from 'react'
+import React, { useState, useEffect, useCallback } from 'react'
 import { Button } from 'react-bootstrap';
 import { Link } from 'react-router-dom'
 import ImgEx1 from "../assets/tazza.jpg"
@@ -11,60 +11,18 @@ import axios from 'axios';
 import Api from "../utils/api/userAPI"
 
 const MyPage = () => {
-    // const [ user, setUser ] = useState([]);
+    const [ user, setUser ] = useState([]);
     const [ profile, setProfile ] = useState([]);
     const [ postings, setPostings ] = useState([]);
+    const userfun = async() => await Api.getUserInfo(); 
+    const postingfun = async() => await Api.getUserWrittenPost(); 
 
-    const userfun = async () => await Api.getUserInfo();
-    useEffect(() => {
-        const user = userfun();
-        console.log(user);
-        // axios({
-        //     url: '/users/' + `${getCookie('user-id')}`,
-        //     method: 'get',
-        //     headers: {
-        //         "X-ACCESS-TOKEN": `${getCookie('access-token')}`,
-        //         "X-REFRESH-TOKEN": localStorage.getItem('refresh-token')
-        //     }
-        // })
-        // .then(res => {
-        //     setUser(res.data);
-        // })
-        // .catch(err => {
-        //     console.log(err)
-        // });
-
-        // axios({
-        //     url: '/users/' + `${getCookie('user-id')}` + '/profile',
-        //     method: 'get',
-        //     headers: {
-        //         "X-ACCESS-TOKEN": `${getCookie('access-token')}`,
-        //         "X-REFRESH-TOKEN": localStorage.getItem('refresh-token')
-        //     }
-        // })
-        // .then(res => {
-        //     setProfile(res.data);
-        // })
-        // .catch(err => {
-        //     console.log(err)
-        // });
-
-        // axios({
-        //     url: '/postings/user/' + `${getCookie('user-id')}` + '?page=0',
-        //     method: 'get',
-        //     headers: {
-        //         "X-ACCESS-TOKEN": `${getCookie('access-token')}`,
-        //         "X-REFRESH-TOKEN": localStorage.getItem('refresh-token')
-        //     }
-        // })
-        //     .then(res => {
-        //         setPostings(res.data['content']);
-        //     })
-        //     .catch(err => {
-        //         console.log(err);
-        //     })
-    }, [])
-
+    useEffect(async() => {
+        setUser(await userfun());
+        setPostings(await postingfun());
+    }, []);
+    
+    console.log(postings)
     return ( 
         <div className="MyPageArea">
             <Header></Header>
@@ -72,7 +30,7 @@ const MyPage = () => {
                 <div className="MainInfo">
                     <img src={ profile } width={ "150rem" }/>
                     <div className="TextInfo">
-                        {/* <h1>{ user.nickName }</h1> */}
+                        <h1>{ user.nickName }</h1>
                         <Link to="/mypage/update">
                             <Button variant="danger">정보 수정</Button>
                         </Link>
@@ -82,7 +40,7 @@ const MyPage = () => {
                 <div className="ActivityHistory">
                     <h2>작성한 글</h2>
                     <div className="HistoryWrapper">
-                        {postings.map((posting)=><div>{posting.title}</div>)}
+                        {/* {postings.map((posting)=><div>{posting.title}</div>)} */}
                     </div>
                 </div>
 

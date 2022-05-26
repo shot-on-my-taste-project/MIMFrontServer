@@ -122,39 +122,36 @@ const Api = {
 },
 
   getUserInfo : async () => {
-    const {data:result} = await axios({
-        url: '/users/' + `${getCookie('user-id')}`,
-        method: 'get',
-        headers: {
-            "X-ACCESS-TOKEN": `${getCookie('access-token')}`,
-            "X-REFRESH-TOKEN": localStorage.getItem('refresh-token')
-        }
-    })
-    .then(res => {
-        return res.data
-    })
-    .catch(err => {
-        return err
-    });
-    return result;
+    try {
+        const res = await axios({
+            url: '/users/' + `${getCookie('user-id')}`,
+            method: 'get',
+            headers: {
+                "X-ACCESS-TOKEN": `${getCookie('access-token')}`,
+                "X-REFRESH-TOKEN": localStorage.getItem('refresh-token')
+            }
+        })
+        return res.status === 200 ? res.data : "error"
+    } catch(e) {
+        return e
+    }
 },
 
   getUserWrittenPost : async () => {
-    axios({
-        url: '/postings/user/' + `${getCookie('user-id')}` + '?page=0',
-        method: 'get',
-        headers: {
-            "X-ACCESS-TOKEN": `${getCookie('access-token')}`,
-            "X-REFRESH-TOKEN": localStorage.getItem('refresh-token')
-        }
-    })
-    .then(res => {
-        return res.data['content']
-    })
-    .catch(err => {
-        console.log(err);
-    })
-}
+      try {
+        const res = axios({
+            url: '/postings/user/' + `${getCookie('user-id')}` + '?page=0',
+            method: 'get',
+            headers: {
+                "X-ACCESS-TOKEN": `${getCookie('access-token')}`,
+                "X-REFRESH-TOKEN": localStorage.getItem('refresh-token')
+            }
+        })
+        return res.status === 200 ? res.data : "error"
+      } catch(e) {
+          return e
+      }
+    }
 };
 
 export default Api;
