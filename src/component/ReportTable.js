@@ -1,6 +1,7 @@
 import React, { Component, useState } from 'react';
 import ReportSearch from './ReportSearch';
 import Pagenation from '../component/Pagenation';
+import { Button } from 'react-bootstrap';
 import { pagenate } from '../services/pagenate'
 
 const getBoards = () => { // 영화 정보를 반환하는 함수
@@ -15,7 +16,7 @@ const getBoards = () => { // 영화 정보를 반환하는 함수
     return boards;
   }
 
-const ReportTable = () => {
+const ReportTable = (props) => {
     const [boards, setBoards] = useState({ // 영화 정보를 담는 state
         data: getBoards(), // 영화 정보
         pageSize: 5, // 한 페이지에 보여줄 아이템(영화목록) 개수
@@ -50,6 +51,8 @@ const ReportTable = () => {
                 <th>글 번호</th>
                 <th>신고 사유</th>
                 <th>신고 시간</th>
+                <th>링크</th>
+                <th>삭제</th>
                 </tr>
             </thead>
             <tbody>
@@ -60,6 +63,8 @@ const ReportTable = () => {
               <td>{board.boardId}</td>
               <td>{board.reason}</td>
               <td>{board.time}</td>
+              <td><Button>L</Button></td>
+              <td><Button>R</Button></td>
             </tr>
           ))}
             </tbody>

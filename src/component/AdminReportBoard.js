@@ -7,7 +7,7 @@ import { pagenate } from '../services/pagenate'
 const AdminReportBoard = () => {
     return (
         <div className="BoardReport">
-            <ReportSearch/>
+            {/* <ReportSearch/> */}
             <ReportTable/>   
         </div>
     );

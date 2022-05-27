@@ -3,9 +3,12 @@ import Header from '../component/AdminHeader';
 import AdminReportBoard from '../component/AdminReportBoard';
 import AdminReportReply from '../component/AdminReportReply';
 import AdminReportPost from '../component/AdminReportPost';
+import ReportTable from '../component/ReportTable';
 import { Button } from 'react-bootstrap'
 const AdminReportManage = () => {
     const [activeIndex, setActiveIndex] = useState(0);
+
+
 
     const tabContArr = [
         {
@@ -13,7 +16,7 @@ const AdminReportManage = () => {
                 <li className={activeIndex===0 ? "is-active" : ""} onClick={()=>tabClickHandler(0)}>게시글 신고</li>
             ),
             tabCont: (
-                <div><AdminReportBoard/></div>
+                <div><ReportTable/></div>
             )
         },
         {
@@ -21,15 +24,7 @@ const AdminReportManage = () => {
                 <li className={activeIndex===1 ? "is-active" : ""} onClick={()=>tabClickHandler(1)}>댓글 신고</li>
             ),
             tabCont: (
-                <div><AdminReportReply/></div>
-            )
-        },
-        {
-            tabTitle: (
-                <li className={activeIndex===2 ? "is-active" : ""} onClick={()=>tabClickHandler(2)}>게시판 신고</li>
-            ),
-            tabCont: (
-                <div><AdminReportPost/></div>
+                <div><ReportTable/></div>
             )
         }
     ];
@@ -37,6 +32,8 @@ const AdminReportManage = () => {
     const tabClickHandler=(index)=>{
         setActiveIndex(index);
     }
+
+    
 
     return (
         <div>
