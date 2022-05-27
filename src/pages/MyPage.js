@@ -14,15 +14,16 @@ const MyPage = () => {
     const [ user, setUser ] = useState([]);
     const [ profile, setProfile ] = useState([]);
     const [ postings, setPostings ] = useState([]);
-    const userfun = async() => await Api.getUserInfo(); 
-    const postingfun = async() => await Api.getUserWrittenPost(); 
-
-    useEffect(async() => {
+    const userfun = Api.getUserInfo; 
+    const postingfun = Api.getUserWrittenPost; 
+    const profilefun = Api.getUserProfile;
+    useEffect(async () => {
         setUser(await userfun());
         setPostings(await postingfun());
+        setProfile(await profilefun());
     }, []);
     
-    console.log(postings)
+    
     return ( 
         <div className="MyPageArea">
             <Header></Header>
@@ -40,7 +41,7 @@ const MyPage = () => {
                 <div className="ActivityHistory">
                     <h2>작성한 글</h2>
                     <div className="HistoryWrapper">
-                        {/* {postings.map((posting)=><div>{posting.title}</div>)} */}
+                        {postings.map((posting)=><div>{posting.title}</div>)}
                     </div>
                 </div>
 

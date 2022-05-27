@@ -139,7 +139,7 @@ const Api = {
 
   getUserWrittenPost : async () => {
       try {
-        const res = axios({
+        const res = await axios({
             url: '/postings/user/' + `${getCookie('user-id')}` + '?page=0',
             method: 'get',
             headers: {
@@ -147,9 +147,25 @@ const Api = {
                 "X-REFRESH-TOKEN": localStorage.getItem('refresh-token')
             }
         })
-        return res.status === 200 ? res.data : "error"
+        return res.status === 200 ? res.data['content'] : 'error'
       } catch(e) {
           return e
+      }
+    },
+
+    getUserProfile : async () => {
+      try {
+        const res = await axios({
+          url: '/users/' + `${getCookie('user-id')}` + '/profile',
+          method: 'get',
+          headers: {
+            "X-ACCESS-TOKEN": `${getCookie('access-token')}`,
+            "X-REFRESH-TOKEN": localStorage.getItem('refresh-token')
+          }
+        })
+        return res.status === 200 ? res.data : 'error'
+      } catch(e) {
+        return e
       }
     }
 };
