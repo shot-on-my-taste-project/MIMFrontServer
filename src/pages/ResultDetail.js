@@ -5,21 +5,19 @@ import ImgEx1 from "../assets/tazza.jpg"
 import SlateImg1 from "../assets/slate-open.png"
 import SlateImg2 from "../assets/slate-close.png"
 import '../styles/Result.css'
-import axios from 'axios';
+import Api from "../utils/api/searchAPI"
 
 const ResultDetail = ({ match }) => {
     const movieId = match.params.movieId;
     const linkToCommunity = '/community/movie/' + movieId;
     const [ movieInfo, setMovieInfo ] = useState(null);
 
+    const movieInfoFetch = async () => {
+        setMovieInfo(await Api.getResultDetail(movieId));
+    }
+
     useEffect(() => {
-        axios.get('/movies/' + movieId)
-        .then(res => {
-            setMovieInfo(res.data);
-        })
-        .catch(err => {
-            console.log(err)
-        })
+        movieInfoFetch();
     }, []);
 
     if(movieInfo) {
