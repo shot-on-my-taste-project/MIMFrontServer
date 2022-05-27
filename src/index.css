@@ -1,7 +1,17 @@
+@font-face {
+  font-family: 'neon';
+  src: url('./fonts/BebasNeue.ttf') format('truetype');
+}
+
+@font-face {
+  font-family: 'score';
+  src: url('./fonts/SCDream.ttf') format('truetype');
+}
+
 body {
   background-color: black;
   margin: 0;
-  font-family: -apple-system, BlinkMacSystemFont, 'Segoe UI', 'Roboto', 'Oxygen',
+  font-family: 'score', -apple-system, BlinkMacSystemFont, 'Segoe UI', 'Roboto', 'Oxygen',
     'Ubuntu', 'Cantarell', 'Fira Sans', 'Droid Sans', 'Helvetica Neue',
     sans-serif;
   -webkit-font-smoothing: antialiased;
