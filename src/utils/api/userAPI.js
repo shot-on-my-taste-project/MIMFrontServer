@@ -1,4 +1,4 @@
-import axios from 'axios';
+
 import saveToken, { defaultInstance, authInstance } from '../api/AxiosInstance';
 import { getCookie, setCookie, removeCookie } from '../Cookie';
 
@@ -6,16 +6,24 @@ const Api = {
   onClickLogin: async (data) => {
     try {
       const res = await defaultInstance.post('/login', data)
-      localStorage.setItem("refresh-token", res.headers['x-refresh-token']);
-      setCookie("access-token", res.headers['x-access-token']);
-      setCookie("user-id", data.id);
-      document.location.href = "/";
+      if(data.id === "admin1" || data.id === "admin") {
+        localStorage.setItem("refresh-token", res.headers['x-refresh-token']);
+        setCookie("user-id", data.id);
+        document.location.href = "/admin/board"
+        
+      } else {
+        localStorage.setItem("refresh-token", res.headers['x-refresh-token']);
+        setCookie("access-token", res.headers['x-access-token']);
+        setCookie("user-id", data.id);
+        document.location.href = "/"
+      }
     } catch (e) {
       alert("아이디 혹은 비밀번호가 다릅니다.")
       var pwInput = document.getElementById("pw")
       pwInput.value = null
-      pwInput.focus();
+      pwInput.focus(); 
     }
+    
   },
 
   duplicateId: async (inputId) => {

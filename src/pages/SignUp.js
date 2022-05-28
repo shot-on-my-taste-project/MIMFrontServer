@@ -76,17 +76,6 @@ const SignUp = () => {
                             <Button variant="secondary" size="sm" className="subBtn" onClick={ Api.duplicateNickname.bind(this, inputNickName) }>중복<br/>확인</Button>
                         </td>
                     </tr>
-                    <tr>
-                        <th colspan="1">프로필 사진</th>
-                        <td colspan="1">
-                            <div className="Filebox">
-                                <label for="ex_file">업로드</label>
-                                {/* <form action='/users//profile' method='post' encType='multipart/form-data'> */}
-                                    <input class="userInfo" type="file" id="ex_file" placeholder=""/>
-                                {/* </form> */}
-                            </div>
-                        </td>
-                    </tr>
                 </table>
                 <Button variant="danger" id="signup-btn" onClick={Api.onClickSignUp.bind(this, userSignUpData)}>SIGN UP</Button>
             </div>
