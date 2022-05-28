@@ -16,16 +16,18 @@ const MyPage = () => {
     const postingfun = Api.getUserWrittenPost;
     const profilefun = Api.getUserProfile;
 
-    const test = async () => {
+    const getInfo = async () => {
         setUser(await userfun().then((x) => {
             setProfile(`http://fhdufhdu.iptime.org:8081/users/${x.id}/profile`);
+            console.log(x)
             return x;
         }));
-        setPostings(await postingfun());
+        setPostings(await postingfun(0, 5));
+        console.log(await postingfun(0, 5))
     }
 
     useEffect(() => {
-        test();
+        getInfo();
     }, []);
 
 

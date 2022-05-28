@@ -65,15 +65,14 @@ const Api = {
     console.log(data);
     try {
       const res = await authInstance.put('/users/' + `${getCookie('user-id')}`, {
-        data: {
-          "id": getCookie('user-id'),
-          "nickName": data.nickName,
-          "profilePath": data.profilePath,
-          "pw": data.pw
-        }
-      })
+        "id": getCookie('user-id'),
+        "nickName": data.nickName,
+        "profilePath": data.profilePath,
+        "pw": data.pw
+      }
+      )
       console.log('dmdekq', res)
-      // document.location.href="/mypage"
+      window.location.href = "/mypage"
     } catch (e) {
 
     }
@@ -125,9 +124,9 @@ const Api = {
     }
   },
 
-  getUserWrittenPost: async () => {
+  getUserWrittenPost: async (currentPage, size) => {
     try {
-      const res = await authInstance.get('/postings/user/' + `${getCookie('user-id')}` + '?page=0')
+      const res = await authInstance.get(`/postings/user/${getCookie('user-id')}?page=${currentPage}&size=${size}`)
       return res.data['content']
     } catch (e) {
       return e
