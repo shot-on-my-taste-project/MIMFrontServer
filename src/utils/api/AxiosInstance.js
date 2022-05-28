@@ -4,7 +4,7 @@ import { getCookie, setCookie, removeCookie } from '../Cookie';
 const BASE_URL = '/'
 
 const axiosAPI = (url, options) => {
-    const instance = axios.create({baseURL: url, ...options})
+    const instance = axios.create({ baseURL: url, ...options })
     return instance
 }
 

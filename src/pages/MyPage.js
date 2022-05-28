@@ -1,4 +1,4 @@
-import React, { useState, useEffect, useCallback } from 'react'
+import React, { useState, useEffect } from 'react'
 import { Button } from 'react-bootstrap';
 import { Link } from 'react-router-dom'
 import ImgEx1 from "../assets/tazza.jpg"
@@ -6,8 +6,6 @@ import ImgEx2 from "../assets/seungriho.jpg"
 import ImgEx3 from "../assets/busanhang.jpg"
 import Header from '../component/Header';
 import '../styles/MyPage.css'
-import { getCookie } from '../utils/Cookie';
-import axios from 'axios';
 import Api from "../utils/api/userAPI"
 
 const MyPage = () => {

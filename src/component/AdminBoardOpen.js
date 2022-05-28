@@ -24,7 +24,6 @@ const AdminBoardOpen = (props) => {
                 ))}
             </div>
         </div>
-
     );
 };
 
