@@ -1,5 +1,5 @@
 import axios from 'axios';
-import { defaultInstance, authInstance } from '../api/AxiosInstance';
+import saveToken, { defaultInstance, authInstance } from '../api/AxiosInstance';
 import { getCookie, setCookie, removeCookie } from '../Cookie';
 
 const Api = {
@@ -64,14 +64,14 @@ const Api = {
   updateMember: async (data) => {
     console.log(data);
     try {
-      const res = await authInstance.put('/users/' + `${getCookie('user-id')}`, {
+      const res = await authInstance.put(`/users/${getCookie('user-id')}`, {
         "id": getCookie('user-id'),
         "nickName": data.nickName,
         "profilePath": data.profilePath,
         "pw": data.pw
       }
       )
-      console.log('dmdekq', res)
+      saveToken(res);
       window.location.href = "/mypage"
     } catch (e) {
 
@@ -101,24 +101,9 @@ const Api = {
 
   getUserInfo: async () => {
     try {
-      const res = await axios({
-        url: '/users/' + `${getCookie('user-id')}`,
-        method: 'get',
-        headers: {
-          "X-ACCESS-TOKEN": `${getCookie('access-token')}`,
-          "X-REFRESH-TOKEN": localStorage.getItem('refresh-token')
-        }
-      })
+      const res = await authInstance.get(`/users/${getCookie('user-id')}`)
+      saveToken(res);
       return res.status === 200 ? res.data : "error"
-    } catch (e) {
-      return e
-    }
-  },
-
-  getUserWrittenPost: async () => {
-    try {
-      const res = await authInstance.get('/users/' + `${getCookie('user-id')}`)
-      return res.data
     } catch (e) {
       return e
     }
@@ -127,6 +112,7 @@ const Api = {
   getUserWrittenPost: async (currentPage, size) => {
     try {
       const res = await authInstance.get(`/postings/user/${getCookie('user-id')}?page=${currentPage}&size=${size}`)
+      saveToken(res);
       return res.data['content']
     } catch (e) {
       return e
@@ -135,9 +121,20 @@ const Api = {
 
   getUserProfile: async () => {
     try {
-      const res = await authInstance.get('/users/' + `${getCookie('user-id')}` + '/profile')
+      const res = await authInstance.get(`/users/${getCookie('user-id')}/profile`)
+      saveToken(res);
       return res.data
     } catch (e) {
+      return e
+    }
+  },
+
+  getFavoriteMovie: async(currentPage, size) => {
+    try {
+      const res = await authInstance.get(`favorite-movies/user/${getCookie('user-id')}?page=${currentPage}&size=${size}`)
+      saveToken(res);
+      return res.data['content']
+    } catch(e) {
       return e
     }
   }
