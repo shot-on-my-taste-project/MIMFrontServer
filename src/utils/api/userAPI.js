@@ -61,6 +61,16 @@ const Api = {
     }
   },
 
+  uploadProfile: async(formData) => {
+    try {
+      const res = await authInstance.post(`/users/${getCookie('user-id')}/profile`, formData)
+      saveToken(res);
+      console.log(res)
+    } catch(e) {
+
+    }
+  },
+
   updateMember: async (data) => {
     console.log(data);
     try {
@@ -82,20 +92,16 @@ const Api = {
     if (!window.confirm("탈퇴하시겠습니까?")) {
       alert("탈퇴를 취소하였습니다.")
     } else {
-      axios({
-        url: '/users/' + `${getCookie('user-id')}`,
-        method: 'delete',
-        headers: {
-          "X-ACCESS-TOKEN": `${getCookie('access-token')}`,
-          "X-REFRESH-TOKEN": localStorage.getItem("refresh-token")
-        }
-      })
-      removeCookie('access-token')
-      removeCookie('user-id')
-      localStorage.removeItem('refresh-token')
-      alert("탈퇴되었습니다.")
-      document.location.href = "/";
+      try {
+        const res = await authInstance.delete(`/users/${getCookie('user-id')}`)
+        removeCookie('access-token')
+        removeCookie('user-id')
+        localStorage.removeItem('refresh-token')
+        alert("탈퇴되었습니다.")
+        document.location.href = "/";
+      } catch(e) {
 
+      }
     }
   },
 

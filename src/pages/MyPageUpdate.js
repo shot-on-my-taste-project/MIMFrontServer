@@ -1,23 +1,33 @@
-import React, { useState } from 'react'
+import React, { useState, useEffect } from 'react'
 import { Button } from 'react-bootstrap';
 import Header from '../component/Header';
-import profileImg from "../assets/profile.jpg"
+import profileImgInput from "../assets/profile.jpg"
 import CryptoJS from 'crypto-js';
-// import { duplicateNickname, updateMember, leaveMember } from '../utils/api/userAPI';
 import Api from "../utils/api/userAPI"
+import { getCookie } from '../utils/Cookie';
 import '../styles/MyPage.css'
 
 const MyPageUpdate = () => {
+    const [user, setUser] = useState([]);
+    const [profile, setProfile] = useState([]);
     const [inputNickName, setInputNickName] = useState('')
     let [inputOriginPw, setInputOriginPw] = useState('')
     let [inputNewPw, setInputNewPw] = useState('')
     const [inputProfilePath, setProfilePath] = useState('')
     const [userMypageData, setUserMyPageData] = useState({})
 
+    const userfun = Api.getUserInfo;
+
+    const getInfo = async () => {
+        setUser(await userfun().then((x) => {
+            setProfile(`http://fhdufhdu.iptime.org:8081/users/${x.id}/profile`);
+            return x;
+        }));
+    }
+
     const handleInputNickName = (e) => {
         setInputNickName(e.target.value)
         userMypageData.nickName = e.target.value
-        console.log(userMypageData)
     }
 
     const handleInputOriginPw = (e) => {
@@ -30,16 +40,19 @@ const MyPageUpdate = () => {
         const value = e.target.value
         if (value === '') {
             delete userMypageData.pw;
-            console.log(userMypageData)
         }
         else {
             userMypageData.pw = CryptoJS.SHA256(e.target.value).toString()
-            console.log(userMypageData)
         }
     }
-
-    const handleInputProfilePath = (e) => {
-        // setProfilePath(e.target.value)
+    
+    const onImgChange = async(e) => {
+        const formData = new FormData()
+        formData.append('profile', e.target.files[0])
+        const res = await Api.uploadProfile(formData)
+        document.getElementById('profile-img').src = await userfun().then((x) => {
+            return `http://fhdufhdu.iptime.org:8081/users/${x.id}/profile`;
+        }) 
     }
 
     const samePassword = () => {
@@ -59,19 +72,24 @@ const MyPageUpdate = () => {
         window.location.href = "/mypage";
     }
 
+    useEffect(() => {
+        getInfo();
+    }, []);
+
     return (
         <div className="MyPageArea">
             <Header></Header>
             <div className="MainInfoUpdate">
                 <div className="profileArea">
-                    <img src={profileImg} width={"150rem"} />
+                    <img id="profile-img" src={ profile } width={"150rem"} />
                     <div className="Filebox">
                         <label for="ex_file">업로드</label>
-                        <input class="userInfo" type="file" id="ex_file" placeholder="" />
+                        <input class="userInfo" type="file" id="ex_file" accept="image/*" onChange={onImgChange} />
+                        {/* <Button onClick={onImgUploadBtnClick}>업로드</Button> */}
                     </div>
                 </div>
 
-                <input type="text" placeholder="닉네임" onChange={handleInputNickName} />
+                <input type="text" placeholder={user.nickName} onChange={handleInputNickName} />
                 <Button id="duplicate-check" variant="secondary" onClick={Api.duplicateNickname.bind(this, inputNickName)}>중복확인</Button>
             </div>
 
