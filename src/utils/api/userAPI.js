@@ -164,8 +164,7 @@ const Api = {
           "X-REFRESH-TOKEN": localStorage.getItem('refresh-token')
         }
       })
-      console.log(res.data)
-      return res.status === 200 ? res.data : 'error'
+      return res.status === 200 ? res.data[0].url : 'error'
     } catch (e) {
       return e
     }
