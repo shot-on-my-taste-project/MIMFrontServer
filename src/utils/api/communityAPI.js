@@ -1,10 +1,19 @@
 import saveToken, { defaultInstance, authInstance } from '../api/AxiosInstance';
 import { getCookie, setCookie, removeCookie } from '../Cookie';
-import Api2 from "./searchAPI"
+
 const Api = {
     getAllBoard: async () => {
         try {
-            const res = await defaultInstance.get('/boards?page=1&size=3')
+            const res = await authInstance.get('/boards?page=2&size=3')
+            return res.data
+        } catch(e) {
+            return e
+        }
+    },
+
+    getBoard: async(movieId) => {
+        try {
+            const res = await authInstance.get(`/boards/movie/${movieId}`)
             return res.data
         } catch(e) {
             return e
@@ -13,7 +22,7 @@ const Api = {
 
     getAllFreeBoardPosts: async (currentPage, size) => {
         try {
-            const res = await defaultInstance.get(`/postings/board/1?page=${currentPage}&size=${size}`)
+            const res = await authInstance.get(`/postings/board/1?page=${currentPage}&size=${size}`)
             return res.data
         } catch(e) {
             return e
@@ -30,9 +39,9 @@ const Api = {
         }
       },
 
-    getAllMovieBoardPosts: async (movieId, currentPage, size) => {
+    getAllMovieBoardPosts: async (movieBoardId, currentPage, size) => {
         try {
-            const res = await defaultInstance.get(`/postings/board/${movieId}?page=${currentPage}&size=${size}`)
+            const res = await authInstance.get(`/postings/board/${movieBoardId}?page=${currentPage}&size=${size}`)
             return res.data['content']
         } catch(e) {
             return e
@@ -50,6 +59,22 @@ const Api = {
             saveToken(res)
             alert("작성이 완료되었습니다")
             window.location.href = "/community/free"
+        } catch(e) {
+            return e
+        }
+    },
+
+    writeMovieBoardPost: async (data) => {
+        try {
+            const res = await authInstance.post("/postings", {
+                "content": data.content,
+                "movieBoardId": data.movieBoardId,
+                "title": data.title,
+                "userId": getCookie('user-id')
+            })
+            saveToken(res)
+            alert("작성이 완료되었습니다")
+            window.location.href = "/community/movie/" + data.movieId
         } catch(e) {
             return e
         }

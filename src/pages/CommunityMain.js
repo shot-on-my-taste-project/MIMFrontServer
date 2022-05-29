@@ -26,6 +26,7 @@ const CommunityMain = () => {
 
     //포스터 url 가져오기
     const getPoster = (movieId) => `http://fhdufhdu.iptime.org:8081/movies/${movieId}/poster`;
+    const getCommunityLink = (movieId) => `/community/movie/${movieId}`;
     // 데이터 받아오기
     const [ boards, setBoards ] = useState([])
     const [ movies, setMovies ] = useState([])
@@ -46,7 +47,6 @@ const CommunityMain = () => {
         }))    
     }
 
-    console.log('dudghk', movies)
     useEffect(async() => {
         getInfo();
     }, []);
@@ -72,7 +72,7 @@ const CommunityMain = () => {
                     {  movies.map((movie, index) => 
                         <div className="Community">
                         <img src={ getPoster(movie.id) } width={"300rem"} height={"400rem"}/>
-                        <Link style={{textDecoration: 'none', color: 'white'}} to="/community/movie"><h3>{movie.title}</h3></Link>
+                        <Link style={{textDecoration: 'none', color: 'white'}} to={getCommunityLink(movie.id)}><h3>{movie.title}</h3></Link>
                         <h6>{console.log(boards[index])}개의 게시글</h6>
                         </div>
                     )}
