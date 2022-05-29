@@ -24,8 +24,9 @@ class App extends Component {
                     <Route path="/result" component={ Result }/>
                 </Switch>
                 <Switch>
-                    <Route path="/community/movie/write" component={ BoardWrite }/>
-                    <Route path="/community/movie" component={ CommunityMovie }/>
+                    <Route path="/community/movie/write/:movieId" component={ BoardWrite }/>
+                    <Route path="/community/movie/:movieId" component={ CommunityMovie }/>
+                    {/* <Route path="/community/movie" component={ CommunityMovie }/> */}
                     <Route path="/community/free/write" component={ FreeBoardWrite }/>
                     <Route path="/community/free" component={ CommunityFree }/>
                     <Route path="/community" component={ CommunityMain }/>
