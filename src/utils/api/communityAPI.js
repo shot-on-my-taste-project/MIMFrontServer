@@ -3,17 +3,9 @@ import { getCookie, setCookie, removeCookie } from '../Cookie';
 import Api2 from "./searchAPI"
 const Api = {
     getAllBoard: async () => {
-        const boardArr = []
         try {
-            const res = await defaultInstance.get('/boards?page=0&size=3').then(x=> {
-                
-            })
-            console.log(res.data['content'])
-            res.data['content'].map((board) => {
-                console.log(board.boardId)
-                boardArr.push(board.boardId)
-            })
-            return boardArr
+            const res = await defaultInstance.get('/boards?page=1&size=3')
+            return res.data
         } catch(e) {
             return e
         }
@@ -27,6 +19,16 @@ const Api = {
             return e
         } 
     },
+
+    getMovies: async (ids) => {
+        try {
+          const res = await authInstance.get(`/movies/ids?ids=${ids}`)
+          saveToken(res);
+          return res.data
+        } catch (e) {
+          return e
+        }
+      },
 
     getAllMovieBoardPosts: async (movieId, currentPage, size) => {
         try {

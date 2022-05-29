@@ -1,4 +1,4 @@
-import React, { Component, useState } from 'react'
+import React, { Component, useState, useEffect } from 'react'
 import { Route, Link } from 'react-router-dom'
 import { Button } from 'react-bootstrap'
 import Header from '../component/Header'
@@ -9,8 +9,12 @@ import ImgEx3 from "../assets/busanhang.jpg"
 import CustomSearchArea from '../component/CustomSearchArea'
 import UserBoardSearch from '../component/UserBoardSearch'
 import Popup from '../component/Popup'
+import Api from "../utils/api/communityAPI"
+import Api2 from "../utils/api/searchAPI"
+
 const CommunityMain = () => {
    
+    // 팝업 부분
     const [ popupOpen, setPopupOpen ] = useState(false);
     const openPopup = () => {
         setPopupOpen(true);
@@ -20,43 +24,61 @@ const CommunityMain = () => {
         setPopupOpen(false);
     }
 
-    return (
-        <div>
-            <Header></Header>
+    //포스터 url 가져오기
+    const getPoster = (movieId) => `http://fhdufhdu.iptime.org:8081/movies/${movieId}/poster`;
+    // 데이터 받아오기
+    const [ boards, setBoards ] = useState([])
+    const [ movies, setMovies ] = useState([])
 
-            <div className="Title">
-                <h1>인기 게시판 TOP 3</h1>
-                <div>
-                    <CustomSearchArea event={openPopup}/>
-                    <Popup open={popupOpen} close={closePopup}>
-                        <UserBoardSearch />
-                        
-                    </Popup>
+    //게시판 요청에서 영화 아이디 추출
+    const getIds = (list) => {
+        let ids = '';
+        list.forEach((x) => {
+            ids += `${x.movieId},`
+        })
+        return ids;
+    };
+
+    const getInfo = async() => {
+        setBoards(await Api.getAllBoard().then(async x => {
+            setMovies(await Api.getMovies(getIds(x.content)))
+            return x.content
+        }))    
+    }
+
+    console.log('dudghk', movies)
+    useEffect(async() => {
+        getInfo();
+    }, []);
+
+    
+    
+        return (
+            <div>
+                <Header></Header>
+    
+                <div className="Title">
+                    <h1>인기 게시판 TOP 3</h1>
+                    <div>
+                        <CustomSearchArea event={openPopup}/>
+                        <Popup open={popupOpen} close={closePopup}>
+                            <UserBoardSearch />   
+                        </Popup>
+                    </div>
+                    
                 </div>
                 
-            </div>
-            
-            <div className="CommunitiesWrapper">
-                <div className="Community">
-                    <img src={ ImgEx1 } width={"300rem"} height={"400rem"}/>
-                    <Link style={{textDecoration: 'none', color: 'white'}} to="/community/movie"><h3>타짜</h3></Link>
-                    <h6>123명이 이야기 중</h6>
-                </div>
-                
-                <div className="Community">
-                    <img src={ ImgEx2 } width={"300rem"} height={"400rem"}/>
-                    <h3>승리호</h3>
-                    <h6>456명이 이야기 중</h6>
-                </div>
-
-                <div className="Community">
-                    <img src={ ImgEx3 } width={"300rem"} height={"400rem"}/>
-                    <h3>부산행</h3>
-                    <h6>789명이 이야기 중</h6>
+                <div className="CommunitiesWrapper">
+                    {  movies.map((movie, index) => 
+                        <div className="Community">
+                        <img src={ getPoster(movie.id) } width={"300rem"} height={"400rem"}/>
+                        <Link style={{textDecoration: 'none', color: 'white'}} to="/community/movie"><h3>{movie.title}</h3></Link>
+                        <h6>{console.log(boards[index])}개의 게시글</h6>
+                        </div>
+                    )}
                 </div>
             </div>
-        </div>
-    );
+        );
 };
 
 export default CommunityMain;
