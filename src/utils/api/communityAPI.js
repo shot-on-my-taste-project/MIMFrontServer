@@ -91,6 +91,17 @@ const Api = {
 
     deleteFavoriteMovie: async(data) => {
 
+    },
+
+    getPostDetail: async(boardId, postId) => {
+        try {
+            const res = await authInstance.get(`/postings/board/${boardId}/posting-number/${postId}`)
+            saveToken(res)
+            console.log(res)
+            return res.data
+        } catch(e) {
+            return e
+        }
     }
 }
 

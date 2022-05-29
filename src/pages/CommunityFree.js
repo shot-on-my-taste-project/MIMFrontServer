@@ -1,8 +1,8 @@
 import React, { useState, useEffect } from 'react'
+import { Link } from 'react-router-dom';
 import Header from '../component/Header';
-import PagenationV2 from "../component/PagenationV2.js"
+import PagenationV2 from "../component/PagenationV2"
 import '../styles/Community.css'
-import { pagenate } from '../services/pagenate'
 import CustomSearchArea from '../component/CustomSearchArea';
 import WriteButton from '../component/WriteButton';
 import Api from '../utils/api/communityAPI';
@@ -24,6 +24,9 @@ const CommunityMovie = () => {
       return x.content
     }))
   }
+
+  const getPostDetailLink = (postId) => `/community/free/${postId}`
+
   useEffect(() => {
     getPosts();
   }, [currentPage]);
@@ -56,9 +59,9 @@ const CommunityMovie = () => {
               </thead>
               <tbody>
                   {posts.map((post) => (
-              <tr key={post.id}>
-                <td>{post.id}</td>
-                <td>{post.title}</td>
+              <tr key={post.postingNumber}>
+                <td>{ post.postingNumber }</td>
+                <td><Link style={{textDecoration: 'none', color: 'white'}} to={getPostDetailLink(post.postingNumber)}>{post.title}</Link></td>
                 <td>{post.time.substr(0, 16).replace('T', ' ')}</td>
               </tr>
             ))}

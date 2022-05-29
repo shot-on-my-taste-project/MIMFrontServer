@@ -1,6 +1,6 @@
 import React, { useState, useEffect } from 'react'
+import { Link } from 'react-router-dom';
 import Header from '../component/Header';
-import Thumb from "../assets/tazza-thumb.jpg"
 import '../styles/Community.css'
 import CustomSearchArea from '../component/CustomSearchArea';
 import WriteButton from '../component/WriteButton';
@@ -35,6 +35,7 @@ const CommunityMovie = ({match}) => {
     getPosts();
   }, [currentPage]);
 
+  const getPostDetailLink = (movieId, postId) => `/community/movie/${movieId}/${postId}`
   const getWritePostLink = (movieId) => `/community/movie/write/${movieId}`;
 
     return (
@@ -66,9 +67,9 @@ const CommunityMovie = ({match}) => {
               </thead>
               <tbody>
                   {posts.map((post) => (
-              <tr key={post.id}>
-                <td>{post.id}</td>
-                <td>{post.title}</td>
+              <tr key={post.postingNumber}>
+                <td>{post.postingNumber}</td>
+                <td><Link style={{textDecoration: 'none', color: 'white'}} to={getPostDetailLink(paramMovieId, post.postingNumber)}>{post.title}</Link></td>
                 <td>{post.time.substr(0, 16).replace('T', ' ')}</td>
               </tr>
             ))}

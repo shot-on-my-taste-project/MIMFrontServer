@@ -2,7 +2,7 @@ import React, { Component } from 'react'
 import { Route, Switch } from 'react-router-dom'
 import Menu from '../component/Menu';
 import { Home, About, Login, SignUp, Result, ResultDetail, MyPage, MyPageUpdate, 
-    CommunityMain, CommunityMovie, CommunityFree, BoardWrite, FreeBoardWrite,  
+    CommunityMain, CommunityMovie, CommunityFree, BoardWrite, FreeBoardWrite, PostMovie, PostFree,
     AdminBoardManage, AdminMovieManage, AdminReportManage } from '../pages'
 import 'bootstrap/dist/css/bootstrap.min.css';
 import {Button} from "react-bootstrap";
@@ -25,9 +25,10 @@ class App extends Component {
                 </Switch>
                 <Switch>
                     <Route path="/community/movie/write/:movieId" component={ BoardWrite }/>
+                    <Route path="/community/movie/:movieId/:postId" component={ PostMovie }/>
                     <Route path="/community/movie/:movieId" component={ CommunityMovie }/>
-                    {/* <Route path="/community/movie" component={ CommunityMovie }/> */}
                     <Route path="/community/free/write" component={ FreeBoardWrite }/>
+                    <Route path="/community/free/:postId" component={ PostFree }/>
                     <Route path="/community/free" component={ CommunityFree }/>
                     <Route path="/community" component={ CommunityMain }/>
                 </Switch>
