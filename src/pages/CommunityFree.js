@@ -1,118 +1,81 @@
-import React, { Component, useState } from 'react'
-import { Link } from 'react-router-dom'
-import { Button } from 'react-bootstrap'
+import React, { useState, useEffect } from 'react'
 import Header from '../component/Header';
-import Pagenation from '../component/Pagenation';
+import PagenationV2 from "../component/PagenationV2.js"
 import '../styles/Community.css'
 import { pagenate } from '../services/pagenate'
 import CustomSearchArea from '../component/CustomSearchArea';
 import WriteButton from '../component/WriteButton';
+import Api from '../utils/api/communityAPI';
 
 
 const CommunityMovie = () => {
-    const getBoards = () => { // 영화 정보를 반환하는 함수
-        const boards = [
-          { id: 1678, title: "동작 그만 밑장빼기냐?", time: "13:33" },
-          { id: 1677, title: "묻고 트리플로 가", time: "13:32" },
-          { id: 1676, title: "2시부터 단관할 사람", time: "13:32" },
-          { id: 1675, title: "곧 사쿠라의 계절이네요", time: "13:30" },
-          { id: 1674, title: "싸늘하다 가슴에 비수가 날아와 꽂힌다", time: "13:29" },
-          { id: 1673, title: "집에 가고 싶다", time: "13:28" },
-          { id: 1672, title: "침대가 보고 싶다", time: "13:28" },
-          { id: 1671, title: "학교 온 지 1시간도 안됐는데", time: "13:27" },
-          { id: 1670, title: "개발이 끝이 없네", time: "13:26" },
-          { id: 1669, title: "ㅁㄴㅇㄻㄴㅇㄹ", time: "13:25" },
-          { id: 1668, title: "asdgfdsafd", time: "13:24" },{ id: 1678, title: "동작 그만 밑장빼기냐?", time: "13:33" },
-          { id: 1677, title: "묻고 트리플로 가", time: "13:32" },
-          { id: 1676, title: "2시부터 단관할 사람", time: "13:32" },
-          { id: 1675, title: "곧 사쿠라의 계절이네요", time: "13:30" },
-          { id: 1674, title: "싸늘하다 가슴에 비수가 날아와 꽂힌다", time: "13:29" },
-          { id: 1673, title: "집에 가고 싶다", time: "13:28" },
-          { id: 1672, title: "침대가 보고 싶다", time: "13:28" },
-          { id: 1671, title: "학교 온 지 1시간도 안됐는데", time: "13:27" },
-          { id: 1670, title: "개발이 끝이 없네", time: "13:26" },
-          { id: 1669, title: "ㅁㄴㅇㄻㄴㅇㄹ", time: "13:25" },
-          { id: 1668, title: "asdgfdsafd", time: "13:24" },
-          { id: 1678, title: "동작 그만 밑장빼기냐?", time: "13:33" },
-          { id: 1677, title: "묻고 트리플로 가", time: "13:32" },
-          { id: 1676, title: "2시부터 단관할 사람", time: "13:32" },
-          { id: 1675, title: "곧 사쿠라의 계절이네요", time: "13:30" },
-          { id: 1674, title: "싸늘하다 가슴에 비수가 날아와 꽂힌다", time: "13:29" },
-          { id: 1673, title: "집에 가고 싶다", time: "13:28" },
-          { id: 1672, title: "침대가 보고 싶다", time: "13:28" },
-          { id: 1671, title: "학교 온 지 1시간도 안됐는데", time: "13:27" },
-          { id: 1670, title: "개발이 끝이 없네", time: "13:26" },
-          { id: 1669, title: "ㅁㄴㅇㄻㄴㅇㄹ", time: "13:25" },
-          { id: 1668, title: "asdgfdsafd", time: "13:24" }
-        ]
-        return boards;
-      }
+  const [posts, setPosts] = useState([])
+  
+  const [currentPage, setCurrentPage] = useState(0);
+  const [totalPage, setTotalPage] = useState(1);
 
-      const [boards, setBoards] = useState({ // 영화 정보를 담는 state
-        data: getBoards(), // 영화 정보
-        pageSize: 10, // 한 페이지에 보여줄 아이템(영화목록) 개수
-        currentPage: 1 // 현재 활성화된 페이지 위치
-      });
-    
-      const handlePageChange = (page) => {
-        setBoards({ ...boards, currentPage: page });
-      };
-    
-      const { data, pageSize, currentPage } = boards;
-      const pagedBoards = pagenate(data, currentPage, pageSize); // 페이지 별로 아이템이 속한 배열을 얻어옴
+  const handlePageChange = (page) => {
+    setCurrentPage(page);
+  }
 
-      const { length: count } = boards.data;
-      if (count === 0) 
-        return <p>글 정보가 없습니다.</p>;
+  const getPosts = async() => {
+    setPosts(await Api.getAllFreeBoardPosts(currentPage, 10).then(x => {
+      setTotalPage(x.totalPages)
+      return x.content
+    }))
+  }
+  useEffect(() => {
+    getPosts();
+  }, [currentPage]);
+
     return (
-        <div className="CommunityMovieContainer">
-            <Header></Header>
-            <div className="FreeBoardThumb">
-                <h1>자유 게시판</h1>
-                <div className="SubSearchArea">
-                    <CustomSearchArea />
-                    <WriteButton moveTo="/community/free/write" />
-                </div>
-            </div>
-        
-            <div className="TableWrapper">
-              <div className="TableContainer">
-                <table className="tablecss table">
-                  <colgroup>
-                    <col width="10%"/>
-                    <col width="80%"/>
-                    <col width="10%"/>
-                  </colgroup>
-                <thead>
-                    <tr>
-                    <th>번호</th>
-                    <th>제목</th>
-                    <th>작성시간</th>
-                    </tr>
-                </thead>
-                <tbody>
-                    {pagedBoards.map((board) => (
-                <tr key={board.id}>
-                  <td>{board.id}</td>
-                  <td>{board.title}</td>
-                  <td>{board.time}</td>
-                </tr>
-              ))}
-                </tbody>
-                </table>
+      <div className="CommunityMovieContainer">
+          <Header></Header>
+          <div className="FreeBoardThumb">
+              <h1>자유 게시판</h1>
+              <div className="SubSearchArea">
+                  <CustomSearchArea />
+                  <WriteButton moveTo="/community/free/write" />
               </div>
-              
-    
-              <Pagenation
-                pageSize={pageSize}
-                itemsCount={count}
-                currentPage={currentPage}
-                onPageChange={handlePageChange}
-              />
-            </div>
           </div>
-        
-    );
+      
+          <div className="TableWrapper">
+            <div className="TableContainer">
+              <table className="tablecss table">
+                <colgroup>
+                  <col width="10%"/>
+                  <col width="70%"/>
+                  <col width="20%"/>
+                </colgroup>
+              <thead>
+                  <tr>
+                  <th>번호</th>
+                  <th>제목</th>
+                  <th>작성시간</th>
+                  </tr>
+              </thead>
+              <tbody>
+                  {posts.map((post) => (
+              <tr key={post.id}>
+                <td>{post.id}</td>
+                <td>{post.title}</td>
+                <td>{post.time.substr(0, 16).replace('T', ' ')}</td>
+              </tr>
+            ))}
+              </tbody>
+              </table>
+            </div>
+            
+  
+            <PagenationV2
+                currentPage={currentPage}
+                totalPage={totalPage}
+                onPageChange={handlePageChange}
+            ></PagenationV2>
+          </div>
+        </div>
+      
+  );
 };
 
 export default CommunityMovie;
