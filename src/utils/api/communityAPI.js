@@ -78,6 +78,19 @@ const Api = {
         } catch(e) {
             return e
         }
+    },
+
+    addFavoriteMovie: async(data) => {
+        try {
+            const res = await authInstance.post("/favorite-movies", data)
+            saveToken(res)
+        } catch(e) {
+            return e
+        }
+    },
+
+    deleteFavoriteMovie: async(data) => {
+
     }
 }
 

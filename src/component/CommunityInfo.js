@@ -31,7 +31,7 @@ const CommunityInfo = (props) => {
                </div>
                <div className="Btn">
                  <ReportButton />
-                 <FavoriteButton />
+                 <FavoriteButton movieId={movieId}/>
                </div>
                
            </div>
