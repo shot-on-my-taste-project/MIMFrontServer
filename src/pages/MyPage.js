@@ -16,6 +16,7 @@ const MyPage = () => {
 
     //포스터 url 가져오기
     const getPoster = (movieId) => `http://fhdufhdu.iptime.org:8081/movies/${movieId}/poster`;
+    const getCommunityLink = (movieId) => `/community/movie/${movieId}`;
 
     const getInfo = async () => {
         setUser(await userfun().then((x) => {
@@ -58,7 +59,7 @@ const MyPage = () => {
                         {favoriteMovies.map((fm) => 
                             <div className="Movie">
                                 <img src={getPoster(fm.id)} width={"100rem"} height={"133rem"} />
-                                <Link style={{ textDecoration: 'none', color: 'white' }} to="/result/detail/"><h4>{fm.title}</h4></Link>
+                                <Link style={{ textDecoration: 'none', color: 'white' }} to={getCommunityLink(fm.id)}><h4>{fm.title}</h4></Link>
                             </div>)
                         }
                     </div>
