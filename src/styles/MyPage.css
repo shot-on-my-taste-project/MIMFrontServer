@@ -127,6 +127,10 @@ th {
     padding-right: 1rem;
 }
 
+.profileArea img {
+    opacity: 0.4;
+    filter: alpha(opacity=40);
+}
 /* 태블릿 */
 @media screen and (min-width: 768px) and (max-width: 1023px){
     .InputWrapper {
