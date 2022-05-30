@@ -18,13 +18,14 @@ class PostDetail extends Component {
                         <h1>{title}</h1>
                     </div>
                     <div className="WrittenInfo">
-                        작성자: {writer}
-                        작성일: {writtenTime}
+                        <div>작성자: {writer}</div>
+                        <div id="written-time">작성일: {writtenTime}</div>        
                     </div>
                 </div>
                 <hr/>
                 <div className="ContentWrapper">
-                    {content}
+                    <div className="PostContentContainer">{content}</div>
+                    <div className="PostBtnWrapper">
                     {
                         getCookie("user-id") === writer
                         ? <><Button variant="secondary">수정</Button>
@@ -32,23 +33,30 @@ class PostDetail extends Component {
                         : <><Button variant="secondary">신고</Button></>
                     }
                     <Button variant="secondary">목록</Button>  
+                    </div>
                 </div>
                 <hr/>
                 <div className="ReplyWrapper">
-                {comments.map(comment => 
-                <div className="WriteReply">        
-                    <img src={getProfile(comment.userId)} width="50rem" height="50rem" />
-                    <div className="ReplyContentWrapper">
-                         <h6>{comment.userId}</h6>
-                         {comment.content}
-                     </div>
-                     {
-                         getCookie("user-id") === comment.userId 
-                         ?<><Link>수정</Link><Link>삭제</Link></>
-                         :<Link>신고</Link>
-                     }               
-                </div>
-                )}
+                    {comments.map(comment => 
+                    <div className="Reply">
+                        <div className="ReplyContentWrapper">        
+                            <img src={getProfile(comment.userId)} width="50rem" height="50rem" />
+                            <div>
+                                <h6>{comment.userId}</h6>
+                                {comment.content}
+                            </div>
+                        </div>
+                        <div className="ReplyFuncWrapper">
+                        {
+                            getCookie("user-id") === comment.userId 
+                            ?<><Link>수정</Link><Link> 삭제</Link></>
+                            :<Link>신고</Link>
+                        }       
+                        </div>    
+                    </div>
+                    
+                    )}
+                    <hr/>
                     <div className="WriteReply">
                         
                         <img src={getProfile(getCookie('user-id'))} width="50rem" height="50rem" />
