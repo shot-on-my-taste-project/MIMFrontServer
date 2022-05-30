@@ -121,6 +121,16 @@ const Api = {
         }
     },
 
+    getPostDetail2: async(postId) => {
+        try {
+            const res = await authInstance.get(`/postings/${postId}`)
+            saveToken(res)
+            return res.data
+        } catch(e) {
+            return e
+        }
+    },
+
     getAllComments: async(boardId, postingNumber) => {
         try{
             const res = await authInstance.get(`comments/board/${boardId}/posting-number/${postingNumber}?page=0&size=5`)
@@ -141,7 +151,18 @@ const Api = {
         }
     },
 
-    updatePost: async() => {
+    updatePost: async(postId, data, post) => {
+        try {
+            const res = await authInstance.put(`/postings/${postId}`, data)
+            saveToken(res)
+            alert("수정이 완료되었습니다.")
+            if(data.movieId === "1")
+                window.location.href= `/community/free/${post.postingNumber}`
+            else
+                window.location.href= `/community/movie/${data.movieId}/${post.postingNumber}`
+        } catch(e) {
+            return e
+        }
 
     },
 
@@ -149,12 +170,32 @@ const Api = {
 
     },
 
-    deletePost: async() => {
-
+    deletePost: async(movieId, postId) => {
+        try {
+            const res = await authInstance.delete(`/postings/${postId}`)
+            saveToken(res)
+            alert("게시글이 삭제되었습니다.")
+            if(movieId === "1")
+                window.location.href= `/community/free`
+            else
+                window.location.href= `/community/movie/${movieId}`
+        } catch(e) {
+            return e
+        }
     },
 
-    deleteComment: async() => {
-        
+    deleteComment: async(movieId, postId, commentId) => {
+        try {
+            const res = await authInstance.delete(`/comments/${commentId}`)
+            saveToken(res)
+            alert("댓글이 삭제되었습니다.")
+            if(movieId === "1")
+                window.location.href= `/community/free/${postId}`
+            else
+                window.location.href= `/community/movie/${movieId}/${postId}`
+        } catch(e) {
+            return e
+        }
     }
 }
 

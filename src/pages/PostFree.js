@@ -33,6 +33,9 @@ const PostFree = ({match}) => {
 
           <div className="PostContent">
                 <PostDetail
+                movieId="1"
+                boardId="1"
+                postId={post.id}
                 title={post.title}
                 writtenTime={post.time}
                 writer={post.userId}

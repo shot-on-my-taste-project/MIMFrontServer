@@ -4,13 +4,33 @@ import { Button } from 'react-bootstrap';
 import React, { Component } from 'react';
 import '../styles/Community.css'
 import { getCookie } from '../utils/Cookie';
+import Api from '../utils/api/communityAPI';
 
 class PostDetail extends Component {
     render() {
 
-        const { title, writtenTime, writer, content, comments } = this.props;
+        const { movieId, boardId, postId, title, writtenTime, writer, content, comments } = this.props;
+        
         const getProfile = (userId) => `http://fhdufhdu.iptime.org:8081/users/${userId}/profile`
-  
+        
+        const getMovieCommunityMainLink = (movieId) => {
+            if(movieId === "1")
+                return `/community/free`
+            else
+                return `/community/movie/${movieId}`
+        }
+
+        const getUpdatePostLink = (movieId, postId) => {
+            if(movieId === "1")
+                return `/community/free/update/${postId}`
+            else
+                return `/community/movie/${movieId}/update/${postId}`
+        }
+
+        const deletePostFunc = async () => {
+            await Api.deletePost(movieId, postId)
+        }
+
         return (
             <div className="PostDetail">
                 <div className="PostInfo">
@@ -28,11 +48,11 @@ class PostDetail extends Component {
                     <div className="PostBtnWrapper">
                     {
                         getCookie("user-id") === writer
-                        ? <><Button variant="secondary">수정</Button>
-                        <Button variant="secondary">삭제</Button></>
+                        ? <><Link to={getUpdatePostLink(movieId, postId)}><Button variant="secondary">수정</Button></Link>
+                        <Button onClick={deletePostFunc} variant="secondary">삭제</Button></>
                         : <><Button variant="secondary">신고</Button></>
                     }
-                    <Button variant="secondary">목록</Button>  
+                    <Link to={getMovieCommunityMainLink(movieId)}><Button variant="secondary">목록</Button></Link>
                     </div>
                 </div>
                 <hr/>

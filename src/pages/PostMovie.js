@@ -42,6 +42,9 @@ const PostMovie = ({match}) => {
 
             <div className="PostContent">
                 <PostDetail
+                movieId={paramMovieId}
+                boardId={board.id}
+                postId={post.id}
                 title={post.title}
                 writtenTime={post.time}
                 writer={post.userId}
