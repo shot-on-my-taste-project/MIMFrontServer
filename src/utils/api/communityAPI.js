@@ -80,17 +80,35 @@ const Api = {
         }
     },
 
-    addFavoriteMovie: async(data) => {
+    addFavoriteMovie: async(movieId) => {
         try {
-            const res = await authInstance.post("/favorite-movies", data)
+            const res = await authInstance.post("/favorite-movies", {
+                "userId": getCookie('user-id'),
+                "movieId": movieId
+            })
             saveToken(res)
         } catch(e) {
             return e
         }
     },
 
-    deleteFavoriteMovie: async(data) => {
+    deleteFavoriteMovie: async(movieId) => {
+        try {
+            const res = await authInstance.delete(`/favorite-movies/user/${getCookie('user-id')}/movie/${movieId}`)
+            saveToken(res)
+        } catch(e) {
+            return e
+        }
+    },
 
+    isFavoriteMovie: async(movieId) => {
+        try {
+            const res = await authInstance.get(`/favorite-movies/user/${getCookie('user-id')}/movie/${movieId}`)
+            saveToken(res)
+            return res.data
+        } catch(e) {
+            return e
+        }
     },
 
     getPostDetail: async(boardId, postId) => {

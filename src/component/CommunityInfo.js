@@ -9,18 +9,30 @@ const CommunityInfo = (props) => {
     const { movieId } = props
     const [movie, setMovie] = useState([])
     const [board, setBoard] = useState([])
+    const [isFavorite, setIsFavorite] = useState(false)
 
     const getBackground = (movieId) => `http://fhdufhdu.iptime.org:8081/movies/${movieId}/background`;
     
     const getMovieInfo = async() => {
+        setIsFavorite(await Api2.isFavoriteMovie(movieId))
         setMovie(await Api.getResultDetail(movieId).then(async x => {
             const board_ = await Api2.getBoard(movieId)
             setBoard(board_)
             return x.movieDto
         }))
     }
+    
+    const addFavoriteMovie = async() => {
+        await Api2.addFavoriteMovie(movieId)
+        alert('즐겨찾기 항목에 추가되었습니다.')
+    }
+    
+    const deleteFavoriteMovie = async() => {
+        await Api2.deleteFavoriteMovie(movieId)
+        alert('즐겨찾기 항목에서 삭제되었습니다.')
+    }
 
-    useEffect(async() => {getMovieInfo()}, []);
+    useEffect(async() => {await getMovieInfo();}, []);
   
     return (
         <>
@@ -31,7 +43,11 @@ const CommunityInfo = (props) => {
                </div>
                <div className="Btn">
                  <ReportButton />
-                 <FavoriteButton movieId={movieId}/>
+                 <FavoriteButton 
+                 isFavorite={isFavorite}
+                 activateAction={addFavoriteMovie}
+                 deactivateAction={deleteFavoriteMovie}
+                 />
                </div>
                
            </div>
