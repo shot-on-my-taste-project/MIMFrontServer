@@ -5,6 +5,7 @@ const Api = {
     getAllBoard: async () => {
         try {
             const res = await authInstance.get('/boards?page=2&size=3')
+            saveToken(res);
             return res.data
         } catch(e) {
             return e
@@ -14,6 +15,7 @@ const Api = {
     getBoard: async(movieId) => {
         try {
             const res = await authInstance.get(`/boards/movie/${movieId}`)
+            saveToken(res);
             return res.data
         } catch(e) {
             return e
@@ -23,6 +25,7 @@ const Api = {
     getAllFreeBoardPosts: async (currentPage, size) => {
         try {
             const res = await authInstance.get(`/postings/board/1?page=${currentPage}&size=${size}`)
+            saveToken(res);
             return res.data
         } catch(e) {
             return e
@@ -145,7 +148,7 @@ const Api = {
         try {
             const res = await authInstance.post("/comments", data)
             saveToken(res)
-            return res.data
+            alert("댓글이 작성되었습니다.")
         } catch(e) {
             return e
         }

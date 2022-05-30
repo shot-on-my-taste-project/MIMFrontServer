@@ -1,15 +1,16 @@
 import Profile  from '../assets/profile.jpg'
 import { Link } from 'react-router-dom';
 import { Button } from 'react-bootstrap';
-import React, { Component } from 'react';
+import React, { useState } from 'react';
 import '../styles/Community.css'
 import { getCookie } from '../utils/Cookie';
 import Api from '../utils/api/communityAPI';
 
-class PostDetail extends Component {
-    render() {
+const PostDetail = (props) => {
+    
 
-        const { movieId, boardId, postId, title, writtenTime, writer, content, comments } = this.props;
+        const { movieId, boardId, postId, title, writtenTime, writer, content, comments } = props;
+        const [ writeCommentContent, setWriteCommentContent ] = useState([])
         
         const getProfile = (userId) => `http://fhdufhdu.iptime.org:8081/users/${userId}/profile`
         
@@ -29,6 +30,20 @@ class PostDetail extends Component {
 
         const deletePostFunc = async () => {
             await Api.deletePost(movieId, postId)
+        }
+
+        const writeCommentContentHandler = (e) => {
+            setWriteCommentContent(e.target.value)
+        }
+
+        const commentData = {
+            "content": writeCommentContent,
+            "depth": 0,
+            "postingId": postId
+        }
+
+        const uploadComment = async () => {
+            await Api.writeComment(commentData)
         }
 
         return (
@@ -71,7 +86,8 @@ class PostDetail extends Component {
                             getCookie("user-id") === comment.userId 
                             ?<><Link>수정</Link><Link> 삭제</Link></>
                             :<Link>신고</Link>
-                        }       
+                        }
+                        <Link> 답댓글</Link>       
                         </div>    
                     </div>
                     
@@ -81,15 +97,15 @@ class PostDetail extends Component {
                         
                         <img src={getProfile(getCookie('user-id'))} width="50rem" height="50rem" />
                         <div className="ReplyContentWrapper">
-                            <h6>{writer}</h6>
-                            <textarea/>
+                            <h6>{getCookie('user-id')}</h6>
+                            <textarea onChange={writeCommentContentHandler}/>
                         </div>                    
-                        <Button variant="danger">등록</Button>
+                        <Button onClick={uploadComment} variant="danger">등록</Button>
                     </div>
                 </div>
             </div>
         );
     }
-}
+
   
 export default PostDetail;
