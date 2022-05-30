@@ -9,8 +9,9 @@ import Api from '../utils/api/communityAPI';
 const PostDetail = (props) => {
     
 
-        const { movieId, boardId, postId, title, writtenTime, writer, content, comments } = props;
+        const { movieId, postNumber, postId, title, writtenTime, writer, content, comments } = props;
         const [ writeCommentContent, setWriteCommentContent ] = useState([])
+        const [ updateCommentContent, setUpdateCommentContent ] = useState([])
         
         const getProfile = (userId) => `http://fhdufhdu.iptime.org:8081/users/${userId}/profile`
         
@@ -42,8 +43,38 @@ const PostDetail = (props) => {
             "postingId": postId
         }
 
+        const updateCommentData = {
+            "content": updateCommentContent
+        }
+
         const uploadComment = async () => {
-            await Api.writeComment(commentData)
+            await Api.writeComment(commentData, movieId, postNumber)
+        }
+
+        const deleteComment = async (commentId) => {
+            await Api.deleteComment(movieId, postNumber, commentId)
+        }
+
+        const updateComment = async (updateSentence, commentId) => {
+            await Api.updateComment(updateSentence, movieId, postNumber, commentId)
+        }
+        
+        const updateCommentClick = () => {
+            var container = document.getElementById("content-container")
+            var commentId = container.parentNode.parentNode.parentNode.getAttribute("id")
+            container.removeChild(container.firstChild)
+            
+            const textArea = document.createElement("textarea")
+            textArea.setAttribute("id", "update-contents")
+    
+            const button = document.createElement("button")
+            button.appendChild(document.createTextNode("수정"))
+            button.addEventListener("click", async () => {
+                updateComment(textArea.value, commentId)
+            })
+            
+            container.appendChild(textArea)
+            container.appendChild(button)
         }
 
         return (
@@ -73,18 +104,19 @@ const PostDetail = (props) => {
                 <hr/>
                 <div className="ReplyWrapper">
                     {comments.map(comment => 
-                    <div className="Reply">
+                    <div className="Reply" id={comment.id}>
                         <div className="ReplyContentWrapper">        
                             <img src={getProfile(comment.userId)} width="50rem" height="50rem" />
                             <div>
                                 <h6>{comment.userId}</h6>
-                                {comment.content}
+                                <div id="content-container">{comment.content}</div>
                             </div>
                         </div>
                         <div className="ReplyFuncWrapper">
                         {
                             getCookie("user-id") === comment.userId 
-                            ?<><Link>수정</Link><Link> 삭제</Link></>
+                            ?<><Link onClick={updateCommentClick}>수정</Link>
+                            <Link onClick={() => {deleteComment(comment.id)}}> 삭제</Link></>
                             :<Link>신고</Link>
                         }
                         <Link> 답댓글</Link>       
@@ -93,8 +125,7 @@ const PostDetail = (props) => {
                     
                     )}
                     <hr/>
-                    <div className="WriteReply">
-                        
+                    <div className="WriteReply">  
                         <img src={getProfile(getCookie('user-id'))} width="50rem" height="50rem" />
                         <div className="ReplyContentWrapper">
                             <h6>{getCookie('user-id')}</h6>

@@ -45,6 +45,7 @@ const PostMovie = ({match}) => {
                 movieId={paramMovieId}
                 boardId={board.id}
                 postId={post.id}
+                postNumber={post.postingNumber}
                 title={post.title}
                 writtenTime={post.time}
                 writer={post.userId}

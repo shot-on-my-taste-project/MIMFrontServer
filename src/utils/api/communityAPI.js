@@ -144,11 +144,15 @@ const Api = {
         }
     },
 
-    writeComment: async(data) => {
+    writeComment: async(data, movieId, postId) => {
         try {
             const res = await authInstance.post("/comments", data)
             saveToken(res)
             alert("댓글이 작성되었습니다.")
+            if(movieId === "1")
+            window.location.href= `/community/free/${postId}`
+        else
+            window.location.href= `/community/movie/${movieId}/${postId}`
         } catch(e) {
             return e
         }
@@ -169,8 +173,20 @@ const Api = {
 
     },
 
-    updateComment: async() => {
-
+    updateComment: async(sentence, movieId, postNumber, commentId) => {
+        try {
+            const res = await authInstance.put(`/comments/${commentId}`, {
+                "content": sentence
+            })
+            saveToken(res)
+            alert("수정이 완료되었습니다.")
+            if(movieId === "1") 
+                window.location.href = `/community/free/${postNumber}`
+            else
+                window.location.href = `/community/movie/${movieId}/${postNumber}`
+        } catch(e) {
+            return e
+        }
     },
 
     deletePost: async(movieId, postId) => {

@@ -1,4 +1,5 @@
 import React, { useState, useEffect } from 'react'
+import { Link } from 'react-router-dom';
 import ReportButton from '../component/ReportButton';
 import FavoriteButton from '../component/FavoriteButton';
 import '../styles/Community.css'
@@ -12,7 +13,8 @@ const CommunityInfo = (props) => {
     const [isFavorite, setIsFavorite] = useState(false)
 
     const getBackground = (movieId) => `http://fhdufhdu.iptime.org:8081/movies/${movieId}/background`;
-    
+    const getCommunityLink = (movieId) => `/community/movie/${movieId}`;
+
     const getMovieInfo = async() => {
         setIsFavorite(await Api2.isFavoriteMovie(movieId))
         setMovie(await Api.getResultDetail(movieId).then(async x => {
@@ -39,7 +41,7 @@ const CommunityInfo = (props) => {
             <img className="ThumbImg" src={ getBackground(movieId) } width={"100%"} height={"50%"}/>
            <div className="BoardInfo">
                <div className="Text">
-                 <h1>{ movie.title }</h1><h4>{board.lastPostingNumber}개의 게시글</h4>
+                 <Link style={{textDecoration: 'none', color: 'white'}} to={getCommunityLink(movieId)}><h1>{ movie.title }</h1></Link><h4>{board.lastPostingNumber}개의 게시글</h4>
                </div>
                <div className="Btn">
                  <ReportButton />
