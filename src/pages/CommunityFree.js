@@ -10,7 +10,7 @@ import Api from '../utils/api/communityAPI';
 
 const CommunityMovie = () => {
   const [posts, setPosts] = useState([])
-  
+
   const [currentPage, setCurrentPage] = useState(0);
   const [totalPage, setTotalPage] = useState(1);
 

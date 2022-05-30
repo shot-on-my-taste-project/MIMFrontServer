@@ -12,9 +12,11 @@ const PostFree = ({match}) => {
     const paramPostId = match.params.postId;
     
     const [post, setPost] = useState([])
-    
+    const [comments, setComments] = useState([])
+
     const getPost = async() => {
         setPost(await Api.getPostDetail(1, paramPostId))
+        setComments(await Api.getAllComments(1, paramPostId))
     }
     useEffect(async() => await getPost(), [])
 
@@ -34,7 +36,8 @@ const PostFree = ({match}) => {
                 title={post.title}
                 writtenTime={post.time}
                 writer={post.userId}
-                content={post.content}>
+                content={post.content}
+                comments={comments}>
                 </PostDetail>
             </div>
         </div>
