@@ -14,10 +14,12 @@ const PostMovie = ({match}) => {
 
     const [board, setBoard] = useState([])
     const [post, setPost] = useState([])
+    const [comments, setComments] = useState([])
     
     const getPost = async() => {
         setBoard(await Api.getBoard(paramMovieId).then(async x => {
             setPost(await Api.getPostDetail(x.id, paramPostId))
+            setComments(await Api.getAllComments(x.id, paramPostId))
             return x;
         }))
     }
@@ -43,7 +45,8 @@ const PostMovie = ({match}) => {
                 title={post.title}
                 writtenTime={post.time}
                 writer={post.userId}
-                content={post.content}>
+                content={post.content}
+                comments={comments}>
                 </PostDetail>
             </div>
         </div>

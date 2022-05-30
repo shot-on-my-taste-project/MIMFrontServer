@@ -115,11 +115,46 @@ const Api = {
         try {
             const res = await authInstance.get(`/postings/board/${boardId}/posting-number/${postId}`)
             saveToken(res)
-            console.log(res)
             return res.data
         } catch(e) {
             return e
         }
+    },
+
+    getAllComments: async(boardId, postingNumber) => {
+        try{
+            const res = await authInstance.get(`comments/board/${boardId}/posting-number/${postingNumber}?page=0&size=5`)
+            saveToken(res)    
+            return res.data['content']       
+        } catch(e) {
+            return e
+        }
+    },
+
+    writeComment: async(data) => {
+        try {
+            const res = await authInstance.post("/comments", data)
+            saveToken(res)
+            return res.data
+        } catch(e) {
+            return e
+        }
+    },
+
+    updatePost: async() => {
+
+    },
+
+    updateComment: async() => {
+
+    },
+
+    deletePost: async() => {
+
+    },
+
+    deleteComment: async() => {
+        
     }
 }
 
