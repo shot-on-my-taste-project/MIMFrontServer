@@ -44,7 +44,6 @@ const CommunityInfo = (props) => {
                  <h1 onClick={() => getCommunityLink(movieId)}>{ movie.title }</h1><h4>{board.lastPostingNumber}개의 게시글</h4>
                </div>
                <div className="Btn">
-                 <ReportButton />
                  <FavoriteButton 
                  isFavorite={isFavorite}
                  activateAction={addFavoriteMovie}

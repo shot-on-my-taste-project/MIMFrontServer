@@ -147,13 +147,18 @@ const Api = {
 
     writeComment: async(data, movieId, postId) => {
         try {
-            const res = await authInstance.post("/comments", data)
+            const res = await authInstance.post("/comments", {
+                "userId": getCookie("user-id"),
+                "content": data.content,
+                "depth": data.depth,
+                "postingId": data.postingId
+            })
             // saveToken(res)
             alert("댓글이 작성되었습니다.")
             if(movieId === "1")
-            window.location.href= `/community/free/${postId}`
-        else
-            window.location.href= `/community/movie/${movieId}/${postId}`
+                window.location.href= `/community/free/${postId}`
+            else
+                window.location.href= `/community/movie/${movieId}/${postId}`
         } catch(e) {
             return e
         }
