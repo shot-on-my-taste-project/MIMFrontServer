@@ -8,7 +8,6 @@ import Api from '../utils/api/communityAPI';
 
 const PostDetail = (props) => {
     
-
         const { movieId, postNumber, postId, title, writtenTime, writer, content, comments } = props;
         const [ writeCommentContent, setWriteCommentContent ] = useState([])
         
@@ -28,6 +27,8 @@ const PostDetail = (props) => {
                 return `/community/movie/${movieId}/update/${postId}`
         }
 
+        const getContentContainer = (commentId) => `content-container${commentId}`
+        
         const deletePostFunc = async () => {
             await Api.deletePost(movieId, postId)
         }
@@ -58,11 +59,11 @@ const PostDetail = (props) => {
             await Api.reportComment(reportSentence, movieId, postNumber, commentId)
         }
         
-        const updateCommentClick = () => {
-            var container = document.getElementById("content-container")
-            var commentId = container.parentNode.parentNode.parentNode.getAttribute("id")
+        const updateCommentClick = (commentId) => {
+            var container = document.getElementById(`content-container${commentId}`)
+            // var commentId = container.parentNode.parentNode.parentNode.getAttribute("id")
             container.removeChild(container.firstChild)
-            
+            // console.log(commentId)
             const textArea = document.createElement("textarea")
             textArea.setAttribute("id", "update-contents")
     
@@ -80,9 +81,9 @@ const PostDetail = (props) => {
             await Api.reportPost()
         }
 
-        const reportCommentClick = () => {
-            var container = document.getElementById("content-container")
-            var commentId = container.parentNode.parentNode.parentNode.getAttribute("id")
+        const reportCommentClick = (commentId) => {
+            var container = document.getElementById(`content-container${commentId}`)
+            // var commentId = container.parentNode.parentNode.parentNode.getAttribute("id")
             container.removeChild(container.firstChild)
             
             const textArea = document.createElement("textarea")
@@ -128,17 +129,17 @@ const PostDetail = (props) => {
                     <div className="Reply" id={comment.id}>
                         <div className="ReplyContentWrapper">        
                             <img src={getProfile(comment.userId)} width="50rem" height="50rem" />
-                            <div>
+                            <div className="ReplyContainer">
                                 <h6>{comment.userId}</h6>
-                                <div id="content-container">{comment.content}</div>
+                                <div class="ContentContainer" id={getContentContainer(comment.id)}>{comment.content}</div>
                             </div>
                         </div>
                         <div className="ReplyFuncWrapper">
                         {
                             getCookie("user-id") === comment.userId 
-                            ?<><Link onClick={updateCommentClick}>수정</Link>
+                            ?<><Link onClick={() => updateCommentClick(comment.id)}>수정</Link>
                             <Link onClick={() => {deleteComment(comment.id)}}> 삭제</Link></>
-                            :<Link onClick={reportCommentClick}>신고</Link>
+                            :<Link onClick={() => {reportCommentClick(comment.id)}}>신고</Link>
                         }
                         <Link> 답댓글</Link>       
                         </div>    
