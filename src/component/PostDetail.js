@@ -11,15 +11,14 @@ const PostDetail = (props) => {
 
         const { movieId, postNumber, postId, title, writtenTime, writer, content, comments } = props;
         const [ writeCommentContent, setWriteCommentContent ] = useState([])
-        const [ updateCommentContent, setUpdateCommentContent ] = useState([])
         
         const getProfile = (userId) => `http://fhdufhdu.iptime.org:8081/users/${userId}/profile`
         
         const getMovieCommunityMainLink = (movieId) => {
             if(movieId === "1")
-                return `/community/free`
+                window.location.href = `/community/free`
             else
-                return `/community/movie/${movieId}`
+                window.location.href = `/community/movie/${movieId}`
         }
 
         const getUpdatePostLink = (movieId, postId) => {
@@ -43,10 +42,6 @@ const PostDetail = (props) => {
             "postingId": postId
         }
 
-        const updateCommentData = {
-            "content": updateCommentContent
-        }
-
         const uploadComment = async () => {
             await Api.writeComment(commentData, movieId, postNumber)
         }
@@ -57,6 +52,10 @@ const PostDetail = (props) => {
 
         const updateComment = async (updateSentence, commentId) => {
             await Api.updateComment(updateSentence, movieId, postNumber, commentId)
+        }
+
+        const reportComment = async(reportSentence, commentId) => {
+            await Api.reportComment(reportSentence, movieId, postNumber, commentId)
         }
         
         const updateCommentClick = () => {
@@ -71,6 +70,28 @@ const PostDetail = (props) => {
             button.appendChild(document.createTextNode("수정"))
             button.addEventListener("click", async () => {
                 updateComment(textArea.value, commentId)
+            })
+            
+            container.appendChild(textArea)
+            container.appendChild(button)
+        }
+
+        const reportPostFunc = async() => {
+            await Api.reportPost()
+        }
+
+        const reportCommentClick = () => {
+            var container = document.getElementById("content-container")
+            var commentId = container.parentNode.parentNode.parentNode.getAttribute("id")
+            container.removeChild(container.firstChild)
+            
+            const textArea = document.createElement("textarea")
+            textArea.setAttribute("id", "update-contents")
+    
+            const button = document.createElement("button")
+            button.appendChild(document.createTextNode("신고"))
+            button.addEventListener("click", async () => {
+                reportComment(textArea.value, commentId)
             })
             
             container.appendChild(textArea)
@@ -96,9 +117,9 @@ const PostDetail = (props) => {
                         getCookie("user-id") === writer
                         ? <><Link to={getUpdatePostLink(movieId, postId)}><Button variant="secondary">수정</Button></Link>
                         <Button onClick={deletePostFunc} variant="secondary">삭제</Button></>
-                        : <><Button variant="secondary">신고</Button></>
+                        : <><Button onClick={reportPostFunc} variant="secondary">신고</Button></>
                     }
-                    <Link to={getMovieCommunityMainLink(movieId)}><Button variant="secondary">목록</Button></Link>
+                    <Button onClick={() => {getMovieCommunityMainLink(movieId)}} variant="secondary">목록</Button>
                     </div>
                 </div>
                 <hr/>
@@ -117,7 +138,7 @@ const PostDetail = (props) => {
                             getCookie("user-id") === comment.userId 
                             ?<><Link onClick={updateCommentClick}>수정</Link>
                             <Link onClick={() => {deleteComment(comment.id)}}> 삭제</Link></>
-                            :<Link>신고</Link>
+                            :<Link onClick={reportCommentClick}>신고</Link>
                         }
                         <Link> 답댓글</Link>       
                         </div>    

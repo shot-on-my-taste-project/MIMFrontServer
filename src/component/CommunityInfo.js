@@ -13,7 +13,7 @@ const CommunityInfo = (props) => {
     const [isFavorite, setIsFavorite] = useState(false)
 
     const getBackground = (movieId) => `http://fhdufhdu.iptime.org:8081/movies/${movieId}/background`;
-    const getCommunityLink = (movieId) => `/community/movie/${movieId}`;
+    const getCommunityLink = (movieId) => window.location.href = `/community/movie/${movieId}`;
 
     const getMovieInfo = async() => {
         setIsFavorite(await Api2.isFavoriteMovie(movieId))
@@ -34,14 +34,14 @@ const CommunityInfo = (props) => {
         alert('즐겨찾기 항목에서 삭제되었습니다.')
     }
 
-    useEffect(async() => {await getMovieInfo();}, []);
+    useEffect(() => { getMovieInfo();}, []);
   
     return (
         <>
             <img className="ThumbImg" src={ getBackground(movieId) } width={"100%"} height={"50%"}/>
            <div className="BoardInfo">
                <div className="Text">
-                 <Link style={{textDecoration: 'none', color: 'white'}} to={getCommunityLink(movieId)}><h1>{ movie.title }</h1></Link><h4>{board.lastPostingNumber}개의 게시글</h4>
+                 <h1 onClick={() => getCommunityLink(movieId)}>{ movie.title }</h1><h4>{board.lastPostingNumber}개의 게시글</h4>
                </div>
                <div className="Btn">
                  <ReportButton />

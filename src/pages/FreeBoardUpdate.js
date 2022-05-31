@@ -38,7 +38,7 @@ const FreeBoardUpdate = ({match}) => {
         setPost(await Api.getPostDetail2(paramPostId))
     }
 
-    useEffect(async() => {getBoardInfo();}, [])
+    useEffect(() => {getBoardInfo();}, [])
 
     return (
         <div>

@@ -42,7 +42,7 @@ const BoardWrite = ({match}) => {
     window.location.href = "/community/movie/"+ paramMovieId
   }
 
-  useEffect(async() => {getBoardInfo();}, [])
+  useEffect(() => {getBoardInfo();}, [])
   console.log(board)
 
     return (

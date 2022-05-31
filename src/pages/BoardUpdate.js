@@ -44,7 +44,7 @@ const BoardUpdate = ({match}) => {
     window.location.href = "/community/movie/"+ paramMovieId
   }
 
-  useEffect(async() => {getBoardInfo();}, [])
+  useEffect(() => {getBoardInfo();}, [])
 
     return (
         <div>

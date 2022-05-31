@@ -18,7 +18,7 @@ const PostFree = ({match}) => {
         setPost(await Api.getPostDetail(1, paramPostId))
         setComments(await Api.getAllComments(1, paramPostId))
     }
-    useEffect(async() => await getPost(), [])
+    useEffect(() => { getPost() }, [])
 
     return (
         <div className="CommunityMovieContainer">
