@@ -72,7 +72,7 @@ const Api = {
   uploadProfile: async(formData) => {
     try {
       const res = await authInstance.post(`/users/${getCookie('user-id')}/profile`, formData)
-      saveToken(res);
+      // saveToken(res);
       console.log(res)
     } catch(e) {
 
@@ -89,7 +89,7 @@ const Api = {
         "pw": data.pw
       }
       )
-      saveToken(res);
+      // saveToken(res);
       window.location.href = "/mypage"
     } catch (e) {
 
@@ -116,7 +116,7 @@ const Api = {
   getUserInfo: async () => {
     try {
       const res = await authInstance.get(`/users/${getCookie('user-id')}`)
-      saveToken(res);
+      // saveToken(res);
       return res.status === 200 ? res.data : "error"
     } catch (e) {
       return e
@@ -126,7 +126,7 @@ const Api = {
   getUserWrittenPost: async (currentPage, size) => {
     try {
       const res = await authInstance.get(`/postings/user/${getCookie('user-id')}?page=${currentPage}&size=${size}`)
-      saveToken(res);
+      // saveToken(res);
       return res.data['content']
     } catch (e) {
       return e
@@ -136,7 +136,7 @@ const Api = {
   getUserProfile: async () => {
     try {
       const res = await authInstance.get(`/users/${getCookie('user-id')}/profile`)
-      saveToken(res);
+      // saveToken(res);
       return res.data
     } catch (e) {
       return e
@@ -146,7 +146,7 @@ const Api = {
   getFavoriteMovie: async(currentPage, size) => {
     try {
       const res = await authInstance.get(`favorite-movies/user/${getCookie('user-id')}?page=${currentPage}&size=${size}`)
-      saveToken(res);
+      // saveToken(res);
       return res.data['content']
     } catch(e) {
       return e

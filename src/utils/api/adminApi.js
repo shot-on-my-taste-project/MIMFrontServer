@@ -6,7 +6,7 @@ const Api = {
   getRequests: async (currentPage) => {
     try {
       const res = await authInstance.get(`/request-boards?page=${currentPage}&size=3`)
-      saveToken(res);
+      // saveToken(res);
       return res.data
     } catch (e) {
       return e
@@ -15,7 +15,7 @@ const Api = {
   getBoards: async (currentPage) => {
     try {
       const res = await authInstance.get(`/boards?page=${currentPage}&size=3`)
-      saveToken(res);
+      // saveToken(res);
       return res.data
     } catch (e) {
       return e
@@ -24,7 +24,7 @@ const Api = {
   getMovies: async (ids) => {
     try {
       const res = await authInstance.get(`/movies/ids?ids=${ids}`)
-      saveToken(res);
+      // saveToken(res);
       return res.data
     } catch (e) {
       return e
@@ -34,7 +34,7 @@ const Api = {
     try {
       const { id } = e.target;
       const res = await authInstance.post(`/request-boards/${id}`, {})
-      saveToken(res);
+      // saveToken(res);
       alert("성공하였습니다.")
       window.location.reload();
     } catch (e) {
@@ -46,7 +46,7 @@ const Api = {
     try {
       const { id } = e.target;
       const res = await authInstance.delete(`/boards/${id}`)
-      saveToken(res);
+      // saveToken(res);
       alert("성공하였습니다.")
       window.location.reload();
     } catch (e) {
@@ -56,7 +56,7 @@ const Api = {
   getPostingReport: async (currentPage) => {
     try {
       const res = await authInstance.get(`/report-postings?page=${currentPage}&size=10`)
-      saveToken(res);
+      // saveToken(res);
       return res.data;
     } catch (e) {
       return e;
@@ -65,7 +65,7 @@ const Api = {
   getCommentReport: async (currentPage) => {
     try {
       const res = await authInstance.get(`/report-comments?page=${currentPage}&size=10`)
-      saveToken(res);
+      // saveToken(res);
       return res.data;
     } catch (e) {
       return e;
@@ -75,7 +75,7 @@ const Api = {
     const { id } = e.target;
     try {
       const res = await authInstance.put(`/report-postings/${id}`)
-      saveToken(res);
+      // saveToken(res);
       alert("성공하였습니다.")
       window.location.reload();
     } catch (e) {
@@ -86,7 +86,7 @@ const Api = {
     const { id } = e.target;
     try {
       const res = await authInstance.put(`/report-comments/${id}`)
-      saveToken(res);
+      // saveToken(res);
       alert("성공하였습니다.")
       window.location.reload();
     } catch (e) {

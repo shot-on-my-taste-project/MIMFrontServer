@@ -5,7 +5,7 @@ const Api = {
     getAllBoard: async () => {
         try {
             const res = await authInstance.get('/boards?page=2&size=3')
-            saveToken(res);
+            // saveToken(res);
             return res.data
         } catch(e) {
             return e
@@ -15,7 +15,7 @@ const Api = {
     getBoard: async(movieId) => {
         try {
             const res = await authInstance.get(`/boards/movie/${movieId}`)
-            saveToken(res);
+            // saveToken(res);
             return res.data
         } catch(e) {
             return e
@@ -25,7 +25,7 @@ const Api = {
     getAllFreeBoardPosts: async (currentPage, size) => {
         try {
             const res = await authInstance.get(`/postings/board/1?page=${currentPage}&size=${size}`)
-            saveToken(res);
+            // saveToken(res);
             return res.data
         } catch(e) {
             return e
@@ -35,7 +35,7 @@ const Api = {
     getMovies: async (ids) => {
         try {
           const res = await authInstance.get(`/movies/ids?ids=${ids}`)
-          saveToken(res);
+        //   saveToken(res);
           return res.data
         } catch (e) {
           return e
@@ -45,6 +45,7 @@ const Api = {
     getAllMovieBoardPosts: async (movieBoardId, currentPage, size) => {
         try {
             const res = await authInstance.get(`/postings/board/${movieBoardId}?page=${currentPage}&size=${size}`)
+            // saveToken(res);
             return res.data['content']
         } catch(e) {
             return e
@@ -59,7 +60,7 @@ const Api = {
                 "title": data.title,
                 "userId": getCookie('user-id')
             })
-            saveToken(res)
+            // saveToken(res)
             alert("작성이 완료되었습니다")
             window.location.href = "/community/free"
         } catch(e) {
@@ -75,7 +76,7 @@ const Api = {
                 "title": data.title,
                 "userId": getCookie('user-id')
             })
-            saveToken(res)
+            // saveToken(res)
             alert("작성이 완료되었습니다")
             window.location.href = "/community/movie/" + data.movieId
         } catch(e) {
@@ -89,7 +90,7 @@ const Api = {
                 "userId": getCookie('user-id'),
                 "movieId": movieId
             })
-            saveToken(res)
+            // saveToken(res)
         } catch(e) {
             return e
         }
@@ -98,7 +99,7 @@ const Api = {
     deleteFavoriteMovie: async(movieId) => {
         try {
             const res = await authInstance.delete(`/favorite-movies/user/${getCookie('user-id')}/movie/${movieId}`)
-            saveToken(res)
+            // saveToken(res)
         } catch(e) {
             return e
         }
@@ -107,7 +108,7 @@ const Api = {
     isFavoriteMovie: async(movieId) => {
         try {
             const res = await authInstance.get(`/favorite-movies/user/${getCookie('user-id')}/movie/${movieId}`)
-            saveToken(res)
+            // saveToken(res)
             return res.data
         } catch(e) {
             return e
@@ -117,7 +118,7 @@ const Api = {
     getPostDetail: async(boardId, postId) => {
         try {
             const res = await authInstance.get(`/postings/board/${boardId}/posting-number/${postId}`)
-            saveToken(res)
+            // saveToken(res)
             return res.data
         } catch(e) {
             return e
@@ -127,7 +128,7 @@ const Api = {
     getPostDetail2: async(postId) => {
         try {
             const res = await authInstance.get(`/postings/${postId}`)
-            saveToken(res)
+            // saveToken(res)
             return res.data
         } catch(e) {
             return e
@@ -137,7 +138,7 @@ const Api = {
     getAllComments: async(boardId, postingNumber) => {
         try{
             const res = await authInstance.get(`comments/board/${boardId}/posting-number/${postingNumber}?page=0&size=5`)
-            saveToken(res)    
+            // saveToken(res)    
             return res.data['content']       
         } catch(e) {
             return e
@@ -147,7 +148,7 @@ const Api = {
     writeComment: async(data, movieId, postId) => {
         try {
             const res = await authInstance.post("/comments", data)
-            saveToken(res)
+            // saveToken(res)
             alert("댓글이 작성되었습니다.")
             if(movieId === "1")
             window.location.href= `/community/free/${postId}`
@@ -161,7 +162,7 @@ const Api = {
     updatePost: async(postId, data, post) => {
         try {
             const res = await authInstance.put(`/postings/${postId}`, data)
-            saveToken(res)
+            // saveToken(res)
             alert("수정이 완료되었습니다.")
             if(data.movieId === "1")
                 window.location.href= `/community/free/${post.postingNumber}`
@@ -178,7 +179,7 @@ const Api = {
             const res = await authInstance.put(`/comments/${commentId}`, {
                 "content": sentence
             })
-            saveToken(res)
+            // saveToken(res)
             alert("수정이 완료되었습니다.")
             if(movieId === "1") 
                 window.location.href = `/community/free/${postNumber}`
@@ -192,7 +193,7 @@ const Api = {
     deletePost: async(movieId, postId) => {
         try {
             const res = await authInstance.delete(`/postings/${postId}`)
-            saveToken(res)
+            // saveToken(res)
             alert("게시글이 삭제되었습니다.")
             if(movieId === "1")
                 window.location.href= `/community/free`
@@ -206,13 +207,48 @@ const Api = {
     deleteComment: async(movieId, postId, commentId) => {
         try {
             const res = await authInstance.delete(`/comments/${commentId}`)
-            saveToken(res)
+            // saveToken(res)
             alert("댓글이 삭제되었습니다.")
             if(movieId === "1")
                 window.location.href= `/community/free/${postId}`
             else
                 window.location.href= `/community/movie/${movieId}/${postId}`
         } catch(e) {
+            return e
+        }
+    },
+
+    reportPost: async(sentence, movieId, postId) => {
+        try {
+            const res = await authInstance.post(`/report-postings`, {
+                "postingId": postId,
+                "reportReason": sentence
+            })
+            // saveToken(res)
+            alert("정상적으로 신고되었습니다.")
+            if(movieId === "1")
+                window.location.href= `/community/free`
+            else
+                window.location.href= `/community/movie/${movieId}`
+        } catch(e) {
+            return e
+        }
+    },
+
+    reportComment: async(sentence, movieId, postId, commentId) => {
+        try {
+            const res = await authInstance.post(`/report-comments`, {
+                "commentId": commentId,
+                "reportReason": sentence
+            })
+            // saveToken(res)
+            alert("정상적으로 신고되었습니다.")
+            if(movieId === "1")
+                window.location.href= `/community/free/${postId}`
+            else
+                window.location.href= `/community/movie/${movieId}/${postId}`
+        } catch(e) {
+            console.log(e)
             return e
         }
     }
