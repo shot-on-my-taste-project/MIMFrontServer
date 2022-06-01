@@ -4,16 +4,16 @@ import Header from '../component/Header';
 import '../styles/Community.css'
 import CustomSearchArea from '../component/CustomSearchArea';
 import WriteButton from '../component/WriteButton';
-import ReportButton from '../component/ReportButton';
-import FavoriteButton from '../component/FavoriteButton';
 import Api from "../utils/api/communityAPI"
 import Api2 from "../utils/api/searchAPI"
 import CommunityInfo from '../component/CommunityInfo';
 import PagenationV2 from "../component/PagenationV2.js"
+import queryString from "query-string"
 
-const CommunityMovie = ({match}) => {
+const CommunityMovie = ({match, location}) => {
   // 파라미터 정제
   const paramMovieId = match.params.movieId;
+  const query = queryString.parse(location.search)
   
   const [board, setBoard] = useState([])
   const [posts, setPosts] = useState([])
@@ -26,9 +26,22 @@ const CommunityMovie = ({match}) => {
 
   const getPosts = async() => {
     setBoard(await Api.getBoard(paramMovieId).then(async x => {
-      setPosts(await Api.getAllMovieBoardPosts(x.id, currentPage, 5))
+      if(typeof(query.search) === "undefined")
+        setPosts(await Api.getAllMovieBoardPosts(x.id, currentPage, 5))
+      else
+        setPosts(await Api2.getPostingSearch(x.id, currentPage, 5, query.search))
       return x
     }))
+  }
+
+  const [inputSearchText, setInputSearchText] = useState('')
+
+  const inputSearchTextHandler = (e) => {
+      setInputSearchText(e.target.value)
+    }
+
+  const searchAction = () => {
+      window.location.href = "/community/movie/"+ paramMovieId +"?search=" + inputSearchText
   }
 
   useEffect(() => {
@@ -46,7 +59,7 @@ const CommunityMovie = ({match}) => {
             ></CommunityInfo>
             
             <div className="SubSearchArea">
-                <CustomSearchArea />
+              <CustomSearchArea inputHandler={inputSearchTextHandler} searchAction={searchAction} placeHolder={query.search}/>
                 <WriteButton moveTo={ getWritePostLink(paramMovieId) }/>
             </div>
             

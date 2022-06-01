@@ -6,9 +6,13 @@ import '../styles/Community.css'
 import CustomSearchArea from '../component/CustomSearchArea';
 import WriteButton from '../component/WriteButton';
 import Api from '../utils/api/communityAPI';
+import Api2 from '../utils/api/searchAPI';
+import queryString from "query-string"
 
 
-const CommunityMovie = () => {
+const CommunityFree = ({location}) => {
+  const query = queryString.parse(location.search)
+
   const [posts, setPosts] = useState([])
 
   const [currentPage, setCurrentPage] = useState(0);
@@ -19,10 +23,27 @@ const CommunityMovie = () => {
   }
 
   const getPosts = async() => {
-    setPosts(await Api.getAllFreeBoardPosts(currentPage, 10).then(x => {
-      setTotalPage(x.totalPages)
-      return x.content
-    }))
+    if(typeof(query.search) === "undefined") {
+      setPosts(await Api.getAllFreeBoardPosts(currentPage, 10).then(x => {
+        setTotalPage(x.totalPages)
+        return x.content
+      }))
+    } else {
+      setPosts(await Api2.getPostingSearch(1, currentPage, 10, query.search).then(x => {
+        setTotalPage(x.totalPages)
+        return x
+      }))
+    }
+  }
+
+  const [inputSearchText, setInputSearchText] = useState('')
+
+  const inputSearchTextHandler = (e) => {
+      setInputSearchText(e.target.value)
+    }
+
+  const searchAction = () => {
+      window.location.href = "/community/free?search=" + inputSearchText
   }
 
   const getPostDetailLink = (postId) => `/community/free/${postId}`
@@ -31,13 +52,14 @@ const CommunityMovie = () => {
     getPosts();
   }, [currentPage]);
 
+
     return (
       <div className="CommunityMovieContainer">
           <Header></Header>
           <div className="FreeBoardThumb">
               <h1>자유 게시판</h1>
               <div className="SubSearchArea">
-                  <CustomSearchArea />
+                <CustomSearchArea inputHandler={inputSearchTextHandler} searchAction={searchAction} placeHolder={query.search}/>
                   <WriteButton moveTo="/community/free/write" />
               </div>
           </div>
@@ -81,4 +103,4 @@ const CommunityMovie = () => {
   );
 };
 
-export default CommunityMovie;
+export default CommunityFree;

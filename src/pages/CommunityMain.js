@@ -65,7 +65,7 @@ const CommunityMain = ({location}) => {
                 <div className="Title">
                     <h1>인기 게시판 TOP 3</h1>
                     <div>
-                        <CustomSearchArea inputHandler={inputSearchTextHandler} searchAction={searchAction}/>
+                        <CustomSearchArea inputHandler={inputSearchTextHandler} searchAction={searchAction} placeHolder={query.search}/>
                     </div>
                     
                 </div>
@@ -92,7 +92,7 @@ const CommunityMain = ({location}) => {
                 <div className="Title">
                     <h1>'{query.search}'에 대한 검색 결과</h1>
                     <div>
-                        <CustomSearchArea inputHandler={inputSearchTextHandler} searchAction={searchAction}/>
+                        <CustomSearchArea inputHandler={inputSearchTextHandler} searchAction={searchAction} placeHolder={query.search}/>
                     </div>
                     
                 </div>

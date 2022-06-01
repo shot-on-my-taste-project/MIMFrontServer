@@ -18,6 +18,15 @@ const Api = {
         } catch(e) {
             return e
         }
+    },
+
+    getPostingSearch: async (movieId, currentPage, size, search) => {
+        try {
+            const res = await defaultInstance.get(`postings/board/${movieId}/query?page=${currentPage}&size=${size}&query=${search}`)
+            return res.data.content
+        } catch(e) {
+            return e
+        }
     }
     
 }
