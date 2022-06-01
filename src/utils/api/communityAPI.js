@@ -257,6 +257,25 @@ const Api = {
             console.log(e)
             return e
         }
+    },
+
+    reReplyComment: async(sentence, movieId, postId, postNum, commentId) => {
+        try {
+            const res = await authInstance.post("/comments", {
+                "commentGroup": commentId,
+                "content": sentence,
+                "depth": 1,
+                "postingId": postId,
+                "userId": getCookie("user-id")
+            })
+            alert("댓글이 등록되었습니다.")
+            if(movieId === "1")
+                window.location.href= `/community/free/${postNum}`
+            else
+                window.location.href= `/community/movie/${movieId}/${postNum}`
+        } catch(e) {
+            return e
+        }
     }
 }
 

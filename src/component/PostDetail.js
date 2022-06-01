@@ -57,6 +57,10 @@ const PostDetail = (props) => {
         const reportComment = async(reportSentence, commentId) => {
             await Api.reportComment(reportSentence, movieId, postNumber, commentId)
         }
+
+        const reReplyComment = async(reReplySentence, commentId) => {
+            await Api.reReplyComment(reReplySentence, movieId, postId, postNumber, commentId)
+        }
         
         const updateCommentClick = (commentId) => {
             var container = document.getElementById(`content-container${commentId}`)
@@ -99,6 +103,42 @@ const PostDetail = (props) => {
             container.appendChild(button)
         }
 
+        const reReplyCommentClick = (commentId) => {
+            var container = document.getElementById(`content-container${commentId}`)
+            // container.removeChild(container.firstChild)
+            const writeReplyContainer = document.createElement("div")
+            writeReplyContainer.setAttribute("class", "WriteReply")
+
+            const replyContentWrapperContainer = document.createElement("div")
+            replyContentWrapperContainer.setAttribute("class", "ReplyContentWrapper")
+            
+            const h6Tag = document.createElement("h6")
+            h6Tag.textContent = getCookie("user-id")
+
+            const imgTag = document.createElement("img")
+            imgTag.setAttribute("src", getProfile(getCookie("user-id")))
+            imgTag.setAttribute("width", "50rem")
+            imgTag.setAttribute("height", "50rem")
+
+            const textAreaTag = document.createElement("textarea")
+            textAreaTag.setAttribute("id", "update-contents")
+    
+            replyContentWrapperContainer.appendChild(h6Tag)
+            replyContentWrapperContainer.appendChild(textAreaTag)
+
+            const button = document.createElement("button")
+            button.appendChild(document.createTextNode("등록"))
+            button.addEventListener("click", async () => {
+                reReplyComment(textAreaTag.value, commentId)
+            })
+            
+            writeReplyContainer.appendChild(imgTag)
+            writeReplyContainer.appendChild(replyContentWrapperContainer)
+            writeReplyContainer.appendChild(button)
+
+            container.appendChild(writeReplyContainer)
+        }
+
         return (
             <div className="PostDetail">
                 <div className="PostInfo">
@@ -130,7 +170,7 @@ const PostDetail = (props) => {
                         <div className="ReplyContentWrapper">        
                             <img src={getProfile(comment.userId)} width="50rem" height="50rem" />
                             <div className="ReplyContainer">
-                                <h6>{comment.userId}</h6>
+                                <div className="ReplyInfo"><h6>{comment.userId}</h6> <h6 className="TimeInfo">{comment.time.substr(0, 16).replace('T', ' ')}</h6></div>
                                 <div class="ContentContainer" id={getContentContainer(comment.id)}>{comment.content}</div>
                             </div>
                         </div>
@@ -141,10 +181,9 @@ const PostDetail = (props) => {
                             <Link onClick={() => {deleteComment(comment.id)}}> 삭제</Link></>
                             :<Link onClick={() => {reportCommentClick(comment.id)}}>신고</Link>
                         }
-                        <Link> 답댓글</Link>       
+                        <Link onClick={() => reReplyCommentClick(comment.id)}> 답댓글</Link>       
                         </div>    
-                    </div>
-                    
+                    </div> 
                     )}
                     <hr/>
                     <div className="WriteReply">  
