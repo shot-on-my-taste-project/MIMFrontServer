@@ -36,6 +36,7 @@ const PostFree = ({match}) => {
                 movieId="1"
                 boardId="1"
                 postId={post.id}
+                postNumber={post.postingNumber}
                 title={post.title}
                 writtenTime={post.time}
                 writer={post.userId}

@@ -1,4 +1,3 @@
-import Profile  from '../assets/profile.jpg'
 import { Link } from 'react-router-dom';
 import { Button } from 'react-bootstrap';
 import React, { useState } from 'react';
@@ -22,9 +21,9 @@ const PostDetail = (props) => {
 
         const getUpdatePostLink = (movieId, postId) => {
             if(movieId === "1")
-                return `/community/free/update/${postId}`
+                window.location.href = `/community/free/update/${postId}`
             else
-                return `/community/movie/${movieId}/update/${postId}`
+                window.location.href = `/community/movie/${movieId}/update/${postId}`
         }
 
         const getContentContainer = (commentId) => `content-container${commentId}`
@@ -61,9 +60,8 @@ const PostDetail = (props) => {
         
         const updateCommentClick = (commentId) => {
             var container = document.getElementById(`content-container${commentId}`)
-            // var commentId = container.parentNode.parentNode.parentNode.getAttribute("id")
             container.removeChild(container.firstChild)
-            // console.log(commentId)
+
             const textArea = document.createElement("textarea")
             textArea.setAttribute("id", "update-contents")
     
@@ -77,13 +75,15 @@ const PostDetail = (props) => {
             container.appendChild(button)
         }
 
-        const reportPostFunc = async() => {
-            await Api.reportPost()
+        const reportPostClick = (movieId, postId) => {
+            if(movieId === "1") 
+                window.location.href = `/community/free/report/${postId}`
+            else
+                window.location.href = `/community/movie/${movieId}/report/${postId}` 
         }
 
         const reportCommentClick = (commentId) => {
             var container = document.getElementById(`content-container${commentId}`)
-            // var commentId = container.parentNode.parentNode.parentNode.getAttribute("id")
             container.removeChild(container.firstChild)
             
             const textArea = document.createElement("textarea")
@@ -116,9 +116,9 @@ const PostDetail = (props) => {
                     <div className="PostBtnWrapper">
                     {
                         getCookie("user-id") === writer
-                        ? <><Link to={getUpdatePostLink(movieId, postId)}><Button variant="secondary">수정</Button></Link>
+                        ? <><Button onClick={() => getUpdatePostLink(movieId, postId)} variant="secondary">수정</Button>
                         <Button onClick={deletePostFunc} variant="secondary">삭제</Button></>
-                        : <><Button onClick={reportPostFunc} variant="secondary">신고</Button></>
+                        : <><Button onClick={() => reportPostClick(movieId, postId)} variant="secondary">신고</Button></>
                     }
                     <Button onClick={() => {getMovieCommunityMainLink(movieId)}} variant="secondary">목록</Button>
                     </div>

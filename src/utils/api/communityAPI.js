@@ -185,6 +185,7 @@ const Api = {
                 "content": sentence
             })
             // saveToken(res)
+            console.log(movieId, postNumber)
             alert("수정이 완료되었습니다.")
             if(movieId === "1") 
                 window.location.href = `/community/free/${postNumber}`
