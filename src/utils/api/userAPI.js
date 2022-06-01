@@ -8,6 +8,7 @@ const Api = {
       const res = await defaultInstance.post('/login', data)
       if(data.id === "admin1" || data.id === "admin") {
         localStorage.setItem("refresh-token", res.headers['x-refresh-token']);
+        setCookie("access-token", res.headers['x-access-token']);
         setCookie("user-id", data.id);
         document.location.href = "/admin/board"
         
