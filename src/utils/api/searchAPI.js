@@ -10,6 +10,15 @@ const Api = {
             return e
         }
     },
+
+    getMovieSearch: async (search) => {
+        try {
+            const res = await defaultInstance.get(`/movies?title=${search}&page=0&size=3`)
+            return res.data.content
+        } catch(e) {
+            return e
+        }
+    }
     
 }
 

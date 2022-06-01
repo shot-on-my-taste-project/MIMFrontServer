@@ -1,14 +1,14 @@
 import SearchBtn  from '../assets/search.png'
-import React, { Component, useState } from 'react';
+import React, { Component } from 'react';
 import '../styles/Custom.css'
 
 class CustomSearchArea extends Component {
     render() {
-      const { event } = this.props;
+      const { inputHandler, searchAction } = this.props;
         return (
         <div className="CustomSearchArea">
-            <input type="text"/>
-            <img onClick={event} src={ SearchBtn } width="30rem" height="30rem"/>
+            <input type="text" onChange={ inputHandler }/>
+            <img onClick={searchAction} src={ SearchBtn } width="30rem" height="30rem"/>
         </div>
       );
     }

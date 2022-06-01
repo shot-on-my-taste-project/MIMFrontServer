@@ -1,28 +1,15 @@
-import React, { Component, useState, useEffect } from 'react'
-import { Route, Link } from 'react-router-dom'
-import { Button } from 'react-bootstrap'
+import React, { useState, useEffect } from 'react'
+import { Link } from 'react-router-dom'
 import Header from '../component/Header'
 import '../styles/Community.css'
-import ImgEx1 from "../assets/tazza.jpg"
-import ImgEx2 from "../assets/seungriho.jpg"
-import ImgEx3 from "../assets/busanhang.jpg"
 import CustomSearchArea from '../component/CustomSearchArea'
-import UserBoardSearch from '../component/UserBoardSearch'
-import Popup from '../component/Popup'
 import Api from "../utils/api/communityAPI"
 import Api2 from "../utils/api/searchAPI"
+import queryString from "query-string"
 
-const CommunityMain = () => {
+const CommunityMain = ({location}) => {
    
-    // 팝업 부분
-    const [ popupOpen, setPopupOpen ] = useState(false);
-    const openPopup = () => {
-        setPopupOpen(true);
-    }
-    
-    const closePopup = () => {
-        setPopupOpen(false);
-    }
+    const query = queryString.parse(location.search)
 
     //포스터 url 가져오기
     const getPoster = (movieId) => `http://fhdufhdu.iptime.org:8081/movies/${movieId}/poster`;
@@ -30,6 +17,7 @@ const CommunityMain = () => {
     // 데이터 받아오기
     const [ boards, setBoards ] = useState([])
     const [ movies, setMovies ] = useState([])
+    const [ movieSearchResult, setMovieSearchResult ] = useState([])
 
     //게시판 요청에서 영화 아이디 추출
     const getIds = (list) => {
@@ -47,23 +35,35 @@ const CommunityMain = () => {
         }))    
     }
 
-    useEffect(async() => {
+    const getMovieSearch = async(searchText) => {
+        setMovieSearchResult(await Api2.getMovieSearch(searchText))
+    }
+
+    const [inputSearchText, setInputSearchText] = useState('')
+
+    const inputSearchTextHandler = (e) => {
+        setInputSearchText(e.target.value)
+      }
+
+    const searchAction = () => {
+        window.location.href = "/community/main?search=" + inputSearchText
+    }
+
+    useEffect(() => {
         getInfo();
+        if(typeof(query.search) != "undefined") {
+            getMovieSearch(query.search);
+        }
     }, []);
 
-    
-    
+    if (typeof(query.search) === "undefined") {
         return (
             <div>
                 <Header></Header>
-    
                 <div className="Title">
                     <h1>인기 게시판 TOP 3</h1>
                     <div>
-                        <CustomSearchArea event={openPopup}/>
-                        <Popup open={popupOpen} close={closePopup}>
-                            <UserBoardSearch />   
-                        </Popup>
+                        <CustomSearchArea inputHandler={inputSearchTextHandler} searchAction={searchAction}/>
                     </div>
                     
                 </div>
@@ -73,12 +73,53 @@ const CommunityMain = () => {
                         <div className="Community">
                         <img src={ getPoster(movie.id) } width={"300rem"} height={"400rem"}/>
                         <Link style={{textDecoration: 'none', color: 'white'}} to={getCommunityLink(movie.id)}><h3>{movie.title}</h3></Link>
-                        <h6>{console.log(boards[index])}개의 게시글</h6>
+                        {/* <h6>{console.log(boards[index])}개의 게시글</h6> */}
                         </div>
                     )}
                 </div>
             </div>
         );
+    }
+    else {
+        return (
+            <div>
+                <Header></Header>
+                <div className="Title">
+                    <h1>'{query.search}'에 대한 검색 결과</h1>
+                    <div>
+                        <CustomSearchArea inputHandler={inputSearchTextHandler} searchAction={searchAction}/>
+                    </div>
+                    
+                </div>
+                
+                <div className="CommunitiesWrapper">
+                    {  movieSearchResult.map((movie, index) => 
+                        <div className="Community">
+                        <img src={ getPoster(movie.id) } width={"300rem"} height={"400rem"}/>
+                        <Link style={{textDecoration: 'none', color: 'white'}} to={getCommunityLink(movie.id)}><h3>{movie.title}</h3></Link>
+                        {/* <h6>{console.log(boards[index])}개의 게시글</h6> */}
+                        </div>
+                    )}
+                </div>
+
+                <div className="Title">
+                    <h1>인기 게시판 TOP 3</h1>
+                </div>
+                
+                <div className="CommunitiesWrapper">
+                    {  movies.map((movie, index) => 
+                        <div className="Community">
+                        <img src={ getPoster(movie.id) } width={"300rem"} height={"400rem"}/>
+                        <Link style={{textDecoration: 'none', color: 'white'}} to={getCommunityLink(movie.id)}><h3>{movie.title}</h3></Link>
+                        {/* <h6>{console.log(boards[index])}개의 게시글</h6> */}
+                        </div>
+                    )}
+                </div>
+            </div>
+        );
+    }
+  
+        
 };
 
 export default CommunityMain;
