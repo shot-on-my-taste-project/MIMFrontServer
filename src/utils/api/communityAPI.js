@@ -18,7 +18,7 @@ const Api = {
             // saveToken(res);
             return res.data
         } catch(e) {
-            return e
+            return false
         }
     },
 
@@ -276,6 +276,15 @@ const Api = {
         } catch(e) {
             return e
         }
+    },
+
+    RequestBoard: async(movieId) => {
+        try {
+            const res = await authInstance.post(`/request-boards/movie/${movieId}`)
+            alert("정상적으로 요청되었습니다.\n개설 될 때까지 조금만 기다려 주세요!")
+        } catch(e) {
+
+        } 
     }
 }
 

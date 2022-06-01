@@ -69,6 +69,11 @@
     display: none;
 }
 
+.CommunityAlert {
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+}
 /* PC */
 @media screen and (min-width: 1024px){
     .SearchArea {
