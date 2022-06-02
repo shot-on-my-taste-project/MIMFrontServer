@@ -16,17 +16,43 @@ export function closeNav() {
 }
 
 export function checkOnlyOne(elementId) {
-    document.querySelectorAll('input[type=checkbox]')
-      .forEach(el => el.checked = false);
-    document.getElementById(elementId).checked = true;
     if(elementId === "picture") {
         document.getElementById("input-text").setAttribute("placeholder", " ex) 화투를 치는 장면")
+        document.getElementById("input-text").setAttribute("name", "picture")
         document.getElementById("search-image-ex").style.display = "flex";
         document.getElementById("search-script-ex").style.display = "none";
     }
     else {
         document.getElementById("input-text").setAttribute("placeholder", " ex) 손모가지 날아가붕게")
+        document.getElementById("input-text").setAttribute("name", "text")
         document.getElementById("search-image-ex").style.display = "none";
         document.getElementById("search-script-ex").style.display = "flex";
     }
+
+    const checkboxes = document.getElementsByName("search-opt");
+  
+    checkboxes.forEach((cb) => {
+        cb.checked = false;
+    })
+  
+    document.getElementById(elementId).checked = true;
+}
+
+export function checkOnlyOneSmall(elementId) {
+    if(elementId === "picture") {
+        document.getElementById("input-text-small").setAttribute("placeholder", " ex) 화투를 치는 장면")
+        document.getElementById("input-text-small").setAttribute("name", "picture")
+    }
+    else {
+        document.getElementById("input-text-small").setAttribute("placeholder", " ex) 손모가지 날아가붕게")
+        document.getElementById("input-text-small").setAttribute("name", "text")
+    }
+
+    const checkboxes = document.getElementsByName("search-opt-small");
+  
+    checkboxes.forEach((cb) => {
+        cb.checked = false;
+    })
+  
+    document.getElementById(elementId).checked = true;
 }

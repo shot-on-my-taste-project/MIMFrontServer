@@ -1,41 +1,67 @@
-import React, { Component } from 'react';
+import React, { Component, useState } from 'react';
 import SlateImg1 from "../assets/slate-open.png"
 import SlateImg2 from "../assets/slate-close.png"
 import ImgEx from "../assets/image-ex.png"
 import Logo from './Logo';
 import * as Home from '../services/home.js'
-class MainSearch extends Component {
-    render() {
-        return (
-            <div className="SearchArea">
-                <Logo></Logo>
-                <div id="main-search">
-                    <input id="input-text" type="text" placeholder=" ex) 화투를 치는 장면"/>
-                    <div id="slate">
-                    <img id="slate-open" src={ SlateImg1 } width={"40px"} height={"40px"}/>
-                    <img id="slate-close" src={ SlateImg2 } width={"40px"} height={"35px"}/>
-                    </div>
-                </div>
-                <SearchOption></SearchOption>
+const MainSearch = (props) => {
+  const { inputHandler, sceneSearchAction, lineSearchAction } = props
+  const [ searchOption, setSearchOption ] = useState('picture')
+
+  const getOption = () => {
+    var result = document.getElementById("input-text");
+    setSearchOption(result.getAttribute("name"))
+  }
+
+  if(searchOption === "picture") {
+    return (
+      <div className="SearchArea">
+        <Logo></Logo>
+        <div id="main-search">
+          <input id="input-text" name="picture" type="text" onChange={inputHandler} placeholder=" ex) 화투를 치는 장면"/>
+            <div id="slate" onClick={sceneSearchAction}>
+              <img id="slate-open" src={ SlateImg1 } width={"40px"} height={"40px"}/>
+              <img id="slate-close" src={ SlateImg2 } width={"40px"} height={"35px"}/>
             </div>
-        );
-    };
+        </div>
+        <SearchOption 
+        getCheckedValue={getOption}/>
+      </div>
+    );
+  } else {
+    return (
+      <div className="SearchArea">
+        <Logo></Logo>
+        <div id="main-search">
+          <input id="input-text" name="picture" type="text" onChange={inputHandler} placeholder=" ex) 화투를 치는 장면"/>
+            <div id="slate" onClick={lineSearchAction}>
+              <img id="slate-open" src={ SlateImg1 } width={"40px"} height={"40px"}/>
+              <img id="slate-close" src={ SlateImg2 } width={"40px"} height={"35px"}/>
+            </div>
+        </div>
+        <SearchOption 
+        getCheckedValue={getOption}/>
+      </div>
+    );
+  }
+
+  
 }
 
-class SearchOption extends Component {
-    render() {
+const SearchOption = (props) => {
+    const { getCheckedValue } = props;
       return (
         <div className="SearchOption">
           <div className="SelectOption">
             <div className="option">
-              <input type="checkbox" class="search-opt" name="search-opt" checked
-              id="picture" value="picture" onClick={() => Home.checkOnlyOne('picture')}/>
+              <input type="checkbox" class="search-opt" name="search-opt"
+              id="picture" value="picture" onChange={getCheckedValue} onClick={(e) => { Home.checkOnlyOne('picture');}}/>
               <label>장면검색</label>
             </div>
 
             <div className="option">
-              <input type="checkbox" class="search-opt" name="search-opt" 
-              id="text" value="text" onClick={() => Home.checkOnlyOne('text')}/>
+              <input type="checkbox" class="search-opt" name="search-opt"
+              id="text" value="text" onChange={getCheckedValue} onClick={(e) => { Home.checkOnlyOne('text');}}/>
               <label>대사검색</label>
             </div>
           </div>
@@ -45,9 +71,8 @@ class SearchOption extends Component {
             <SearchScriptExample></SearchScriptExample>
           </div>
         </div>
-      );
-    }
-  }
+      );    
+}
 
   class SearchImgExample extends Component {
     render() {

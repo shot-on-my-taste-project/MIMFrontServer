@@ -22,7 +22,8 @@ class App extends Component {
                 </Switch>
                 <Switch>
                     <Route path="/result/detail/:movieId" component={ ResultDetail }/>
-                    <Route path="/result" component={ Result }/>
+                    <Route path="/scene" component={ Result }/>
+                    <Route path="/line" component={ Result }/>
                 </Switch>
                 <Switch>
                     <Route path="/community/movie/:movieId/report/:postId" component={ BoardReport }/>

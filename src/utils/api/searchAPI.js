@@ -27,6 +27,24 @@ const Api = {
         } catch(e) {
             return e
         }
+    },
+
+    getSceneSearchResult: async (search) => {
+        try {
+            const res = await defaultInstance.get(`/scean?input=${search}`)
+            return res.data
+        } catch(e) {
+            return e
+        }
+    },
+
+    getLineSearchResult: async (search) => {
+        try {
+            const res = await defaultInstance.get(`/line?input=${search}`)
+            return res.data
+        } catch(e) {
+            return e
+        }
     }
     
 }
