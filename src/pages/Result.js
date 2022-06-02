@@ -15,6 +15,9 @@ const Result = ({match, location}) => {
 
     const [ searchText, setSearchText ] = useState('')
     
+    const getPoster = (movieId) => `http://fhdufhdu.iptime.org:8081/movies/${movieId}/poster`;
+    const getDetail = (movieId) => `/result/detail/${movieId}`
+
     const inputSearchTextHandler = (e) => {
         setSearchText(e.target.value)
     }
@@ -58,20 +61,12 @@ const Result = ({match, location}) => {
             </div>
             
             <div className="ResultsWrapper">
-                <div className="Result">
-                    <img src={ ImgEx1 } width={"300rem"} height={"400rem"}/>
-                    <Link style={{textDecoration: 'none', color: 'white'}} to="/result/detail"><h3>타짜</h3></Link>
+                {searchResult.map((result, index) => 
+                    <div className="Result">
+                    <img src={ getPoster(result.id) } width={"300rem"} height={"400rem"}/>
+                    <Link style={{textDecoration: 'none', color: 'white'}} to={getDetail(result.id)}><h3>{result.title}</h3></Link>
                 </div>
-                
-                <div className="Result">
-                    <img src={ ImgEx2 } width={"300rem"} height={"400rem"}/>
-                    <h3>승리호</h3>
-                </div>
-
-                <div className="Result">
-                    <img src={ ImgEx3 } width={"300rem"} height={"400rem"}/>
-                    <h3>부산행</h3>
-                </div>
+                )}
             </div>
         </div>
     );
