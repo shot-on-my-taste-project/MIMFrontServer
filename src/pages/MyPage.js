@@ -9,6 +9,7 @@ const MyPage = () => {
     const [user, setUser] = useState([]);
     const [profile, setProfile] = useState([]);
     const [postings, setPostings] = useState([]);
+    const [movies, setMovies] = useState([]);
     const [favoriteMovies, setFavoriteMovies] = useState([]);
     const userfun = Api.getUserInfo;
     const postingfun = Api.getUserWrittenPost;
@@ -17,6 +18,13 @@ const MyPage = () => {
     //포스터 url 가져오기
     const getPoster = (movieId) => `http://fhdufhdu.iptime.org:8081/movies/${movieId}/poster`;
     const getCommunityLink = (movieId) => `/community/movie/${movieId}`;
+    const getPostLink = (movieId, postNum) => {
+        if(movieId===1)
+            return `/community/free/${postNum}`
+        else {
+            return `/community/movie/${movieId}/${postNum}`
+        }
+    }
 
     const getInfo = async () => {
         setUser(await userfun().then((x) => {
@@ -31,6 +39,7 @@ const MyPage = () => {
         getInfo();
     }, []);
 
+    // console.log(movieId)
 
     return (
         <div className="MyPageArea">
@@ -49,7 +58,9 @@ const MyPage = () => {
                 <div className="ActivityHistory">
                     <h2>작성한 글</h2>
                     <div className="HistoryWrapper">
-                        {postings.map((posting) => <div>{posting.title}</div>)}
+                        {postings.map((posting) => 
+                        <Link style={{ textDecoration: 'none', color: 'white' }} to={ getPostLink(posting.movieDto.id, posting.postingNumber)}>
+                        <div>{posting.title}</div></Link>)}
                     </div>
                 </div>
 
