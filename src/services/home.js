@@ -30,7 +30,6 @@ export function checkOnlyOne(elementId) {
     }
 
     const checkboxes = document.getElementsByName("search-opt");
-  
     checkboxes.forEach((cb) => {
         cb.checked = false;
     })
@@ -49,10 +48,9 @@ export function checkOnlyOneSmall(elementId) {
     }
 
     const checkboxes = document.getElementsByName("search-opt-small");
-  
     checkboxes.forEach((cb) => {
         cb.checked = false;
     })
   
-    document.getElementById(elementId).checked = true;
+    document.getElementById(elementId + "-small").checked = true;
 }

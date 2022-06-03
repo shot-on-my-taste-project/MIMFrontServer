@@ -36,7 +36,6 @@ const Result = ({match, location}) => {
 
     const lineSearch = async () => {
         setSearchResult(await Api.getLineSearchResult(query.search))
-        console.log(await Api.getLineSearchResult(query.search))
     }
 
     useEffect(() => {
