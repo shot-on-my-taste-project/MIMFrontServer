@@ -5,7 +5,6 @@ import AdminBoardClose from '../component/AdminBoardClose';
 import CustomSearchArea from '../component/CustomSearchArea';
 import Popup from '../component/Popup';
 import PagenationV2 from "../component/PagenationV2.js"
-import AdminBoardSearch from '../component/AdminBoardSearch';
 import Api from '../utils/api/adminApi'
 import '../styles/Admin.css'
 
@@ -65,21 +64,12 @@ const AdminBoardManage = () => {
         setMovies([]);
     }
 
-    const [popupOpen, setPopupOpen] = useState(false);
-    const openPopup = () => {
-        setPopupOpen(true);
-    }
-
-    const closePopup = () => {
-        setPopupOpen(false);
-    }
-
     const handlePageChange = (page) => {
         setCurrentPage(page);
     }
 
     const getInfo = async () => {
-        if (activeIndex == 0) {
+        if (activeIndex === 0) {
             const requests = await Api.getRequests(currentPage).then((x) => {
                 setRequestBoards(x.content);
                 setTotalPage(x.totalPages);
@@ -106,12 +96,6 @@ const AdminBoardManage = () => {
             <Header></Header>
             <div className="BoardManageThumb">
                 <h1>게시판 관리</h1>
-                <div className="SubSearchArea">
-                    <CustomSearchArea event={openPopup} />
-                    <Popup open={popupOpen} close={closePopup}>
-                        <AdminBoardSearch />
-                    </Popup>
-                </div>
             </div>
             <ul className="tabs is-boxed">
                 {tabContArr.map((section, index) => {

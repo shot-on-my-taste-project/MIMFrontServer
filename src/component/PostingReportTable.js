@@ -1,28 +1,20 @@
-import React, { Component, useState } from 'react';
-import ReportSearch from './ReportSearch';
-import Pagenation from '../component/Pagenation';
+import React from 'react';
+import { Link } from 'react-router-dom';
 import { Button } from 'react-bootstrap';
-import { pagenate } from '../services/pagenate'
 import { AxiosError } from 'axios';
-import Api from '../utils/api/adminApi'
-
-const getBoards = () => { // 영화 정보를 반환하는 함수
-  const boards = [
-    { id: 1678, board: "타짜", boardId: "327", reason: "부적절한 홍보 게시글", time: "13:33" },
-    { id: 1677, board: "타짜", boardId: "327", reason: "부적절한 홍보 게시글", time: "13:33" },
-    { id: 1676, board: "승리호", boardId: "56", reason: "음란성 및 청소년에게 부적절한 게시글", time: "13:33" },
-    { id: 1675, board: "타짜", boardId: "327", reason: "부적절한 홍보 게시글", time: "13:33" },
-    { id: 1674, board: "변산", boardId: "89", reason: "명예훼손 및 저작권 침해 게시글", time: "13:33" },
-    { id: 1673, board: "타짜", boardId: "327", reason: "부적절한 홍보 게시글", time: "13:33" }
-  ]
-  return boards;
-}
 
 const PostingReportTable = (props) => {
   const { reports, buttonHandler } = props;
   console.log(reports)
   const nullCheck = (reports) => reports instanceof AxiosError || typeof reports === "undefined" || reports == null || reports.length == 0
   console.log(nullCheck(reports))
+
+  const getPostLink = (boardId, postId) => {
+    if(boardId === 1)
+      return `/community/free/${postId}`
+    else
+      return `/community/movie/${boardId}/${postId}`
+  }
 
   return (
     <div className="BoardReport">
@@ -57,7 +49,7 @@ const PostingReportTable = (props) => {
                   <td>{report.postingDto.id}</td>
                   <td>{report.reportReason}</td>
                   <td>{report.reportTimestamp}</td>
-                  <td><Button >L</Button></td>
+                  <td><Link to={getPostLink(report.movieDto.id, report.postingDto.postingNumber)}><Button >L</Button></Link></td>
                   <td><Button onClick={buttonHandler} id={report.id}>R</Button></td>
                 </tr>
               ))}

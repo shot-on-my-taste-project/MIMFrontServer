@@ -20,7 +20,9 @@ class SideBar extends Component {
                 <div className="SideBar">
                     <div id="sidenav">
                         <a id="closebtn" href="javascript:void(0)" onClick={Home.closeNav}>&times;</a>
-                        {getCookie('user-id')} <Button variant="danger" onClick={logout}>로그아웃</Button>
+                        <div className="userInfoSideBar">
+                            {getCookie('user-id')} <Button variant="danger" onClick={logout}>로그아웃</Button>
+                        </div>
                         <Link to="/" >홈</Link>
                         <Link to="/community/main" >작품별 게시판</Link>
                         <Link to="/community/free" >통합 자유 게시판</Link>
