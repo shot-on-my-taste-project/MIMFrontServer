@@ -274,6 +274,7 @@ const Api = {
             else
                 window.location.href= `/community/movie/${movieId}/${postNum}`
         } catch(e) {
+            console.log(e)
             return e
         }
     },
