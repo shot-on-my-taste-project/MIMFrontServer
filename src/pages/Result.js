@@ -32,7 +32,6 @@ const Result = ({match, location}) => {
 
     const sceneSearch = async () => {
         setSearchResult(await Api.getSceneSearchResult(query.search))
-        console.log(await Api.getSceneSearchResult(query.search))
     }
 
     const lineSearch = async () => {
@@ -48,28 +47,55 @@ const Result = ({match, location}) => {
         }
     },[])
 
-    return ( 
-        <div className="ResultArea">
-            <Header></Header>
-            <div className="SearchArea">
-                <MainSearchSmall 
-                inputHandler={inputSearchTextHandler}
-                selectedOption={match.path} 
-                placeHolder={query.search}
-                sceneSearchAction={sceneSearchAction}
-                lineSearchAction={lineSearchAction} />
-            </div>
-            
-            <div className="ResultsWrapper">
-                {searchResult.map((result, index) => 
-                    <div className="Result">
-                    <img src={ getPoster(result.id) } width={"300rem"} height={"400rem"}/>
-                    <Link style={{textDecoration: 'none', color: 'white'}} to={getDetail(result.id)}><h3>{result.title}</h3></Link>
+
+    if(match.path==='/scene') {
+        return ( 
+            <div className="ResultArea">
+                <Header></Header>
+                <div className="SearchAreaSmall">
+                    <MainSearchSmall 
+                    inputHandler={inputSearchTextHandler}
+                    selectedOption={match.path} 
+                    placeHolder={query.search}
+                    sceneSearchAction={sceneSearchAction}
+                    lineSearchAction={lineSearchAction} />
                 </div>
-                )}
+                
+                <div className="ResultsWrapper">
+                    {searchResult.map((result) => 
+                        <div className="Result">
+                        <img src={ getPoster(result.id) } width={"300rem"} height={"400rem"}/>
+                        <Link style={{textDecoration: 'none', color: 'white'}} to={getDetail(result.id)}><h3>{result.title}</h3></Link>
+                    </div>
+                    )}
+                </div>
             </div>
-        </div>
-    );
+        );
+    } else {
+        return ( 
+            <div className="ResultArea">
+                <Header></Header>
+                <div className="SearchAreaSmall">
+                    <MainSearchSmall 
+                    inputHandler={inputSearchTextHandler}
+                    selectedOption={match.path} 
+                    placeHolder={query.search}
+                    sceneSearchAction={sceneSearchAction}
+                    lineSearchAction={lineSearchAction} />
+                </div>
+                
+                <div className="ResultsWrapper">
+                    {searchResult.map((result) => 
+                        <div className="Result">
+                        <img src={ getPoster(result.movieDto.id) } width={"300rem"} height={"400rem"}/>
+                        <Link style={{textDecoration: 'none', color: 'white'}} to={getDetail(result.movieDto.id)}><h3>{result.movieDto.title}</h3></Link>
+                    </div>
+                    )}
+                </div>
+            </div>
+        );
+    }
+    
 };
 
 export default Result;
