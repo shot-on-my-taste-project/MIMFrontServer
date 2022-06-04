@@ -4,8 +4,7 @@ import { getCookie, setCookie, removeCookie } from '../Cookie';
 const Api = {
     getAllBoard: async () => {
         try {
-            const res = await authInstance.get('/boards?page=2&size=3')
-            // saveToken(res);
+            const res = await authInstance.get('/boards?page=0&size=3')
             return res.data
         } catch(e) {
             return e
