@@ -1,25 +1,25 @@
 {
   "files": {
-    "main.css": "/static/css/main.7113a397.css",
-    "main.js": "/static/js/main.4e1da1c4.js",
-    "static/js/787.2d32d5a3.chunk.js": "/static/js/787.2d32d5a3.chunk.js",
-    "static/media/SCDream.ttf": "/static/media/SCDream.1b9c0c4493da2120241c.ttf",
-    "static/media/image-ex.png": "/static/media/image-ex.f498530e0a87d1c015ed.png",
-    "static/media/seungriho.jpg": "/static/media/seungriho.d2472522b00a136d13bf.jpg",
-    "static/media/tazza.jpg": "/static/media/tazza.599f8fe63ad55aa479b0.jpg",
-    "static/media/tazza-thumb.jpg": "/static/media/tazza-thumb.b1c277a3e9794835341d.jpg",
-    "static/media/BebasNeue.ttf": "/static/media/BebasNeue.12e3683f9192436a7be8.ttf",
-    "static/media/busanhang.jpg": "/static/media/busanhang.ccdc82df21053be4e81e.jpg",
-    "static/media/report-btn.png": "/static/media/report-btn.e0a80c48ae450eae495c.png",
-    "static/media/favorite-deactivate.png": "/static/media/favorite-deactivate.9aac6101c44e4d5e0907.png",
-    "static/media/slate-open.png": "/static/media/slate-open.7016e805abef28bbade4.png",
-    "index.html": "/index.html",
-    "main.7113a397.css.map": "/static/css/main.7113a397.css.map",
-    "main.4e1da1c4.js.map": "/static/js/main.4e1da1c4.js.map",
-    "787.2d32d5a3.chunk.js.map": "/static/js/787.2d32d5a3.chunk.js.map"
+    "main.css": "/MIMFrontServer/static/css/main.d902a30c.css",
+    "main.js": "/MIMFrontServer/static/js/main.8ad844b2.js",
+    "static/js/787.2d32d5a3.chunk.js": "/MIMFrontServer/static/js/787.2d32d5a3.chunk.js",
+    "static/media/SCDream.ttf": "/MIMFrontServer/static/media/SCDream.1b9c0c4493da2120241c.ttf",
+    "static/media/image-ex.png": "/MIMFrontServer/static/media/image-ex.f498530e0a87d1c015ed.png",
+    "static/media/seungriho.jpg": "/MIMFrontServer/static/media/seungriho.d2472522b00a136d13bf.jpg",
+    "static/media/tazza.jpg": "/MIMFrontServer/static/media/tazza.599f8fe63ad55aa479b0.jpg",
+    "static/media/tazza-thumb.jpg": "/MIMFrontServer/static/media/tazza-thumb.b1c277a3e9794835341d.jpg",
+    "static/media/BebasNeue.ttf": "/MIMFrontServer/static/media/BebasNeue.12e3683f9192436a7be8.ttf",
+    "static/media/busanhang.jpg": "/MIMFrontServer/static/media/busanhang.ccdc82df21053be4e81e.jpg",
+    "static/media/report-btn.png": "/MIMFrontServer/static/media/report-btn.e0a80c48ae450eae495c.png",
+    "static/media/favorite-deactivate.png": "/MIMFrontServer/static/media/favorite-deactivate.9aac6101c44e4d5e0907.png",
+    "static/media/slate-open.png": "/MIMFrontServer/static/media/slate-open.7016e805abef28bbade4.png",
+    "index.html": "/MIMFrontServer/index.html",
+    "main.d902a30c.css.map": "/MIMFrontServer/static/css/main.d902a30c.css.map",
+    "main.8ad844b2.js.map": "/MIMFrontServer/static/js/main.8ad844b2.js.map",
+    "787.2d32d5a3.chunk.js.map": "/MIMFrontServer/static/js/787.2d32d5a3.chunk.js.map"
   },
   "entrypoints": [
-    "static/css/main.7113a397.css",
-    "static/js/main.4e1da1c4.js"
+    "static/css/main.d902a30c.css",
+    "static/js/main.8ad844b2.js"
   ]
 }
