@@ -1,7 +1,7 @@
 {
   "files": {
     "main.css": "/MIMFrontServer/static/css/main.d902a30c.css",
-    "main.js": "/MIMFrontServer/static/js/main.20db7bc4.js",
+    "main.js": "/MIMFrontServer/static/js/main.8ad844b2.js",
     "static/js/787.2d32d5a3.chunk.js": "/MIMFrontServer/static/js/787.2d32d5a3.chunk.js",
     "static/media/SCDream.ttf": "/MIMFrontServer/static/media/SCDream.1b9c0c4493da2120241c.ttf",
     "static/media/image-ex.png": "/MIMFrontServer/static/media/image-ex.f498530e0a87d1c015ed.png",
@@ -15,11 +15,11 @@
     "static/media/slate-open.png": "/MIMFrontServer/static/media/slate-open.7016e805abef28bbade4.png",
     "index.html": "/MIMFrontServer/index.html",
     "main.d902a30c.css.map": "/MIMFrontServer/static/css/main.d902a30c.css.map",
-    "main.20db7bc4.js.map": "/MIMFrontServer/static/js/main.20db7bc4.js.map",
+    "main.8ad844b2.js.map": "/MIMFrontServer/static/js/main.8ad844b2.js.map",
     "787.2d32d5a3.chunk.js.map": "/MIMFrontServer/static/js/787.2d32d5a3.chunk.js.map"
   },
   "entrypoints": [
     "static/css/main.d902a30c.css",
-    "static/js/main.20db7bc4.js"
+    "static/js/main.8ad844b2.js"
   ]
 }
