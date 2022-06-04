@@ -46,6 +46,7 @@ const Result = ({match, location}) => {
         }
     },[])
 
+    console.log(searchResult)
 
     if(match.path==='/scene') {
         return ( 
@@ -87,7 +88,11 @@ const Result = ({match, location}) => {
                     {searchResult.map((result) => 
                         <div className="Result">
                         <img src={ getPoster(result.movieDto.id) } width={"300rem"} height={"400rem"}/>
-                        <Link style={{textDecoration: 'none', color: 'white'}} to={getDetail(result.movieDto.id)}><h3>{result.movieDto.title}</h3></Link>
+                        <Link style={{textDecoration: 'none', color: 'white'}} to={getDetail(result.movieDto.id)}>
+                            <h3>{result.movieDto.title}</h3></Link>
+                        { result.subtitles.map((subtitle) => 
+                            <h6 style={{color: 'gray'}}>{subtitle}</h6>
+                        )}
                     </div>
                     )}
                 </div>
