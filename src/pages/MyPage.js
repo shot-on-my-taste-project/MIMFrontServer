@@ -9,7 +9,6 @@ const MyPage = () => {
     const [user, setUser] = useState([]);
     const [profile, setProfile] = useState([]);
     const [postings, setPostings] = useState([]);
-    const [movies, setMovies] = useState([]);
     const [favoriteMovies, setFavoriteMovies] = useState([]);
     const userfun = Api.getUserInfo;
     const postingfun = Api.getUserWrittenPost;
@@ -39,7 +38,7 @@ const MyPage = () => {
         getInfo();
     }, []);
 
-    // console.log(movieId)
+    console.log(postings)
 
     return (
         <div className="MyPageArea">
@@ -59,7 +58,7 @@ const MyPage = () => {
                     <h2>작성한 글</h2>
                     <div className="HistoryWrapper">
                         {postings.map((posting) => 
-                        <Link style={{ textDecoration: 'none', color: 'white' }} to={ getPostLink(posting.movieDto.id, posting.postingNumber)}>
+                        <Link style={{ textDecoration: 'none', color: 'white' }} to={ getPostLink(posting.movieId, posting.postingNumber)}>
                         <div>{posting.title}</div></Link>)}
                     </div>
                 </div>
